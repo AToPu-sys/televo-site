@@ -1,0 +1,572 @@
+<title>Televo</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #FBFCFE;
+    --bg-deep: #0E1621;
+    --surface: #FFFFFF;
+    --surface-2: #F1F4F8;
+    --ink: #0E1621;
+    --ink-soft: #4B5A68;
+    --muted: #707579;
+    --border: #E4E8EE;
+    --accent: #3390EC;
+    --accent-strong: #1E6FC4;
+    --accent-glow: rgba(51, 144, 236, 0.20);
+    --bubble-out: #DFFBC6;
+    --bubble-out-ink: #234014;
+    --bubble-in: #FFFFFF;
+    --chat-bg: #D6E5F0;
+    --online: #38C172;
+    --danger: #E5473F;
+    --code-ink: #1E6FC4;
+    --shadow-lg: 0 40px 90px -30px rgba(14, 22, 33, 0.28);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0B121B; --bg-deep: #060B11; --surface: #131D28; --surface-2: #1B2732;
+      --ink: #F2F5F8; --ink-soft: #B9C6D2; --muted: #8A9AA9; --border: #223040;
+      --accent: #5EB5F7; --accent-strong: #85CBFF; --accent-glow: rgba(94, 181, 247, 0.28);
+      --bubble-out: #2B5278; --bubble-out-ink: #EAF3FF; --bubble-in: #182533; --chat-bg: #0E1621;
+      --code-ink: #85CBFF; --shadow-lg: 0 40px 90px -30px rgba(0,0,0,0.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0B121B; --bg-deep: #060B11; --surface: #131D28; --surface-2: #1B2732;
+    --ink: #F2F5F8; --ink-soft: #B9C6D2; --muted: #8A9AA9; --border: #223040;
+    --accent: #5EB5F7; --accent-strong: #85CBFF; --accent-glow: rgba(94, 181, 247, 0.28);
+    --bubble-out: #2B5278; --bubble-out-ink: #EAF3FF; --bubble-in: #182533; --chat-bg: #0E1621;
+    --code-ink: #85CBFF; --shadow-lg: 0 40px 90px -30px rgba(0,0,0,0.6);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden; position: relative;
+  }
+  h1, h2, h3 { font-family: 'Manrope', -apple-system, sans-serif; text-wrap: balance; margin: 0; }
+  code, .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+  p { margin: 0; }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  ::selection { background: var(--accent-glow); }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+
+  /* ---------- aurora canvas backdrop ---------- */
+  #aurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .55; }
+  @media (prefers-color-scheme: dark) { #aurora { opacity: .8; } }
+  :root[data-theme="dark"] #aurora { opacity: .8; }
+
+  /* ---------- floating bubble motif (fixed layer) ---------- */
+  .bubble-field { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .fbubble {
+    position: absolute; border-radius: 30% 30% 30% 6%;
+    opacity: 0.09; filter: blur(0.5px);
+    animation: float-y linear infinite;
+  }
+  @keyframes float-y {
+    0%   { transform: translateY(0) rotate(0deg); }
+    50%  { transform: translateY(-40px) rotate(6deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+  }
+  @media (prefers-reduced-motion: reduce) { .fbubble, #aurora { animation: none; display: none; } }
+
+  /* ---------- reveal-on-scroll ---------- */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-stagger.in .stagger-item { opacity: 1; transform: translateY(0); }
+  .stagger-item { opacity: 0; transform: translateY(20px); transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); }
+
+  /* ---------- nav ---------- */
+  nav { position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, var(--bg) 78%, transparent); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); transition: border-color .3s; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 15px 32px; max-width: 1180px; margin: 0 auto; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: 'Manrope'; font-weight: 800; font-size: 19px; letter-spacing: -0.01em; }
+  .brand-mark { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(155deg, var(--accent), var(--accent-strong)); display: grid; place-items: center; flex-shrink: 0; position: relative; overflow: hidden; }
+  .brand-mark::after { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.5) 50%, transparent 70%); background-size: 250% 100%; animation: shine 3.5s ease-in-out infinite; }
+  @keyframes shine { 0%, 60% { background-position: 200% 0; } 100% { background-position: -50% 0; } }
+  .brand-mark svg { width: 17px; height: 17px; position: relative; z-index: 1; }
+  .nav-links { display: flex; align-items: center; gap: 34px; font-size: 14.5px; font-weight: 500; color: var(--ink-soft); }
+  .nav-links a { text-decoration: none; transition: color .15s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 0; height: 2px; background: var(--accent); transition: width .25s cubic-bezier(.16,1,.3,1); }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta { background: var(--accent); color: #fff; padding: 10px 22px; border-radius: 100px; font-weight: 600; font-size: 14px; text-decoration: none; white-space: nowrap; position: relative; overflow: hidden; transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 14px -4px var(--accent-glow); }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -4px var(--accent-glow); }
+  @media (max-width: 760px) { .nav-links { display: none; } }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 88px 0 40px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-strong); background: var(--accent-glow); padding: 7px 14px 7px 11px; border-radius: 100px; margin-bottom: 24px; }
+  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--online); animation: pulse-dot 1.8s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%, 100% { box-shadow: 0 0 0 0 rgba(56,193,114,.5); } 50% { box-shadow: 0 0 0 5px rgba(56,193,114,0); } }
+  .hero h1 { font-size: clamp(38px, 4.8vw, 60px); font-weight: 900; line-height: 1.04; letter-spacing: -0.025em; }
+  .hero h1 .grad { background: linear-gradient(100deg, var(--accent-strong), var(--accent) 45%, #8ED0FF 65%, var(--accent-strong)); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: grad-flow 6s ease-in-out infinite; }
+  @keyframes grad-flow { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  .hero-sub { margin-top: 22px; font-size: 18px; line-height: 1.6; color: var(--ink-soft); max-width: 46ch; }
+  .hero-actions { display: flex; gap: 12px; margin-top: 34px; flex-wrap: wrap; }
+  .btn-primary, .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; border-radius: 13px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid transparent; transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s; }
+  .btn-primary { background: var(--ink); color: var(--bg); box-shadow: 0 10px 26px -10px rgba(14,22,33,.5); }
+  .btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 34px -10px rgba(14,22,33,.55); }
+  .btn-ghost { border-color: var(--border); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .hero-meta { display: flex; gap: 28px; margin-top: 44px; padding-top: 30px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .hero-meta div { min-width: 96px; }
+  .hero-meta .num { font-family: 'Manrope'; font-weight: 800; font-size: 23px; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+  .hero-meta .lbl { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+
+  /* ---------- phone mock w/ orbiting motif ---------- */
+  .phone-stage { display: flex; justify-content: center; position: relative; padding: 30px 0; }
+  .orbit { position: absolute; width: 420px; height: 420px; animation: spin 22s linear infinite; }
+  .orbit-2 { width: 500px; height: 500px; animation: spin 32s linear infinite reverse; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .orbit-dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); top: 0; left: 50%; box-shadow: 0 0 16px 2px var(--accent-glow); }
+  .orbit-2 .orbit-dot { background: var(--online); width: 7px; height: 7px; top: 8%; }
+  .phone { position: relative; width: 292px; border-radius: 42px; background: var(--bg-deep); padding: 12px; box-shadow: var(--shadow-lg), 0 2px 0 rgba(255,255,255,0.07) inset; animation: bob 5s ease-in-out infinite; }
+  @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-0.4deg); } 50% { transform: translateY(-12px) rotate(0.4deg); } }
+  .phone-screen { background: var(--chat-bg); border-radius: 32px; overflow: hidden; height: 566px; display: flex; flex-direction: column; }
+  .phone-head { background: var(--accent); padding: 46px 16px 14px; display: flex; align-items: center; gap: 10px; color: #fff; flex-shrink: 0; }
+  .phone-avatar { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.25); display: grid; place-items: center; font-size: 13px; font-weight: 700; font-family: 'Manrope'; }
+  .phone-head .name { font-weight: 700; font-size: 14.5px; font-family: 'Manrope'; }
+  .phone-head .status { font-size: 11.5px; opacity: 0.85; display: flex; align-items: center; gap: 5px; }
+  .phone-head .status .d { width: 6px; height: 6px; border-radius: 50%; background: #7CFF9E; }
+  .phone-body { flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
+  .bub { max-width: 78%; padding: 9px 12px; border-radius: 14px; font-size: 13px; line-height: 1.4; opacity: 0; animation: bub-in .5s cubic-bezier(.2,.8,.2,1) forwards; }
+  @keyframes bub-in { from { opacity: 0; transform: translateY(10px) scale(.94); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  .bub .t { font-size: 9.5px; opacity: 0.55; margin-top: 3px; text-align: right; font-variant-numeric: tabular-nums; }
+  .bub-in { background: var(--bubble-in); color: var(--ink); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+  .bub-out { background: var(--bubble-out); color: var(--bubble-out-ink); align-self: flex-end; border-bottom-right-radius: 4px; }
+  .bub-lock { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--accent-strong); margin-bottom: 4px; }
+  .typing-dots { align-self: flex-start; background: var(--bubble-in); border-radius: 14px; border-bottom-left-radius: 4px; padding: 11px 14px; display: flex; gap: 4px; opacity: 0; animation: bub-in .4s forwards; animation-delay: 2.6s; }
+  .typing-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: tdot 1.2s ease-in-out infinite; }
+  .typing-dots span:nth-child(2) { animation-delay: .15s; } .typing-dots span:nth-child(3) { animation-delay: .3s; }
+  @keyframes tdot { 0%, 60%, 100% { transform: translateY(0); opacity: .4; } 30% { transform: translateY(-3px); opacity: 1; } }
+  .phone-input { padding: 10px 12px 16px; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .phone-input .field { flex: 1; background: var(--bubble-in); border-radius: 100px; padding: 10px 14px; font-size: 12.5px; color: var(--muted); }
+  .phone-input .send { width: 34px; height: 34px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; flex-shrink: 0; }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 56px; }
+    .phone-stage { order: -1; margin-bottom: 8px; }
+    .phone { width: 240px; } .phone-screen { height: 460px; }
+    .orbit, .orbit-2 { display: none; }
+  }
+
+  /* ---------- trust strip (marquee) ---------- */
+  .trust-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 0; overflow: hidden; }
+  .marquee { display: flex; width: max-content; animation: marquee 26s linear infinite; }
+  .marquee:hover { animation-play-state: paused; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee span { display: flex; align-items: center; gap: 9px; font-size: 13.5px; color: var(--muted); font-weight: 500; padding: 0 34px; white-space: nowrap; }
+  .marquee svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--accent); }
+
+  /* ---------- section shell ---------- */
+  section { padding: 108px 0; position: relative; }
+  .section-head { max-width: 640px; margin-bottom: 56px; }
+  .section-tag { font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-strong); margin-bottom: 12px; }
+  .section-head h2 { font-size: clamp(29px, 3.3vw, 40px); font-weight: 800; letter-spacing: -0.015em; line-height: 1.14; }
+  .section-head p { margin-top: 16px; font-size: 16.5px; color: var(--ink-soft); line-height: 1.65; }
+
+  /* ---------- feature grid ---------- */
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 22px; overflow: hidden; }
+  .feature { background: var(--surface); padding: 34px 30px; display: flex; flex-direction: column; gap: 14px; transition: background .3s; position: relative; }
+  .feature:hover { background: var(--surface-2); }
+  .feature-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-glow); display: grid; place-items: center; color: var(--accent-strong); transition: transform .35s cubic-bezier(.34,1.56,.64,1); }
+  .feature:hover .feature-icon { transform: scale(1.12) rotate(-6deg); }
+  .feature-icon svg { width: 22px; height: 22px; }
+  .feature h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .feature p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+  @media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- crypto section ---------- */
+  .crypto { background: var(--bg-deep); color: #EAF2FA; border-radius: 30px; padding: 68px 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; position: relative; overflow: hidden; }
+  .crypto-glow { position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(94,181,247,.18), transparent 70%); top: -180px; right: -180px; animation: drift 9s ease-in-out infinite; }
+  @keyframes drift { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-30px, 30px); } }
+  .crypto .section-tag { color: #85CBFF; }
+  .crypto h2 { color: #fff; font-size: clamp(27px, 3.1vw, 35px); position: relative; }
+  .crypto p.lead { color: #A9BED2; margin-top: 16px; font-size: 15.5px; line-height: 1.7; position: relative; }
+  .crypto-steps { display: flex; flex-direction: column; gap: 0; margin-top: 28px; position: relative; }
+  .crypto-step { display: flex; gap: 16px; padding: 17px 0; border-top: 1px solid rgba(255,255,255,0.09); }
+  .crypto-step:first-child { border-top: none; }
+  .crypto-step .n { font-family: 'IBM Plex Mono'; font-size: 12px; color: #5EB5F7; padding-top: 2px; flex-shrink: 0; width: 22px; }
+  .crypto-step .body h4 { font-family: 'Manrope'; font-weight: 700; font-size: 14.5px; color: #fff; margin-bottom: 4px; }
+  .crypto-step .body p { font-size: 13.5px; color: #93A9BC; line-height: 1.6; }
+  .crypto-panel { background: #0A1119; border: 1px solid #1D2937; border-radius: 17px; padding: 22px 24px; position: relative; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s; }
+  .crypto-panel:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -20px rgba(94,181,247,.25); }
+  .crypto-panel .row { display: flex; justify-content: space-between; align-items: baseline; padding: 11px 0; border-bottom: 1px solid #1A2531; font-size: 13px; }
+  .crypto-panel .row:last-child { border-bottom: none; }
+  .crypto-panel .row .k { color: #7C90A3; }
+  .crypto-panel .row .v { font-family: 'IBM Plex Mono'; color: var(--code-ink); font-size: 12.5px; }
+  .crypto-panel .fp { margin-top: 14px; padding-top: 14px; border-top: 1px dashed #263344; }
+  .crypto-panel .fp .k { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #6E8296; margin-bottom: 8px; }
+  .crypto-panel .fp .v { font-family: 'IBM Plex Mono'; font-size: 12.5px; color: #85CBFF; line-height: 1.7; letter-spacing: 0.02em; }
+  @media (max-width: 900px) { .crypto { grid-template-columns: 1fr; padding: 44px 26px; } }
+
+  /* ---------- calls showcase ---------- */
+  .calls { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center; }
+  .calls-visual { background: var(--surface); border: 1px solid var(--border); border-radius: 26px; padding: 42px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .ring-avatar { width: 94px; height: 94px; border-radius: 50%; background: linear-gradient(155deg, var(--accent), var(--accent-strong)); display: grid; place-items: center; color: #fff; font-family: 'Manrope'; font-weight: 800; font-size: 30px; position: relative; }
+  .ring-avatar::before, .ring-avatar::after { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid var(--accent); opacity: 0; animation: ring 2.2s ease-out infinite; }
+  .ring-avatar::after { animation-delay: .7s; }
+  @keyframes ring { 0% { transform: scale(1); opacity: .55; } 100% { transform: scale(1.8); opacity: 0; } }
+  .call-status { font-family: 'Manrope'; font-weight: 700; font-size: 15.5px; }
+  .call-sub { font-size: 12.5px; color: var(--muted); }
+  .call-actions { display: flex; gap: 22px; margin-top: 4px; }
+  .call-btn { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; color: #fff; transition: transform .2s; cursor: pointer; }
+  .call-btn:hover { transform: scale(1.08); }
+  .call-decline { background: var(--danger); }
+  .call-accept { background: var(--online); }
+  .spec-list { display: flex; flex-direction: column; gap: 0; }
+  .spec-row { display: flex; justify-content: space-between; gap: 20px; padding: 15px 0; border-top: 1px solid var(--border); font-size: 14px; }
+  .spec-row:first-child { border-top: none; }
+  .spec-row .k { color: var(--ink-soft); }
+  .spec-row .v { font-family: 'IBM Plex Mono'; font-size: 12.5px; color: var(--ink); text-align: right; }
+  @media (max-width: 900px) { .calls { grid-template-columns: 1fr; } }
+
+  /* ---------- honesty ---------- */
+  .honesty { background: var(--surface-2); border-radius: 26px; padding: 50px 46px; }
+  .honesty-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 8px; }
+  .honesty-col h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .honesty-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .honesty-col li { font-size: 14.5px; line-height: 1.5; display: flex; gap: 10px; color: var(--ink-soft); transition: transform .2s; }
+  .honesty-col li:hover { transform: translateX(4px); }
+  .honesty-col li svg { flex-shrink: 0; margin-top: 3px; width: 16px; height: 16px; }
+  .col-ship h3 { color: var(--online); } .col-ship svg { color: var(--online); }
+  .col-next h3 { color: var(--accent-strong); } .col-next svg { color: var(--accent-strong); }
+  @media (max-width: 760px) { .honesty-grid { grid-template-columns: 1fr; } .honesty { padding: 36px 26px; } }
+
+  /* ---------- download cta ---------- */
+  .cta-band { background: linear-gradient(155deg, var(--accent-strong), var(--accent)); border-radius: 30px; padding: 68px 48px; text-align: center; color: #fff; position: relative; overflow: hidden; }
+  .cta-band .blob { position: absolute; border-radius: 50%; background: rgba(255,255,255,.14); filter: blur(30px); animation: drift 8s ease-in-out infinite; }
+  .cta-band .blob1 { width: 260px; height: 260px; top: -80px; left: -60px; }
+  .cta-band .blob2 { width: 200px; height: 200px; bottom: -70px; right: -40px; animation-delay: -3s; }
+  .cta-band h2 { font-size: clamp(27px, 3.5vw, 39px); position: relative; }
+  .cta-band p { margin-top: 14px; font-size: 15.5px; opacity: 0.92; position: relative; max-width: 46ch; margin-left: auto; margin-right: auto; }
+  .cta-badges { display: flex; gap: 14px; justify-content: center; margin-top: 32px; position: relative; flex-wrap: wrap; }
+  .badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 12px 22px; border-radius: 13px; font-weight: 600; font-size: 14px; backdrop-filter: blur(6px); transition: transform .25s, background .25s; }
+  .badge:hover { transform: translateY(-3px); background: rgba(255,255,255,0.22); }
+  .badge svg { width: 20px; height: 20px; }
+  .badge small { display: block; font-weight: 400; font-size: 10.5px; opacity: 0.85; text-transform: uppercase; letter-spacing: .04em; }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--border); padding: 50px 0 40px; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
+  .footer-links { display: flex; gap: 36px; flex-wrap: wrap; }
+  .footer-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 12px; }
+  .footer-col a { display: block; font-size: 14px; color: var(--ink-soft); text-decoration: none; padding: 4px 0; transition: color .15s; }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--muted); }
+</style>
+
+<canvas id="aurora"></canvas>
+<div class="bubble-field" id="bubbleField"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" fill="#fff"/></svg></span>
+      Televo
+    </div>
+    <div class="nav-links">
+      <a href="#privacy">Privacy</a>
+      <a href="#calls">Calls</a>
+      <a href="#honesty">Roadmap</a>
+      <a href="https://atopu-sys.github.io/televo-legal/terms.html">Terms</a>
+    </div>
+    <a class="nav-cta" href="#download">Get Televo</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <section class="hero" style="padding-bottom:0;">
+    <div class="reveal in">
+      <div class="eyebrow"><span class="dot"></span> Now on iOS</div>
+      <h1>Messaging that stays <span class="grad">between you two</span>.</h1>
+      <p class="hero-sub">Televo is a fast, private messenger — real accounts, live sync across devices, voice &amp; video calls, and Secret Chats with end-to-end encryption you can verify yourself.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#download">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M16.365 1.43c0 1.14-.469 2.213-1.212 2.994-.822.866-2.184 1.548-3.16 1.548-.109 0-.204-.017-.28-.028a3.802 3.802 0 01-.02-.313c0-1.101.507-2.28 1.279-3.081C13.71.79 15.243.028 16.09 0c.02.14.02.31.02.32.02.28.02.28.02.28.155-.007.155-.007.155-.007z" fill="currentColor"/><path d="M20.8 17.5c-.622 1.437-.92 2.08-1.72 3.36-1.116 1.79-2.69 4.02-4.64 4.04-1.73.017-2.176-1.126-4.523-1.113-2.348.013-2.84 1.133-4.573 1.116-1.95-.02-3.44-2.03-4.556-3.82C-2.13 16.53-1.34 8.35 4.14 4.7c1.79-1.19 3.65-1.35 4.98-.5.8.51 2.03 1.13 3.03 1.13.94 0 2.06-.66 3.13-.66 1.66 0 3.32.68 4.48 1.86-3.96 2.16-3.33 7.85 1.04 9.97z" fill="currentColor"/></svg>
+          App Store
+        </a>
+        <a class="btn-ghost" href="#privacy">How encryption works</a>
+      </div>
+      <div class="hero-meta">
+        <div><div class="num" data-count="256">0</div><div class="lbl">-bit key exchange</div></div>
+        <div><div class="num">DTLS</div><div class="lbl">Encrypted calls</div></div>
+        <div><div class="num" data-count="0">0</div><div class="lbl">Ads, ever</div></div>
+      </div>
+    </div>
+
+    <div class="phone-stage reveal in">
+      <div class="orbit"><div class="orbit-dot"></div></div>
+      <div class="orbit orbit-2"><div class="orbit-dot"></div></div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-head">
+            <div class="phone-avatar">M</div>
+            <div><div class="name">Maya</div><div class="status"><span class="d"></span> online</div></div>
+          </div>
+          <div class="phone-body">
+            <div class="bub bub-in" style="animation-delay:.2s">Did the files come through?<div class="t">9:41</div></div>
+            <div class="bub bub-out" style="animation-delay:1s"><span class="bub-lock">🔒 Secret Chat</span>Yep — sent over a verified chat, self-destructs in 1h<div class="t">9:41 ✓✓</div></div>
+            <div class="bub bub-in" style="animation-delay:1.8s">Perfect. Calling you in five<div class="t">9:42</div></div>
+            <div class="typing-dots"><span></span><span></span><span></span></div>
+          </div>
+          <div class="phone-input">
+            <div class="field">Message</div>
+            <div class="send"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l16-8-6 8 6 8-16-8z" fill="#fff"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="trust-strip">
+  <div class="marquee" id="marquee">
+    <span><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 3.5v6c0 5-3.4 8.7-8 10.5-4.6-1.8-8-5.5-8-10.5v-6L12 2z" stroke="currentColor" stroke-width="1.6"/></svg> Row-level security on every table</span>
+    <span><svg viewBox="0 0 24 24" fill="none"><path d="M12 15a3 3 0 003-3V7a3 3 0 10-6 0v5a3 3 0 003 3z" stroke="currentColor" stroke-width="1.6"/><path d="M19 11v1a7 7 0 01-14 0v-1M12 19v3" stroke="currentColor" stroke-width="1.6"/></svg> Contacts matched by hash, never uploaded</span>
+    <span><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M12 2l8 3.5v6c0 5-3.4 8.7-8 10.5-4.6-1.8-8-5.5-8-10.5v-6L12 2z" stroke="currentColor" stroke-width="1.6"/></svg> No ad network, no data broker</span>
+    <span><svg viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" stroke="currentColor" stroke-width="1.6"/></svg> Open verify-scripts on every backend feature</span>
+    <span><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 3.5v6c0 5-3.4 8.7-8 10.5-4.6-1.8-8-5.5-8-10.5v-6L12 2z" stroke="currentColor" stroke-width="1.6"/></svg> Row-level security on every table</span>
+    <span><svg viewBox="0 0 24 24" fill="none"><path d="M12 15a3 3 0 003-3V7a3 3 0 10-6 0v5a3 3 0 003 3z" stroke="currentColor" stroke-width="1.6"/><path d="M19 11v1a7 7 0 01-14 0v-1M12 19v3" stroke="currentColor" stroke-width="1.6"/></svg> Contacts matched by hash, never uploaded</span>
+    <span><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M12 2l8 3.5v6c0 5-3.4 8.7-8 10.5-4.6-1.8-8-5.5-8-10.5v-6L12 2z" stroke="currentColor" stroke-width="1.6"/></svg> No ad network, no data broker</span>
+    <span><svg viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" stroke="currentColor" stroke-width="1.6"/></svg> Open verify-scripts on every backend feature</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="features">
+    <div class="section-head reveal">
+      <div class="section-tag">Everyday messaging</div>
+      <h2>Everything a fast messenger needs — nothing it doesn't.</h2>
+      <p>Chats sync live across every device you're signed into. No lag, no "last seen 3 hours ago" surprises.</p>
+    </div>
+    <div class="feature-grid reveal-stagger reveal">
+      <div class="feature stagger-item">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" stroke="currentColor" stroke-width="1.7"/></svg></div>
+        <h3>Live everywhere</h3>
+        <p>One account, every device — messages, read state and typing indicators sync in real time over Supabase Realtime.</p>
+      </div>
+      <div class="feature stagger-item">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 10l9-7 9 7v9a2 2 0 01-2 2H5a2 2 0 01-2-2v-9z" stroke="currentColor" stroke-width="1.7"/><path d="M9 21V12h6v9" stroke="currentColor" stroke-width="1.7"/></svg></div>
+        <h3>Groups you actually run</h3>
+        <p>Create a group, name it, hand out admin. Reply, edit and forward with full "forwarded from" attribution.</p>
+      </div>
+      <div class="feature stagger-item">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" fill="currentColor"/></svg></div>
+        <h3>Self-destruct timers</h3>
+        <p>Set a chat to erase itself after 30 seconds or a week. The timer travels with the message, not the screen.</p>
+      </div>
+      <div class="feature stagger-item">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Files that stay files</h3>
+        <p>Photos and documents of any type, delivered through signed URLs from a private bucket — not re-compressed junk.</p>
+      </div>
+      <div class="feature stagger-item">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2a5 5 0 015 5v3a5 5 0 01-10 0V7a5 5 0 015-5z" stroke="currentColor" stroke-width="1.7"/><path d="M5 11a7 7 0 0014 0M12 18v4" stroke="currentColor" stroke-width="1.7"/></svg></div>
+        <h3>Passcode + Face ID</h3>
+        <p>A local 4-digit lock with biometric unlock gates the whole app the moment it's backgrounded.</p>
+      </div>
+      <div class="feature stagger-item">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 15a4 4 0 004-4V6a4 4 0 00-8 0v5a4 4 0 004 4z" stroke="currentColor" stroke-width="1.7"/><path d="M4 18h4M6 16v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="17" cy="17" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 17l1 1 2-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>Two-step verification</h3>
+        <p>Add a TOTP code from any authenticator app on top of your password — enforced server-side, not cosmetic.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacy">
+    <div class="crypto reveal">
+      <div class="crypto-glow"></div>
+      <div>
+        <div class="section-tag">Secret Chats</div>
+        <h2>Turn any chat into one only two devices can read.</h2>
+        <p class="lead">Keys are generated on-device and never touch our servers. Tap the lock icon, and the conversation from that point on is unreadable to us.</p>
+        <div class="crypto-steps">
+          <div class="crypto-step"><div class="n">01</div><div class="body"><h4>Device generates a keypair</h4><p>X25519 keys are created locally the first time you open Televo and stored in the secure enclave — the private half never leaves the device.</p></div></div>
+          <div class="crypto-step"><div class="n">02</div><div class="body"><h4>Public keys are exchanged</h4><p>Only the public key is published to your profile. Your contact's app fetches it to derive a shared secret — a classic Diffie–Hellman handshake.</p></div></div>
+          <div class="crypto-step"><div class="n">03</div><div class="body"><h4>You verify it yourself</h4><p>Compare safety numbers in person or over another channel. A match means no one sat in the middle of that handshake.</p></div></div>
+        </div>
+      </div>
+      <div class="crypto-panel">
+        <div class="row"><span class="k">Chat</span><span class="v">Maya · Secret Chat</span></div>
+        <div class="row"><span class="k">Key exchange</span><span class="v">X25519 (Curve25519)</span></div>
+        <div class="row"><span class="k">Cipher</span><span class="v">XSalsa20-Poly1305</span></div>
+        <div class="row"><span class="k">Self-destruct</span><span class="v">1h · per-message</span></div>
+        <div class="row"><span class="k">Readable by Televo</span><span class="v" style="color:#FF8A80">never</span></div>
+        <div class="fp"><div class="k">Safety number</div><div class="v">3841 &nbsp;9902 &nbsp;1174&nbsp;<br>5530 &nbsp;0287 &nbsp;6619</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="calls">
+    <div class="calls">
+      <div class="calls-visual reveal">
+        <div class="ring-avatar">M</div>
+        <div class="call-status">Calling Maya…</div>
+        <div class="call-sub">Native WebRTC · relayed over TURN when needed</div>
+        <div class="call-actions">
+          <div class="call-btn call-decline"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+          <div class="call-btn call-accept"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 5c0-1 1-2 2-2h1a1 1 0 011 .8l1 3a1 1 0 01-.3 1L7 9.3a12 12 0 007 7l1.5-1.7a1 1 0 011-.3l3 1a1 1 0 01.8 1v1c0 1-1 2-2 2C10.5 20.5 3.5 13.5 4 5z" fill="#fff"/></svg></div>
+        </div>
+      </div>
+      <div class="calls-copy reveal">
+        <div class="section-head" style="margin-bottom:28px;">
+          <div class="section-tag">Voice &amp; video</div>
+          <h2>Real calls, real WebRTC.</h2>
+          <p>No embedded browser tricks — Televo talks to the device's native media engine directly, so the microphone and camera prompts appear exactly when they should.</p>
+        </div>
+        <div class="spec-list">
+          <div class="spec-row"><span class="k">Signaling</span><span class="v">Realtime broadcast, per-call channel</span></div>
+          <div class="spec-row"><span class="k">Media transport</span><span class="v">DTLS-SRTP (encrypted in transit)</span></div>
+          <div class="spec-row"><span class="k">NAT traversal</span><span class="v">STUN + TURN relay fallback</span></div>
+          <div class="spec-row"><span class="k">Call log</span><span class="v">Incoming · outgoing · missed · declined</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="honesty">
+    <div class="honesty reveal">
+      <div class="section-head" style="margin-bottom:0;">
+        <div class="section-tag">Built in the open</div>
+        <h2>What's shipped, and what we're still building.</h2>
+        <p>Most apps market the roadmap as if it's already done. We'd rather tell you exactly where the line is today.</p>
+      </div>
+      <div class="honesty-grid">
+        <div class="honesty-col col-ship">
+          <h3><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Shipped today</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> End-to-end encrypted Secret Chats with safety-number verification</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> 1:1 voice &amp; video calls over native WebRTC</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Server-enforced blocking &amp; content reporting</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Two-step verification, passcode lock, in-app account deletion</li>
+          </ul>
+        </div>
+        <div class="honesty-col col-next">
+          <h3><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Actively building</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> CallKit &amp; PushKit, so calls ring even when Televo is backgrounded</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Group calls — currently disabled while we fix multi-answer handling</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Message search, voice notes, and reactions</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Forward secrecy (ratcheting keys) for Secret Chats</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="cta-band reveal">
+      <div class="blob blob1"></div><div class="blob blob2"></div>
+      <h2>Your conversations. Your devices. Your rules.</h2>
+      <p>Televo is free, carries no ads, and never sells a byte of your data. Available now for iPhone.</p>
+      <div class="cta-badges">
+        <div class="badge">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M16.365 1.43c0 1.14-.469 2.213-1.212 2.994-.822.866-2.184 1.548-3.16 1.548a3.4 3.4 0 01-.02-.313c0-1.101.507-2.28 1.279-3.081.822-.866 2.184-1.548 3.16-1.548l-.047.4z" fill="#fff"/><path d="M20.8 17.5c-.622 1.437-.92 2.08-1.72 3.36-1.116 1.79-2.69 4.02-4.64 4.04-1.73.017-2.176-1.126-4.523-1.113-2.348.013-2.84 1.133-4.573 1.116-1.95-.02-3.44-2.03-4.556-3.82C-2.13 16.53-1.34 8.35 4.14 4.7c1.79-1.19 3.65-1.35 4.98-.5.8.51 2.03 1.13 3.03 1.13.94 0 2.06-.66 3.13-.66 1.66 0 3.32.68 4.48 1.86-3.96 2.16-3.33 7.85 1.04 9.97z" fill="#fff"/></svg>
+          <span>App Store<small>iPhone · iOS 15.1+</small></span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div>
+        <div class="brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" fill="#fff"/></svg></span>Televo</div>
+        <p style="margin-top:14px; font-size:13.5px; color:var(--muted); max-width:32ch; line-height:1.6;">A private messenger built with Expo and Supabase. No ads, no tracking, no data broker.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#privacy">Secret Chats</a><a href="#calls">Calls</a></div>
+        <div class="footer-col"><h4>Legal</h4><a href="https://atopu-sys.github.io/televo-legal/terms.html">Terms of Service</a><a href="https://atopu-sys.github.io/televo-legal/privacy.html">Privacy Policy</a></div>
+        <div class="footer-col"><h4>Contact</h4><a href="mailto:ssirojov@gmail.com">ssirojov@gmail.com</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Televo. Built for people, not ad networks.</span><span class="mono">v1.0.0</span></div>
+  </div>
+</footer>
+
+<script>
+  // Aurora backdrop — soft animated blobs on canvas, cheap alternative to a
+  // WebGL noise shader, same "living gradient" feel without a GL dependency.
+  (function () {
+    var canvas = document.getElementById('aurora');
+    var ctx = canvas.getContext('2d');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+    resize(); addEventListener('resize', resize);
+    var blobs = [
+      { x: .15, y: .1, r: .35, c: isDark ? '94,181,247' : '51,144,236', dx: .00012, dy: .00009, t: 0 },
+      { x: .8, y: .25, r: .30, c: isDark ? '56,193,114' : '94,181,247', dx: -.00010, dy: .00013, t: 2 },
+      { x: .5, y: .6, r: .28, c: isDark ? '133,203,255' : '56,193,114', dx: .00008, dy: -.00011, t: 4 },
+    ];
+    if (reduced) {
+      blobs.forEach(function (b) { draw(b); });
+    } else {
+      requestAnimationFrame(loop);
+    }
+    function draw(b) {
+      var cx = b.x * canvas.width, cy = b.y * canvas.height, r = b.r * Math.max(canvas.width, canvas.height);
+      var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+      g.addColorStop(0, 'rgba(' + b.c + ',.35)');
+      g.addColorStop(1, 'rgba(' + b.c + ',0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
+    }
+    function loop(ts) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      blobs.forEach(function (b) {
+        b.t += 1;
+        b.x += Math.sin(b.t * .002 + b.dy * 1000) * b.dx;
+        b.y += Math.cos(b.t * .0017) * b.dy;
+        draw(b);
+      });
+      requestAnimationFrame(loop);
+    }
+  })();
+
+  // Floating chat-bubble motif scattered behind content.
+  (function () {
+    var field = document.getElementById('bubbleField');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var n = innerWidth < 760 ? 5 : 10;
+    for (var i = 0; i < n; i++) {
+      var el = document.createElement('div');
+      el.className = 'fbubble';
+      var size = 30 + Math.random() * 70;
+      el.style.width = size + 'px';
+      el.style.height = size * .8 + 'px';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.top = Math.random() * 100 + 'vh';
+      el.style.background = i % 2 === 0 ? 'var(--accent)' : 'var(--online)';
+      el.style.animationDuration = (10 + Math.random() * 10) + 's';
+      el.style.animationDelay = (Math.random() * -10) + 's';
+      field.appendChild(el);
+    }
+  })();
+
+  // Scroll-reveal
+  (function () {
+    var els = document.querySelectorAll('.reveal, .reveal-stagger');
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+
+  // Marquee: duplicate content so the 50%-translate loop is seamless.
+  (function () {
+    var m = document.getElementById('marquee');
+    m.innerHTML += m.innerHTML;
+  })();
+</script>
