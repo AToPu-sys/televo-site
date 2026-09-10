@@ -387,14 +387,14 @@
         <h2>Turn any chat into one only two devices can read.</h2>
         <p class="lead">Keys are generated on-device and never touch our servers. Tap the lock icon, and the conversation from that point on is unreadable to us.</p>
         <div class="crypto-steps">
-          <div class="crypto-step"><div class="n">01</div><div class="body"><h4>Device generates a keypair</h4><p>X25519 keys are created locally the first time you open Televo and stored in the secure enclave — the private half never leaves the device.</p></div></div>
-          <div class="crypto-step"><div class="n">02</div><div class="body"><h4>Public keys are exchanged</h4><p>Only the public key is published to your profile. Your contact's app fetches it to derive a shared secret — a classic Diffie–Hellman handshake.</p></div></div>
+          <div class="crypto-step"><div class="n">01</div><div class="body"><h4>Device generates two keypairs</h4><p>An X25519 keypair and an ML-KEM-768 (post-quantum) keypair are created locally the first time you open Televo and stored in the secure enclave — neither private half ever leaves the device.</p></div></div>
+          <div class="crypto-step"><div class="n">02</div><div class="body"><h4>Both public keys are exchanged</h4><p>Only the public halves are published to your profile. Your contact's app combines a classic X25519 Diffie–Hellman handshake with an ML-KEM-768 encapsulation, so the conversation stays secure even against a future quantum computer, not just today's attackers.</p></div></div>
           <div class="crypto-step"><div class="n">03</div><div class="body"><h4>You verify it yourself</h4><p>Compare safety numbers in person or over another channel. A match means no one sat in the middle of that handshake.</p></div></div>
         </div>
       </div>
       <div class="crypto-panel">
         <div class="row"><span class="k">Chat</span><span class="v">Maya · Secret Chat</span></div>
-        <div class="row"><span class="k">Key exchange</span><span class="v">X25519 (Curve25519)</span></div>
+        <div class="row"><span class="k">Key exchange</span><span class="v">X25519 + ML-KEM-768 (hybrid, post-quantum)</span></div>
         <div class="row"><span class="k">Cipher</span><span class="v">XSalsa20-Poly1305</span></div>
         <div class="row"><span class="k">Self-destruct</span><span class="v">1h · per-message</span></div>
         <div class="row"><span class="k">Readable by Televo</span><span class="v" style="color:#FF8A80">never</span></div>
@@ -464,11 +464,11 @@
     <div class="cta-band reveal">
       <div class="blob blob1"></div><div class="blob blob2"></div>
       <h2>Your conversations. Your devices. Your rules.</h2>
-      <p>Televo is free, carries no ads, and never sells a byte of your data. Available now for iPhone.</p>
+      <p>Televo is free, carries no ads, and never sells a byte of your data. Coming soon to iPhone.</p>
       <div class="cta-badges">
         <div class="badge">
           <svg viewBox="0 0 24 24" fill="none"><path d="M16.365 1.43c0 1.14-.469 2.213-1.212 2.994-.822.866-2.184 1.548-3.16 1.548a3.4 3.4 0 01-.02-.313c0-1.101.507-2.28 1.279-3.081.822-.866 2.184-1.548 3.16-1.548l-.047.4z" fill="#fff"/><path d="M20.8 17.5c-.622 1.437-.92 2.08-1.72 3.36-1.116 1.79-2.69 4.02-4.64 4.04-1.73.017-2.176-1.126-4.523-1.113-2.348.013-2.84 1.133-4.573 1.116-1.95-.02-3.44-2.03-4.556-3.82C-2.13 16.53-1.34 8.35 4.14 4.7c1.79-1.19 3.65-1.35 4.98-.5.8.51 2.03 1.13 3.03 1.13.94 0 2.06-.66 3.13-.66 1.66 0 3.32.68 4.48 1.86-3.96 2.16-3.33 7.85 1.04 9.97z" fill="#fff"/></svg>
-          <span>App Store<small>iPhone · iOS 15.1+</small></span>
+          <span>Coming to App Store<small>iPhone · iOS 15.1+</small></span>
         </div>
       </div>
     </div>
