@@ -1,0 +1,269 @@
+<title>Support — Televo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Get help with Televo — common questions about accounts, Secret Chats, calls, and privacy, plus how to reach a human.">
+<link rel="canonical" href="https://gettelevo.space/support">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233390EC'/%3E%3Cpath d='M8 10a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2h-8l-5 4v-4h-1a2 2 0 01-2-2v-8z' fill='white'/%3E%3C/svg%3E">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #FBFCFE;
+    --surface: #FFFFFF;
+    --ink: #0E1621;
+    --ink-soft: #4B5A68;
+    --muted: #707579;
+    --border: #E4E8EE;
+    --accent: #3390EC;
+    --accent-strong: #1E6FC4;
+    --accent-glow: rgba(51, 144, 236, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0B121B; --surface: #131D28; --ink: #F2F5F8; --ink-soft: #B9C6D2;
+      --muted: #8A9AA9; --border: #223040; --accent: #5EB5F7; --accent-strong: #85CBFF;
+      --accent-glow: rgba(94, 181, 247, 0.16);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.65;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  nav { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px; max-width: 760px; margin: 0 auto;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Manrope'; font-weight: 800; font-size: 18px;
+    text-decoration: none; color: var(--ink);
+  }
+  .brand-mark {
+    width: 30px; height: 30px; border-radius: 9px;
+    background: linear-gradient(155deg, var(--accent), var(--accent-strong));
+    display: grid; place-items: center; flex-shrink: 0;
+  }
+  .brand-mark svg { width: 16px; height: 16px; }
+  .nav-back { font-size: 14px; color: var(--accent); text-decoration: none; font-weight: 500; }
+  .nav-back:hover { text-decoration: underline; }
+
+  header.doc { padding: 56px 0 8px; }
+  h1 {
+    font-family: 'Manrope'; font-weight: 800; font-size: clamp(30px, 5vw, 40px);
+    letter-spacing: -0.02em; margin: 0 0 12px; line-height: 1.15;
+  }
+  .lede { font-size: 16.5px; color: var(--ink-soft); margin: 0; }
+
+  main { padding-bottom: 72px; }
+
+  .contact-hero {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 26px 28px; margin-top: 32px;
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  }
+  .contact-hero .icon {
+    width: 48px; height: 48px; border-radius: 13px; background: var(--accent-glow);
+    display: grid; place-items: center; color: var(--accent-strong); flex-shrink: 0;
+  }
+  .contact-hero .icon svg { width: 24px; height: 24px; }
+  .contact-hero .body { flex: 1; min-width: 220px; }
+  .contact-hero h2 {
+    font-family: 'Manrope'; font-weight: 700; font-size: 18px;
+    margin: 0 0 4px; border: none; padding: 0;
+  }
+  .contact-hero p { margin: 0; font-size: 14.5px; }
+  .mail-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #fff; text-decoration: none;
+    padding: 12px 22px; border-radius: 11px; font-weight: 600; font-size: 14.5px;
+    white-space: nowrap;
+  }
+  .mail-btn:hover { background: var(--accent-strong); }
+
+  h2 {
+    font-family: 'Manrope'; font-weight: 700; font-size: 21px;
+    letter-spacing: -0.01em; margin: 48px 0 6px; padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  p { margin: 0 0 16px; color: var(--ink-soft); }
+  strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--accent); }
+
+  details {
+    border-bottom: 1px solid var(--border); padding: 4px 0;
+  }
+  summary {
+    cursor: pointer; padding: 15px 0; font-weight: 600; font-size: 15.5px;
+    list-style: none; display: flex; justify-content: space-between;
+    align-items: center; gap: 16px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: '+'; color: var(--muted); font-size: 20px; font-weight: 400;
+    flex-shrink: 0; line-height: 1;
+  }
+  details[open] summary::after { content: '−'; }
+  details p { font-size: 14.5px; padding-bottom: 6px; }
+  details p:last-child { margin-bottom: 8px; }
+
+  .response-note {
+    background: var(--accent-glow); border-radius: 12px;
+    padding: 16px 20px; margin-top: 28px; font-size: 14.5px; color: var(--ink-soft);
+  }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 28px 0 40px;
+    font-size: 13.5px; color: var(--muted);
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+</style>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" fill="#fff"/></svg></span>
+      Televo
+    </a>
+    <a class="nav-back" href="/">← Back to site</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="doc">
+    <h1>Support</h1>
+    <p class="lede">
+      Answers to the questions that come up most, and a direct line to a human
+      for everything else.
+    </p>
+  </header>
+
+  <main>
+    <div class="contact-hero">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" stroke="currentColor" stroke-width="1.7"/>
+          <path d="M3.5 7.5l8.5 6 8.5-6" stroke="currentColor" stroke-width="1.7"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h2>Email us</h2>
+        <p>Questions, bug reports, privacy requests, or content reports.</p>
+      </div>
+      <a class="mail-btn" href="mailto:ssirojov@gmail.com?subject=Televo%20support">ssirojov@gmail.com</a>
+    </div>
+
+    <h2>Common questions</h2>
+
+    <details>
+      <summary>I didn't get my sign-in code</summary>
+      <p>
+        Televo signs you in with a 6-digit code sent to your email. Check your
+        spam folder first — the code arrives from an automated sender and some
+        providers filter it.
+      </p>
+      <p>
+        <strong>Use the code, not the link.</strong> The same email may also
+        contain a sign-in link; codes are more reliable because links can be
+        rewritten by mail clients. Codes are single-use and expire quickly, so
+        request a fresh one if it has been sitting for a while.
+      </p>
+    </details>
+
+    <details>
+      <summary>What is a Secret Chat, and how is it different?</summary>
+      <p>
+        A regular chat is encrypted in transit and stored encrypted at rest. A
+        <strong>Secret Chat</strong> adds end-to-end encryption: the keys are
+        generated on your device and never leave it, so message contents are
+        unreadable to us and to our hosting provider.
+      </p>
+      <p>
+        You can confirm nobody intercepted the exchange by comparing safety
+        numbers with the other person — chat menu → <strong>Verify
+        encryption</strong>. Matching numbers mean no one sat in the middle.
+      </p>
+    </details>
+
+    <details>
+      <summary>I reinstalled the app and my old Secret Chat messages are gone</summary>
+      <p>
+        This is expected, and it is the encryption working as designed. Secret
+        Chat history is tied to the encryption keys on the device that received
+        it. Those keys never leave the device and are never backed up to us — so
+        a reinstall creates a new keypair, and messages encrypted to the old one
+        cannot be recovered by anyone, including us.
+      </p>
+    </details>
+
+    <details>
+      <summary>A call connects but I can't hear the other person</summary>
+      <p>
+        Calls connect directly between devices when the network allows it, and
+        fall back to a relay server when it doesn't. If a call shows as connected
+        but carries no audio, the relay is usually the cause — try switching
+        between Wi-Fi and mobile data, which often picks a different route.
+      </p>
+      <p>
+        Also check that Televo has microphone permission in
+        <strong>iOS Settings → Televo</strong>, and camera permission as well for
+        video calls.
+      </p>
+    </details>
+
+    <details>
+      <summary>How do I report a message or block someone?</summary>
+      <p>
+        Press and hold any message from another person and choose
+        <strong>Report</strong>. Reports are screened automatically and escalated
+        to human review — we act on confirmed violations by removing content,
+        warning, suspending, or permanently terminating the account.
+      </p>
+      <p>
+        To block someone, open the chat menu and choose <strong>Block</strong>.
+        Blocking is enforced on the server in both directions, not just hidden in
+        the interface.
+      </p>
+    </details>
+
+    <details>
+      <summary>How do I delete my account?</summary>
+      <p>
+        <strong>Settings → Delete account.</strong> This permanently erases your
+        account, profile, messages, media and push tokens. It cannot be undone,
+        and no email or support request is required to do it.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why does Televo ask for my phone number?</summary>
+      <p>
+        So people who already have your number in their address book can find you
+        on Televo. Your number is never shown to other users and cannot be read
+        in bulk — matching compares cryptographic hashes, so someone only ever
+        confirms a number they already had.
+      </p>
+      <p>
+        You can change or remove it later in Settings. Removing it only stops
+        future contact matching; it does not delete your account.
+      </p>
+    </details>
+
+    <div class="response-note">
+      We respond to support email within a few days, privacy requests within 30
+      days, and content reports within 24 hours.
+    </div>
+  </main>
+
+  <footer>
+    <span>© 2026 Televo</span>
+    <span><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms</a> · <a href="/">Home</a></span>
+  </footer>
+</div>

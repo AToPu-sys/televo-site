@@ -1,0 +1,58 @@
+<title>Page not found — Televo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233390EC'/%3E%3Cpath d='M8 10a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2h-8l-5 4v-4h-1a2 2 0 01-2-2v-8z' fill='white'/%3E%3C/svg%3E">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500&display=swap');
+
+  :root {
+    --bg: #FBFCFE; --ink: #0E1621; --ink-soft: #4B5A68; --muted: #707579;
+    --border: #E4E8EE; --accent: #3390EC; --accent-strong: #1E6FC4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0B121B; --ink: #F2F5F8; --ink-soft: #B9C6D2; --muted: #8A9AA9;
+      --border: #223040; --accent: #5EB5F7; --accent-strong: #85CBFF;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink); min-height: 100vh;
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: grid; place-items: center; padding: 24px; text-align: center;
+  }
+  .mark {
+    width: 64px; height: 64px; border-radius: 18px; margin: 0 auto 28px;
+    background: linear-gradient(155deg, var(--accent), var(--accent-strong));
+    display: grid; place-items: center;
+  }
+  .mark svg { width: 32px; height: 32px; }
+  h1 {
+    font-family: 'Manrope'; font-weight: 800; font-size: 30px;
+    letter-spacing: -0.02em; margin: 0 0 12px;
+  }
+  p { color: var(--ink-soft); margin: 0 0 32px; font-size: 16px; line-height: 1.6; }
+  .links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; padding: 12px 24px; border-radius: 12px;
+    text-decoration: none; font-weight: 600; font-size: 14.5px;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-strong); }
+  .btn-ghost { border: 1px solid var(--border); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+
+<div>
+  <div class="mark">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" fill="#fff"/></svg>
+  </div>
+  <h1>Page not found</h1>
+  <p>That link doesn't lead anywhere on Televo.</p>
+  <div class="links">
+    <a class="btn btn-primary" href="/">Go to homepage</a>
+    <a class="btn btn-ghost" href="/support">Support</a>
+  </div>
+</div>
