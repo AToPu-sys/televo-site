@@ -1,0 +1,213 @@
+<title>Privacy Policy — Televo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #FBFCFE;
+    --surface: #FFFFFF;
+    --ink: #0E1621;
+    --ink-soft: #4B5A68;
+    --muted: #707579;
+    --border: #E4E8EE;
+    --accent: #3390EC;
+    --accent-strong: #1E6FC4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0B121B; --surface: #131D28; --ink: #F2F5F8; --ink-soft: #B9C6D2;
+      --muted: #8A9AA9; --border: #223040; --accent: #5EB5F7; --accent-strong: #85CBFF;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.65;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  nav { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px; max-width: 760px; margin: 0 auto;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Manrope'; font-weight: 800; font-size: 18px;
+    text-decoration: none; color: var(--ink);
+  }
+  .brand-mark {
+    width: 30px; height: 30px; border-radius: 9px;
+    background: linear-gradient(155deg, var(--accent), var(--accent-strong));
+    display: grid; place-items: center; flex-shrink: 0;
+  }
+  .brand-mark svg { width: 16px; height: 16px; }
+  .nav-back { font-size: 14px; color: var(--accent); text-decoration: none; font-weight: 500; }
+  .nav-back:hover { text-decoration: underline; }
+
+  header.doc { padding: 56px 0 8px; }
+  h1 {
+    font-family: 'Manrope'; font-weight: 800; font-size: clamp(30px, 5vw, 40px);
+    letter-spacing: -0.02em; margin: 0 0 10px; line-height: 1.15;
+  }
+  .updated { color: var(--muted); font-size: 14px; margin: 0; }
+  .lede { margin-top: 22px; font-size: 16.5px; color: var(--ink-soft); }
+
+  main { padding-bottom: 72px; }
+  h2 {
+    font-family: 'Manrope'; font-weight: 700; font-size: 21px;
+    letter-spacing: -0.01em; margin: 44px 0 14px; padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  p { margin: 0 0 16px; color: var(--ink-soft); }
+  strong { color: var(--ink); font-weight: 600; }
+  ul { margin: 0 0 16px; padding-left: 22px; color: var(--ink-soft); }
+  li { margin-bottom: 9px; }
+  a { color: var(--accent); }
+
+  .contact-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 22px 24px; margin-top: 12px;
+  }
+  .contact-card p:last-child { margin-bottom: 0; }
+  .email { font-weight: 600; color: var(--ink); font-size: 17px; }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 28px 0 40px;
+    font-size: 13.5px; color: var(--muted);
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+</style>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" fill="#fff"/></svg></span>
+      Televo
+    </a>
+    <a class="nav-back" href="/">← Back to site</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="doc">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: 14 September 2026</p>
+    <p class="lede">
+      This policy describes what Televo collects, why, and what control you have.
+      It is written to match what the app actually does — every item below
+      corresponds to real behaviour in the code.
+    </p>
+  </header>
+
+  <main>
+    <h2>What we collect</h2>
+    <p>
+      <strong>Account information.</strong> Your email address (used to sign in),
+      a username, and a display name. Optionally a profile photo and a short bio,
+      if you add them.
+    </p>
+    <p>
+      <strong>Phone number.</strong> Required when you create an account. It is
+      used for one purpose: letting people who already have your number in their
+      address book find you on Televo. Your number is never shown to other users
+      and cannot be read in bulk — matching happens by comparing cryptographic
+      hashes, so another user only ever confirms a number they already had. You
+      can update or remove it afterward in Settings — removing it only stops
+      future contact matching; it does not delete your account.
+    </p>
+    <p>
+      <strong>Messages and media.</strong> The messages, photos and files you send
+      are stored so they can be delivered and so you can see your history. In a
+      <strong>Secret Chat</strong>, message contents are encrypted on your device
+      before they are sent and can only be read by you and the person you're
+      talking to — we cannot read them.
+    </p>
+    <p>
+      <strong>Contacts (optional).</strong> If you use "Find friends" and grant
+      permission, the app reads phone numbers from your address book
+      <strong>on your device</strong>, converts them to irreversible hashes, and
+      sends only those hashes to check for matches. Your contact list itself is
+      never uploaded or stored.
+    </p>
+    <p>
+      <strong>Usage and technical data.</strong> When you were last active (if you
+      leave "Last Seen" enabled), and a push notification token for your device so
+      we can deliver notifications.
+    </p>
+
+    <h2>What we do NOT do</h2>
+    <ul>
+      <li>We do not sell your data.</li>
+      <li>We do not use your data for advertising.</li>
+      <li>We do not read the contents of Secret Chats — we cannot.</li>
+      <li>We do not upload your address book.</li>
+    </ul>
+
+    <h2>Calls</h2>
+    <p>
+      Voice and video calls connect directly between devices where possible, and
+      their media is encrypted in transit (DTLS-SRTP). Call <strong>contents</strong>
+      are not recorded or stored. We do store a call record (who, when, duration,
+      whether it was answered) so you can see your call history.
+    </p>
+
+    <h2>Encryption</h2>
+    <p>
+      Regular chats are encrypted in transit and stored encrypted at rest by our
+      hosting provider. <strong>Secret Chats</strong> add end-to-end encryption:
+      the encryption keys never leave your device, and message contents are
+      unreadable to us and to our hosting provider. You can verify a Secret Chat
+      has not been intercepted by comparing safety numbers with the other person
+      (chat menu → Verify encryption).
+    </p>
+
+    <h2>Your control over your data</h2>
+    <ul>
+      <li>
+        <strong>Delete your account.</strong> Settings → Delete account. This
+        permanently erases your account, profile, messages, media and push tokens.
+        It cannot be undone.
+      </li>
+      <li>
+        <strong>Privacy settings.</strong> You can turn off Last Seen and read
+        receipts in Settings → Privacy &amp; Security.
+      </li>
+      <li>
+        <strong>Blocking and reporting.</strong> You can block any user and report
+        messages. Reports are reviewed within 24 hours.
+      </li>
+    </ul>
+
+    <h2>Data retention</h2>
+    <p>
+      Your data is kept while your account exists. When you delete your account,
+      your data is deleted along with it.
+    </p>
+
+    <h2>Children</h2>
+    <p>
+      Televo is not intended for children under 13, and we do not knowingly
+      collect data from them.
+    </p>
+
+    <h2>Contact</h2>
+    <div class="contact-card">
+      <p>Questions, privacy requests, or content reports:</p>
+      <p class="email"><a href="mailto:ssirojov@gmail.com">ssirojov@gmail.com</a></p>
+      <p style="margin-top:12px; font-size:14.5px;">
+        We respond to privacy requests within 30 days and review content reports
+        within 24 hours.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <span>© 2026 Televo</span>
+    <span><a href="/terms">Terms of Service</a> · <a href="/">Home</a></span>
+  </footer>
+</div>
