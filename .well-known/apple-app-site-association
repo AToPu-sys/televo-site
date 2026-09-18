@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appID": "P37BNY7C4J.com.televo.app",
+        "paths": ["/auth/*"]
+      }
+    ]
+  }
+}
