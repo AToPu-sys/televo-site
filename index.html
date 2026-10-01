@@ -2,8 +2,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Televo is a private messenger: live sync across devices, voice and video calls over native WebRTC, and Secret Chats built on transparent cryptographic standards. No ads, no tracking.">
-<meta name="theme-color" content="#3390EC" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0B121B" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#17161B">
 <link rel="canonical" href="https://gettelevo.space/">
 
 <!-- Link preview for iMessage, Telegram, WhatsApp, Slack, X. Without these a
@@ -18,402 +17,272 @@
 <meta name="twitter:title" content="Televo — private messenger built on open cryptographic standards">
 <meta name="twitter:description" content="Secret Chats built on transparent cryptographic standards. No ads, no tracking.">
 
-<!-- Inline SVG favicon: the same speech-bubble mark used in the nav, so the
-     browser tab matches the brand without another network request. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233390EC'/%3E%3Cpath d='M8 10a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2h-8l-5 4v-4h-1a2 2 0 01-2-2v-8z' fill='white'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23E3A085'/%3E%3Cpath d='M18 9.8a7 7 0 01-.75 3.2 7.1 7.1 0 01-6.3 3.9 7 7 0 01-3.2-.75L4.5 17.5l1.6-4.75a7 7 0 01-.75-3.2 7.1 7.1 0 013.9-6.3A7 7 0 0113 2.5h.4a7.1 7.1 0 016.6 6.7v.6z' fill='%231A1414'/%3E%3C/svg%3E">
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700;800&display=swap');
 
   :root {
-    --bg: #FBFCFE;
-    --bg-deep: #0E1621;
-    --surface: #FFFFFF;
-    --surface-2: #F1F4F8;
-    --ink: #0E1621;
-    --ink-soft: #4B5A68;
-    --muted: #707579;
-    --border: #E4E8EE;
-    --accent: #3390EC;
-    --accent-strong: #1E6FC4;
-    --accent-glow: rgba(51, 144, 236, 0.20);
-    --bubble-out: #DFFBC6;
-    --bubble-out-ink: #234014;
-    --bubble-in: #FFFFFF;
-    --chat-bg: #D6E5F0;
-    --online: #38C172;
-    --danger: #E5473F;
-    --code-ink: #1E6FC4;
-    --shadow-lg: 0 40px 90px -30px rgba(14, 22, 33, 0.28);
-    --shadow-card: 0 16px 32px -18px rgba(14, 22, 33, 0.22);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #0B121B; --bg-deep: #060B11; --surface: #131D28; --surface-2: #1B2732;
-      --ink: #F2F5F8; --ink-soft: #B9C6D2; --muted: #8A9AA9; --border: #223040;
-      --accent: #5EB5F7; --accent-strong: #85CBFF; --accent-glow: rgba(94, 181, 247, 0.28);
-      --bubble-out: #2B5278; --bubble-out-ink: #EAF3FF; --bubble-in: #182533; --chat-bg: #0E1621;
-      --code-ink: #85CBFF; --shadow-lg: 0 40px 90px -30px rgba(0,0,0,0.6); --shadow-card: 0 16px 32px -18px rgba(0,0,0,0.5);
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #0B121B; --bg-deep: #060B11; --surface: #131D28; --surface-2: #1B2732;
-    --ink: #F2F5F8; --ink-soft: #B9C6D2; --muted: #8A9AA9; --border: #223040;
-    --accent: #5EB5F7; --accent-strong: #85CBFF; --accent-glow: rgba(94, 181, 247, 0.28);
-    --bubble-out: #2B5278; --bubble-out-ink: #EAF3FF; --bubble-in: #182533; --chat-bg: #0E1621;
-    --code-ink: #85CBFF; --shadow-lg: 0 40px 90px -30px rgba(0,0,0,0.6); --shadow-card: 0 16px 32px -18px rgba(0,0,0,0.5);
+    --bg: #17161B;
+    --bg-raised: #211F26;
+    --bg-raised-2: #262330;
+    --line: #332F3A;
+    --text: #F4EFE9;
+    --text-dim: #A39C94;
+    --muted: #716B64;
+    --accent: #E3A085;
+    --accent-strong: #EDB49B;
+    --accent-ink: #1A1414;
+    --accent-soft: rgba(227, 160, 133, 0.14);
+    --online: #7FB885;
+    --danger: #D97A6C;
+    --serif: 'Lora', Georgia, serif;
+    --sans: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    --shadow-lg: 0 46px 90px -32px rgba(0, 0, 0, 0.55);
+    --shadow-card: 0 20px 44px -24px rgba(0, 0, 0, 0.5);
   }
 
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    -webkit-font-smoothing: antialiased; overflow-x: hidden; position: relative;
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--sans); -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  h1, h2, h3 { font-family: 'Manrope', -apple-system, sans-serif; text-wrap: balance; margin: 0; }
-  code, .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 500; margin: 0; text-wrap: balance; }
+  code, .mono { font-family: ui-monospace, 'SF Mono', monospace; }
   p { margin: 0; }
-  a { color: inherit; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
   img { max-width: 100%; display: block; }
-  ::selection { background: var(--accent-glow); }
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
-  @media (max-width: 400px) { .wrap { padding: 0 18px; } }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 500px) { .wrap { padding: 0 20px; } }
 
-  /* ---------- aurora canvas backdrop ---------- */
-  #aurora { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .55; }
-  @media (prefers-color-scheme: dark) { #aurora { opacity: .8; } }
-  :root[data-theme="dark"] #aurora { opacity: .8; }
-
-  /* ---------- floating bubble motif (fixed layer) ---------- */
-  .bubble-field { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .fbubble {
-    position: absolute; border-radius: 30% 30% 30% 6%;
-    opacity: 0.09; filter: blur(0.5px);
-    animation: float-y linear infinite;
-  }
-  @keyframes float-y {
-    0%   { transform: translateY(0) rotate(0deg); }
-    50%  { transform: translateY(-40px) rotate(6deg); }
-    100% { transform: translateY(0) rotate(0deg); }
-  }
-  @media (prefers-reduced-motion: reduce) { .fbubble, #aurora { animation: none; display: none; } }
-
-  /* ---------- reveal-on-scroll ---------- */
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
   .reveal.in { opacity: 1; transform: translateY(0); }
-  .reveal-stagger.in .stagger-item { opacity: 1; transform: translateY(0); }
-  .stagger-item { opacity: 0; transform: translateY(20px); transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); }
-  /* Cascading reveal: each card in a staggered group waits slightly longer
-     than the one before it, so a feature grid or trust strip appears as a
-     wave rather than all at once — the difference between "the page loaded"
-     and "the page is alive". transition-delay only takes effect once .in is
-     added (opacity/transform actually change), so this costs nothing on the
-     PRE-reveal state — every item still starts hidden together. Capped at
-     6 children; a 7th+ item just reuses the last delay rather than growing
-     unbounded on a grid nobody designed to be that long. */
-  .stagger-item:nth-child(1) { transition-delay: 0s; }
-  .stagger-item:nth-child(2) { transition-delay: .08s; }
-  .stagger-item:nth-child(3) { transition-delay: .16s; }
-  .stagger-item:nth-child(4) { transition-delay: .24s; }
-  .stagger-item:nth-child(5) { transition-delay: .32s; }
-  .stagger-item:nth-child(n+6) { transition-delay: .4s; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; transition: none !important; } }
 
   /* ---------- nav ---------- */
-  nav { position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, var(--bg) 78%, transparent); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); transition: border-color .3s; }
-  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 15px 32px; max-width: 1180px; margin: 0 auto; }
-  .brand { display: flex; align-items: center; gap: 10px; font-family: 'Manrope'; font-weight: 800; font-size: 19px; letter-spacing: -0.01em; }
-  .brand-mark { width: 32px; height: 32px; border-radius: 10px; background: linear-gradient(155deg, var(--accent), var(--accent-strong)); display: grid; place-items: center; flex-shrink: 0; position: relative; overflow: hidden; }
-  .brand-mark::after { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.5) 50%, transparent 70%); background-size: 250% 100%; animation: shine 3.5s ease-in-out infinite; }
-  @keyframes shine { 0%, 60% { background-position: 200% 0; } 100% { background-position: -50% 0; } }
-  .brand-mark svg { width: 17px; height: 17px; position: relative; z-index: 1; }
-  .nav-links { display: flex; align-items: center; gap: 34px; font-size: 14.5px; font-weight: 500; color: var(--ink-soft); }
-  .nav-links a { text-decoration: none; transition: color .15s; position: relative; }
-  .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 0; height: 2px; background: var(--accent); transition: width .25s cubic-bezier(.16,1,.3,1); }
-  .nav-links a:hover { color: var(--accent); }
-  .nav-links a:hover::after { width: 100%; }
-  .nav-cta { background: var(--accent); color: #fff; padding: 10px 22px; border-radius: 100px; font-weight: 600; font-size: 14px; text-decoration: none; white-space: nowrap; position: relative; overflow: hidden; transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 14px -4px var(--accent-glow); }
-  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -4px var(--accent-glow); }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(23,22,27,0.88); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  .nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  @media (max-width: 500px) { .nav-inner { padding: 0 20px; } }
+  .brand { display: flex; align-items: center; gap: 11px; }
+  .brand-mark { width: 30px; height: 30px; border-radius: 9px; background: var(--accent); display: grid; place-items: center; flex-shrink: 0; }
+  .brand-name { font-family: var(--serif); font-weight: 600; font-size: 19px; }
+  .nav-right { display: flex; align-items: center; gap: 22px; }
+  .nav-links { display: flex; align-items: center; gap: 36px; font-size: 14px; color: var(--text-dim); }
+  .nav-links a { transition: color .15s; }
+  .nav-links a:hover { color: var(--text); }
   @media (max-width: 760px) { .nav-links { display: none; } }
 
+  .lang-switch { display: flex; align-items: center; background: var(--bg-raised); border: 1px solid var(--line); border-radius: 99px; padding: 3px; }
+  .lang-btn { border: none; background: transparent; color: var(--text-dim); font-size: 12.5px; font-weight: 700; padding: 6px 12px; border-radius: 99px; transition: background .2s, color .2s; }
+  .lang-btn.is-active { background: var(--accent); color: var(--accent-ink); }
+
+  .btn { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; font-size: 14px; padding: 10px 19px; border-radius: 99px; transition: transform .2s, box-shadow .2s; }
+  .btn-accent { background: var(--accent); color: var(--accent-ink); box-shadow: 0 8px 20px -8px var(--accent-soft); }
+  .btn-accent:hover { transform: translateY(-1px); background: var(--accent-strong); }
+  .btn-outline { border: 1px solid var(--line); color: var(--text); font-weight: 500; }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-lg { font-size: 15px; padding: 14px 28px; }
+
   /* ---------- hero ---------- */
-  .hero { padding: 88px 0 40px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
-  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-strong); background: var(--accent-glow); padding: 7px 14px 7px 11px; border-radius: 100px; margin-bottom: 24px; }
-  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--online); animation: pulse-dot 1.8s ease-in-out infinite; }
-  @keyframes pulse-dot { 0%, 100% { box-shadow: 0 0 0 0 rgba(56,193,114,.5); } 50% { box-shadow: 0 0 0 5px rgba(56,193,114,0); } }
-  .hero h1 { font-size: clamp(38px, 4.8vw, 60px); font-weight: 900; line-height: 1.04; letter-spacing: -0.025em; }
-  .hero h1 .grad { background: linear-gradient(100deg, var(--accent-strong), var(--accent) 45%, #8ED0FF 65%, var(--accent-strong)); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: grad-flow 6s ease-in-out infinite; }
-  @keyframes grad-flow { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-  .hero-sub { margin-top: 22px; font-size: 18px; line-height: 1.6; color: var(--ink-soft); max-width: 46ch; }
-  .hero-actions { display: flex; gap: 12px; margin-top: 34px; flex-wrap: wrap; }
-  .btn-primary, .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; border-radius: 13px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid transparent; transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s; }
-  .btn-primary { background: var(--ink); color: var(--bg); box-shadow: 0 10px 26px -10px rgba(14,22,33,.5); }
-  .btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 34px -10px rgba(14,22,33,.55); }
-  .btn-ghost { border-color: var(--border); color: var(--ink); }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-  .hero-meta { display: flex; gap: 28px; margin-top: 44px; padding-top: 30px; border-top: 1px solid var(--border); flex-wrap: wrap; }
-  .hero-meta div { min-width: 96px; }
-  .hero-meta .num { font-family: 'Manrope'; font-weight: 800; font-size: 23px; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
-  .hero-meta .lbl { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+  .hero { padding: 92px 0 96px; border-bottom: 1px solid var(--line); }
+  .hero-grid { display: grid; grid-template-columns: 1fr 0.82fr; gap: 56px; align-items: center; }
+  .hero h1 { font-size: clamp(36px, 4.6vw, 58px); line-height: 1.1; letter-spacing: -0.01em; }
+  .hero-sub { margin-top: 26px; font-size: 18px; line-height: 1.55; color: var(--text-dim); max-width: 42ch; }
+  .hero-actions { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } .hero-phone { order: -1; margin-bottom: 8px; } }
 
-  /* ---------- phone mock w/ orbiting motif ---------- */
-  .phone-stage { display: flex; justify-content: center; position: relative; padding: 30px 0; }
-  .orbit { position: absolute; width: 420px; height: 420px; animation: spin 22s linear infinite; }
-  .orbit-2 { width: 500px; height: 500px; animation: spin 32s linear infinite reverse; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .orbit-dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); top: 0; left: 50%; box-shadow: 0 0 16px 2px var(--accent-glow); }
-  .orbit-2 .orbit-dot { background: var(--online); width: 7px; height: 7px; top: 8%; }
-  .phone { position: relative; width: 292px; border-radius: 42px; background: var(--bg-deep); padding: 12px; box-shadow: var(--shadow-lg), 0 2px 0 rgba(255,255,255,0.07) inset; animation: bob 5s ease-in-out infinite; }
-  @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-0.4deg); } 50% { transform: translateY(-12px) rotate(0.4deg); } }
-  .phone-screen { background: var(--chat-bg); border-radius: 32px; overflow: hidden; height: 566px; display: flex; flex-direction: column; }
-  .phone-head { background: var(--accent); padding: 46px 16px 14px; display: flex; align-items: center; gap: 10px; color: #fff; flex-shrink: 0; }
-  .phone-avatar { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.25); display: grid; place-items: center; font-size: 13px; font-weight: 700; font-family: 'Manrope'; }
-  .phone-head .name { font-weight: 700; font-size: 14.5px; font-family: 'Manrope'; }
-  .phone-head .status { font-size: 11.5px; opacity: 0.85; display: flex; align-items: center; gap: 5px; }
-  .phone-head .status .d { width: 6px; height: 6px; border-radius: 50%; background: #7CFF9E; }
-  .phone-body { flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
-  .bub { max-width: 78%; padding: 9px 12px; border-radius: 14px; font-size: 13px; line-height: 1.4; opacity: 0; animation: bub-in .5s cubic-bezier(.2,.8,.2,1) forwards; }
-  @keyframes bub-in { from { opacity: 0; transform: translateY(10px) scale(.94); } to { opacity: 1; transform: translateY(0) scale(1); } }
-  .bub .t { font-size: 9.5px; opacity: 0.55; margin-top: 3px; text-align: right; font-variant-numeric: tabular-nums; }
-  .bub-in { background: var(--bubble-in); color: var(--ink); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
-  .bub-out { background: var(--bubble-out); color: var(--bubble-out-ink); align-self: flex-end; border-bottom-right-radius: 4px; }
-  .bub-lock { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--accent-strong); margin-bottom: 4px; }
-  .typing-dots { align-self: flex-start; background: var(--bubble-in); border-radius: 14px; border-bottom-left-radius: 4px; padding: 11px 14px; display: flex; gap: 4px; opacity: 0; animation: bub-in .4s forwards; animation-delay: 2.6s; }
-  .typing-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: tdot 1.2s ease-in-out infinite; }
-  .typing-dots span:nth-child(2) { animation-delay: .15s; } .typing-dots span:nth-child(3) { animation-delay: .3s; }
-  @keyframes tdot { 0%, 60%, 100% { transform: translateY(0); opacity: .4; } 30% { transform: translateY(-3px); opacity: 1; } }
-  .phone-input { padding: 10px 12px 16px; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-  .phone-input .field { flex: 1; background: var(--bubble-in); border-radius: 100px; padding: 10px 14px; font-size: 12.5px; color: var(--muted); }
-  .phone-input .send { width: 34px; height: 34px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; flex-shrink: 0; }
-
-  @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; padding-top: 56px; }
-    .phone-stage { order: -1; margin-bottom: 8px; }
-    .phone { width: 240px; } .phone-screen { height: 460px; }
-    .orbit, .orbit-2 { display: none; }
-  }
-
-  /* ---------- trust strip (static 3-col grid) ---------- */
-  .trust-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px 0; }
-  .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-  .trust-item { display: flex; align-items: center; gap: 11px; }
-  .trust-item svg { width: 19px; height: 19px; flex-shrink: 0; color: var(--accent); }
-  .trust-item span { font-size: 14px; color: var(--ink-soft); font-weight: 500; line-height: 1.4; }
-  @media (max-width: 760px) { .trust-grid { grid-template-columns: 1fr; gap: 18px; } }
+  .phone-stage { display: flex; justify-content: center; }
+  .phone { transform: rotate(-2.5deg); width: 270px; border-radius: 30px; background: var(--bg-raised); border: 1px solid var(--line); padding: 9px; box-shadow: var(--shadow-lg); }
+  .phone-screen { border-radius: 22px; overflow: hidden; background: #1C1A21; }
+  .phone-head { padding: 16px 17px 11px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--line); }
+  .phone-avatar { width: 32px; height: 32px; border-radius: 99px; background: linear-gradient(135deg, #E3A085, #C77F63); display: grid; place-items: center; font-family: var(--serif); font-size: 13px; font-weight: 600; color: var(--accent-ink); }
+  .phone-name { font-size: 13.5px; font-weight: 600; }
+  .phone-status { font-size: 11px; color: var(--accent); display: flex; align-items: center; gap: 4px; }
+  .phone-body { padding: 15px 17px; display: flex; flex-direction: column; gap: 9px; min-height: 210px; }
+  .bub { font-size: 13px; padding: 9px 13px; max-width: 78%; line-height: 1.4; }
+  .bub-in { align-self: flex-start; background: #2A2730; color: var(--text); border-radius: 14px 14px 14px 3px; }
+  .bub-out { align-self: flex-end; background: var(--accent); color: var(--accent-ink); border-radius: 14px 14px 3px 14px; }
 
   /* ---------- section shell ---------- */
-  section { padding: 108px 0; position: relative; }
+  section { padding: 104px 0; border-bottom: 1px solid var(--line); }
   .section-head { max-width: 640px; margin-bottom: 56px; }
-  .section-tag { font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-strong); margin-bottom: 12px; }
-  .section-head h2 { font-size: clamp(29px, 3.3vw, 40px); font-weight: 800; letter-spacing: -0.015em; line-height: 1.14; }
-  .section-head p { margin-top: 16px; font-size: 16.5px; color: var(--ink-soft); line-height: 1.65; }
-  .section-subline { margin-top: 10px; font-size: 14.5px; color: var(--muted); line-height: 1.6; }
+  .section-head h2 { font-size: clamp(28px, 3.1vw, 36px); line-height: 1.2; }
+  .section-head p { margin-top: 14px; font-size: 16px; color: var(--text-dim); line-height: 1.65; }
 
-  /* ---------- feature grid ---------- */
-  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 22px; overflow: hidden; }
-  .feature { background: var(--surface); padding: 34px 30px; display: flex; flex-direction: column; gap: 14px; transition: background .3s, transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s; position: relative; z-index: 1; }
-  .feature:hover { background: var(--surface-2); transform: translateY(-4px); box-shadow: var(--shadow-card); z-index: 2; }
-  .feature-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-glow); display: grid; place-items: center; color: var(--accent-strong); transition: transform .35s cubic-bezier(.34,1.56,.64,1); }
-  .feature:hover .feature-icon { transform: scale(1.12) rotate(-6deg); }
-  .feature-icon svg { width: 22px; height: 22px; }
-  .feature h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
-  .feature p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
-  @media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr; } }
+  /* ---------- why (editorial, asymmetric) ---------- */
+  .why-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; }
+  .why-grid h2 { font-size: 36px; line-height: 1.2; }
+  .why-copy { display: flex; flex-direction: column; gap: 22px; }
+  .why-copy p { font-size: 16px; line-height: 1.65; color: var(--text-dim); max-width: 58ch; }
+  .pill-row { display: flex; gap: 10px; flex-wrap: wrap; padding-top: 8px; }
+  .pill { font-size: 12.5px; color: var(--text-dim); border: 1px solid var(--line); padding: 7px 13px; border-radius: 99px; }
+  @media (max-width: 900px) { .why-grid { grid-template-columns: 1fr; gap: 32px; } }
 
-  /* ---------- crypto section ---------- */
-  .crypto { background: var(--bg-deep); color: #EAF2FA; border-radius: 30px; padding: 68px 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; position: relative; overflow: hidden; }
-  .crypto-glow { position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(94,181,247,.18), transparent 70%); top: -180px; right: -180px; animation: drift 9s ease-in-out infinite; }
-  @keyframes drift { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(-30px, 30px); } }
-  .crypto .section-tag { color: #85CBFF; }
-  .crypto h2 { color: #fff; font-size: clamp(27px, 3.1vw, 35px); position: relative; }
-  .crypto p.lead { color: #A9BED2; margin-top: 16px; font-size: 15.5px; line-height: 1.7; position: relative; }
-  .crypto-steps { display: flex; flex-direction: column; gap: 0; margin-top: 28px; position: relative; }
-  .crypto-step { display: flex; gap: 16px; padding: 17px 0; border-top: 1px solid rgba(255,255,255,0.09); }
-  .crypto-step:first-child { border-top: none; }
-  .crypto-step .n { font-family: 'IBM Plex Mono'; font-size: 12px; color: #5EB5F7; padding-top: 2px; flex-shrink: 0; width: 22px; }
-  .crypto-step .body h4 { font-family: 'Manrope'; font-weight: 700; font-size: 14.5px; color: #fff; margin-bottom: 4px; }
-  .crypto-step .body p { font-size: 13.5px; color: #93A9BC; line-height: 1.6; }
-  .crypto-panel { background: #0A1119; border: 1px solid #1D2937; border-radius: 17px; padding: 22px 24px; position: relative; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s; }
-  .crypto-panel:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -20px rgba(94,181,247,.25); }
-  .crypto-panel .row { display: flex; justify-content: space-between; align-items: baseline; padding: 11px 0; border-bottom: 1px solid #1A2531; font-size: 13px; }
+  /* ---------- moments / feature grid ---------- */
+  .moment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+  .moment { background: var(--bg); padding: 38px 30px; display: flex; flex-direction: column; gap: 16px; transition: background .25s; }
+  .moment:hover { background: var(--bg-raised); }
+  .moment svg { color: var(--accent); }
+  .moment-title { font-family: var(--serif); font-weight: 600; font-size: 17px; margin-bottom: 9px; }
+  .moment-body { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+  @media (max-width: 900px) { .moment-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- crypto / secret chats ---------- */
+  .crypto { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .crypto-steps { display: flex; flex-direction: column; margin-top: 26px; }
+  .crypto-step { display: flex; gap: 16px; padding: 18px 0; border-top: 1px solid var(--line); }
+  .crypto-step:first-child { border-top: none; padding-top: 0; }
+  .crypto-step .n { font-family: var(--serif); font-weight: 600; font-size: 13px; color: var(--accent); padding-top: 2px; flex-shrink: 0; width: 20px; }
+  .crypto-step h4 { font-size: 14.5px; font-weight: 700; margin-bottom: 5px; font-family: var(--sans); }
+  .crypto-step p { font-size: 13.5px; color: var(--text-dim); line-height: 1.6; }
+  .crypto-panel { background: var(--bg-raised); border: 1px solid var(--line); border-radius: 18px; padding: 24px 26px; }
+  .crypto-panel .row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
   .crypto-panel .row:last-child { border-bottom: none; }
-  .crypto-panel .row .k { color: #7C90A3; }
-  .crypto-panel .row .v { font-family: 'IBM Plex Mono'; color: var(--code-ink); font-size: 12.5px; }
-  .crypto-panel .fp { margin-top: 14px; padding-top: 14px; border-top: 1px dashed #263344; }
-  .crypto-panel .fp .k { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #6E8296; margin-bottom: 8px; }
-  .crypto-panel .fp .v { font-family: 'IBM Plex Mono'; font-size: 12.5px; color: #85CBFF; line-height: 1.7; letter-spacing: 0.02em; }
-  @media (max-width: 900px) { .crypto { grid-template-columns: 1fr; padding: 44px 26px; } }
+  .crypto-panel .k { color: var(--text-dim); }
+  .crypto-panel .v { font-family: ui-monospace, monospace; color: var(--accent-strong); font-size: 12.5px; text-align: right; }
+  .crypto-panel .fp { margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--line); }
+  .crypto-panel .fp .k { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 8px; }
+  .crypto-panel .fp .v { font-family: ui-monospace, monospace; font-size: 12.5px; color: var(--accent-strong); line-height: 1.7; letter-spacing: 0.02em; }
+  @media (max-width: 900px) { .crypto { grid-template-columns: 1fr; } }
 
-  /* ---------- calls showcase ---------- */
+  /* ---------- tech details disclosure ---------- */
+  .tech-details { margin-top: 36px; }
+  .tech-details summary { cursor: pointer; font-size: 13.5px; font-weight: 600; color: var(--text-dim); list-style: none; display: inline-flex; align-items: center; gap: 7px; }
+  .tech-details summary::-webkit-details-marker { display: none; }
+  .tech-details summary:hover { color: var(--accent); }
+  .tech-details summary .chevron { transition: transform .2s; }
+  .tech-details[open] summary .chevron { transform: rotate(90deg); }
+  .tech-details-body { margin-top: 18px; }
+
+  /* ---------- calls ---------- */
   .calls { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center; }
-  .calls-visual { background: var(--surface); border: 1px solid var(--border); border-radius: 26px; padding: 42px; display: flex; flex-direction: column; align-items: center; gap: 18px; transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s; }
-  .calls-visual:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
-  .ring-avatar { width: 94px; height: 94px; border-radius: 50%; background: linear-gradient(155deg, var(--accent), var(--accent-strong)); display: grid; place-items: center; color: #fff; font-family: 'Manrope'; font-weight: 800; font-size: 30px; position: relative; }
+  .calls-visual { background: var(--bg-raised); border: 1px solid var(--line); border-radius: 22px; padding: 42px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .ring-avatar { width: 88px; height: 88px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #C77F63); display: grid; place-items: center; color: var(--accent-ink); font-family: var(--serif); font-weight: 600; font-size: 28px; position: relative; }
   .ring-avatar::before, .ring-avatar::after { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid var(--accent); opacity: 0; animation: ring 2.2s ease-out infinite; }
   .ring-avatar::after { animation-delay: .7s; }
-  @keyframes ring { 0% { transform: scale(1); opacity: .55; } 100% { transform: scale(1.8); opacity: 0; } }
-  .call-status { font-family: 'Manrope'; font-weight: 700; font-size: 15.5px; }
-  .call-sub { font-size: 12.5px; color: var(--muted); }
-  .call-actions { display: flex; gap: 22px; margin-top: 4px; }
-  .call-btn { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; color: #fff; transition: transform .2s; cursor: pointer; }
-  .call-btn:hover { transform: scale(1.08); }
+  @keyframes ring { 0% { transform: scale(1); opacity: .5; } 100% { transform: scale(1.8); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .ring-avatar::before, .ring-avatar::after { animation: none; display: none; } }
+  .call-status { font-family: var(--serif); font-weight: 600; font-size: 15.5px; }
+  .call-sub { font-size: 12.5px; color: var(--text-dim); }
+  .call-actions { display: flex; gap: 20px; margin-top: 4px; }
+  .call-btn { width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; }
   .call-decline { background: var(--danger); }
   .call-accept { background: var(--online); }
-  .spec-list { display: flex; flex-direction: column; gap: 0; }
-  .spec-row { display: flex; justify-content: space-between; gap: 20px; padding: 15px 0; border-top: 1px solid var(--border); font-size: 14px; }
+  .spec-list { display: flex; flex-direction: column; }
+  .spec-row { display: flex; justify-content: space-between; gap: 20px; padding: 15px 0; border-top: 1px solid var(--line); font-size: 14px; }
   .spec-row:first-child { border-top: none; }
-  .spec-row .k { color: var(--ink-soft); }
-  .spec-row .v { font-family: 'IBM Plex Mono'; font-size: 12.5px; color: var(--ink); text-align: right; }
+  .spec-row .k { color: var(--text-dim); }
+  .spec-row .v { font-family: ui-monospace, monospace; font-size: 12.5px; color: var(--text); text-align: right; }
   @media (max-width: 900px) { .calls { grid-template-columns: 1fr; } }
 
-  /* ---------- honesty ---------- */
-  .honesty { background: var(--surface-2); border-radius: 26px; padding: 50px 46px; }
-  .honesty-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 8px; }
-  .honesty-col h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-  .honesty-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
-  .honesty-col li { font-size: 14.5px; line-height: 1.5; display: flex; gap: 10px; color: var(--ink-soft); transition: transform .2s; }
-  .honesty-col li:hover { transform: translateX(4px); }
-  .honesty-col li svg { flex-shrink: 0; margin-top: 3px; width: 16px; height: 16px; }
+  /* ---------- roadmap / honesty ---------- */
+  .roadmap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 8px; }
+  .roadmap-col h3 { font-family: var(--sans); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+  .roadmap-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 13px; }
+  .roadmap-col li { font-size: 14.5px; line-height: 1.5; display: flex; gap: 10px; color: var(--text-dim); }
+  .roadmap-col li svg { flex-shrink: 0; margin-top: 3px; width: 15px; height: 15px; }
   .col-ship h3 { color: var(--online); } .col-ship svg { color: var(--online); }
-  .col-next h3 { color: var(--accent-strong); } .col-next svg { color: var(--accent-strong); }
-  @media (max-width: 760px) { .honesty-grid { grid-template-columns: 1fr; } .honesty { padding: 36px 26px; } }
+  .col-next h3 { color: var(--accent); } .col-next svg { color: var(--accent); }
+  @media (max-width: 760px) { .roadmap-grid { grid-template-columns: 1fr; } }
 
-  /* ---------- our promise ---------- */
-  .promise-band {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 22px;
-    padding: 34px 38px; display: flex; align-items: flex-start; gap: 22px;
-  }
-  .promise-icon {
-    width: 46px; height: 46px; border-radius: 13px; background: var(--accent-glow);
-    color: var(--accent-strong); display: grid; place-items: center; flex-shrink: 0;
-  }
-  .promise-icon svg { width: 24px; height: 24px; }
-  .promise-band h3 { font-family: 'Manrope'; font-weight: 700; font-size: 17px; margin-bottom: 8px; }
-  .promise-band p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.65; }
+  /* ---------- promise ---------- */
+  .promise-band { background: var(--bg-raised); border: 1px solid var(--line); border-radius: 20px; padding: 34px 38px; display: flex; align-items: flex-start; gap: 22px; }
+  .promise-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; flex-shrink: 0; }
+  .promise-band h3 { font-weight: 600; font-size: 17px; margin-bottom: 8px; }
+  .promise-band p { font-size: 14.5px; color: var(--text-dim); line-height: 1.65; }
   @media (max-width: 600px) { .promise-band { flex-direction: column; padding: 28px 24px; } }
 
-  /* ---------- download cta ---------- */
-  .cta-band { background: linear-gradient(155deg, var(--accent-strong), var(--accent)); border-radius: 30px; padding: 68px 48px; text-align: center; color: #fff; position: relative; overflow: hidden; }
-  .cta-band .blob { position: absolute; border-radius: 50%; background: rgba(255,255,255,.14); filter: blur(30px); animation: drift 8s ease-in-out infinite; }
-  .cta-band .blob1 { width: 260px; height: 260px; top: -80px; left: -60px; }
-  .cta-band .blob2 { width: 200px; height: 200px; bottom: -70px; right: -40px; animation-delay: -3s; }
-  .cta-band h2 { font-size: clamp(27px, 3.5vw, 39px); position: relative; }
-  .cta-band p { margin-top: 14px; font-size: 15.5px; opacity: 0.92; position: relative; max-width: 46ch; margin-left: auto; margin-right: auto; }
-  .cta-badges { display: flex; gap: 14px; justify-content: center; margin-top: 32px; position: relative; flex-wrap: wrap; }
+  /* ---------- download ---------- */
+  .download-inner { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+  .download-inner h2 { font-size: clamp(30px, 3.6vw, 42px); max-width: 17ch; line-height: 1.15; }
+  .download-inner > p { font-size: 16px; color: var(--text-dim); max-width: 44ch; }
 
   /* ---------- waitlist form ---------- */
-  .waitlist-form { margin-top: 32px; position: relative; max-width: 460px; margin-left: auto; margin-right: auto; }
+  .waitlist-form { margin-top: 10px; width: 100%; max-width: 440px; }
   .waitlist-input-row { display: flex; gap: 10px; flex-wrap: wrap; }
   .waitlist-input {
     flex: 1; min-width: 200px; padding: 14px 18px; border-radius: 13px;
-    border: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.12);
-    color: #fff; font-size: 15px; font-family: inherit; outline: none;
-    transition: border-color .2s, background .2s;
+    border: 1px solid var(--line); background: var(--bg-raised);
+    color: var(--text); font-size: 15px; font-family: inherit; outline: none;
+    transition: border-color .2s;
   }
-  .waitlist-input::placeholder { color: rgba(255,255,255,0.65); }
-  .waitlist-input:focus { border-color: #fff; background: rgba(255,255,255,0.2); }
-  .waitlist-submit {
-    background: #fff; color: var(--accent-strong); white-space: nowrap;
-    position: relative; cursor: pointer;
-  }
-  .waitlist-submit:hover { transform: translateY(-2px) scale(1.02); }
-  /* Subtle glow micro-interaction (Step 2.3): a soft pulsing halo behind the
-     primary beta CTA, not on the button element itself — so it reads as
-     ambient light rather than the button visibly changing shape or color. */
-  .btn-glow { position: relative; }
-  .btn-glow::before {
-    content: ''; position: absolute; inset: -6px; border-radius: inherit;
-    background: radial-gradient(circle, var(--accent-glow), transparent 70%);
-    opacity: 0; transition: opacity .3s; z-index: -1;
-    animation: glow-pulse 2.6s ease-in-out infinite;
-  }
-  .btn-glow:hover::before { opacity: 1; }
-  @keyframes glow-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
-  @media (prefers-reduced-motion: reduce) { .btn-glow::before { animation: none; } }
-
+  .waitlist-input::placeholder { color: var(--muted); }
+  .waitlist-input:focus { border-color: var(--accent); }
+  .waitlist-submit { white-space: nowrap; border: none; }
   .waitlist-spinner { display: none; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
   .waitlist-submit.is-loading .waitlist-submit-label { display: none; }
   .waitlist-submit.is-loading .waitlist-spinner { display: inline-block; }
-  .waitlist-submit:disabled { opacity: 0.75; cursor: default; }
-
-  .waitlist-status {
-    margin-top: 12px; font-size: 13.5px; color: rgba(255,255,255,0.85);
-    min-height: 18px; position: relative;
-  }
-  .waitlist-status.is-error { color: #FFD3D0; }
+  .waitlist-submit:disabled { opacity: 0.7; cursor: default; }
+  .waitlist-status { margin-top: 12px; font-size: 13.5px; color: var(--text-dim); min-height: 18px; }
+  .waitlist-status.is-error { color: var(--danger); }
   @media (max-width: 480px) { .waitlist-input-row { flex-direction: column; } .waitlist-submit { justify-content: center; } }
-  .badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 12px 22px; border-radius: 13px; font-weight: 600; font-size: 14px; backdrop-filter: blur(6px); transition: transform .25s, background .25s; }
-  .badge:hover { transform: translateY(-3px); background: rgba(255,255,255,0.22); }
-  .badge svg { width: 20px; height: 20px; }
-  .badge small { display: block; font-weight: 400; font-size: 10.5px; opacity: 0.85; text-transform: uppercase; letter-spacing: .04em; }
 
   /* ---------- footer ---------- */
-  footer { border-top: 1px solid var(--border); padding: 50px 0 40px; }
-  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
+  footer { padding: 48px 0; }
+  .footer-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
   .footer-links { display: flex; gap: 36px; flex-wrap: wrap; }
   .footer-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 12px; }
-  .footer-col a { display: block; font-size: 14px; color: var(--ink-soft); text-decoration: none; padding: 4px 0; transition: color .15s; }
+  .footer-col a { display: block; font-size: 14px; color: var(--text-dim); padding: 4px 0; transition: color .15s; }
   .footer-col a:hover { color: var(--accent); }
-  .footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--muted); }
+  .footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--muted); }
 </style>
-
-<canvas id="aurora"></canvas>
-<div class="bubble-field" id="bubbleField"></div>
 
 <nav>
   <div class="nav-inner">
-    <div class="brand">
-      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" fill="#fff"/></svg></span>
-      Televo
+    <a href="#top" class="brand">
+      <span class="brand-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span>
+      <span class="brand-name">Televo</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#privacy" data-i18n="nav.privacy">Secret Chats</a>
+        <a href="#calls" data-i18n="nav.calls">Calls</a>
+        <a href="#honesty" data-i18n="nav.roadmap">Roadmap</a>
+        <a href="/support" data-i18n="nav.support">Support</a>
+      </div>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang-btn="en">EN</button>
+        <button type="button" class="lang-btn" data-lang-btn="ru">RU</button>
+      </div>
+      <a class="btn btn-accent" href="#download" data-i18n="nav.cta">Get Televo</a>
     </div>
-    <div class="nav-links">
-      <a href="#privacy">Privacy</a>
-      <a href="#calls">Calls</a>
-      <a href="#honesty">Roadmap</a>
-      <a href="/support">Support</a>
-    </div>
-    <a class="nav-cta" href="#download">Join the Beta</a>
   </div>
 </nav>
 
 <div class="wrap">
-  <section class="hero" style="padding-bottom:0;">
-    <div class="reveal in">
-      <div class="eyebrow"><span class="dot"></span> Coming soon to iOS</div>
-      <h1>Messaging that stays <span class="grad">between you two</span>.</h1>
-      <p class="hero-sub">Televo is a fast, private messenger — real accounts, live sync across devices, voice &amp; video calls, and Secret Chats built on transparent cryptographic standards (code audit &amp; GitHub repository coming soon).</p>
-      <div class="hero-actions">
-        <a class="btn-primary btn-glow" href="#download">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Join the Beta
-        </a>
-        <a class="btn-ghost" href="#privacy">How encryption works</a>
+  <section class="hero" id="top">
+    <div class="hero-grid">
+      <div class="reveal in">
+        <h1 data-i18n="hero.title">A quiet place<br>to say what you mean.</h1>
+        <p class="hero-sub" data-i18n="hero.sub">Televo encrypts your private conversations on your own phone before they go anywhere. Not because we don't trust you — because you shouldn't have to trust us with something this personal. Live sync, real voice &amp; video calls, and Secret Chats built on transparent cryptographic standards.</p>
+        <div class="hero-actions">
+          <a class="btn btn-accent btn-lg" href="#download" data-i18n="hero.cta">Get Televo</a>
+          <a class="btn btn-outline btn-lg" href="#why" data-i18n="hero.secondary">Why it matters</a>
+        </div>
       </div>
-      <div class="hero-meta">
-        <div><div class="num" data-count="256">0</div><div class="lbl">-bit key exchange</div></div>
-        <div><div class="num">DTLS</div><div class="lbl">Encrypted calls</div></div>
-        <div><div class="num" data-count="0">0</div><div class="lbl">Ads, ever</div></div>
-      </div>
-    </div>
-
-    <div class="phone-stage reveal in">
-      <div class="orbit"><div class="orbit-dot"></div></div>
-      <div class="orbit orbit-2"><div class="orbit-dot"></div></div>
-      <div class="phone">
-        <div class="phone-screen">
-          <div class="phone-head">
-            <div class="phone-avatar">M</div>
-            <div><div class="name">Maya</div><div class="status"><span class="d"></span> online</div></div>
-          </div>
-          <div class="phone-body">
-            <div class="bub bub-in" style="animation-delay:.2s">Did the files come through?<div class="t">9:41</div></div>
-            <div class="bub bub-out" style="animation-delay:1s"><span class="bub-lock">🔒 Secret Chat</span>Yep — sent over a verified chat, self-destructs in 1h<div class="t">9:41 ✓✓</div></div>
-            <div class="bub bub-in" style="animation-delay:1.8s">Perfect. Calling you in five<div class="t">9:42</div></div>
-            <div class="typing-dots"><span></span><span></span><span></span></div>
-          </div>
-          <div class="phone-input">
-            <div class="field">Message</div>
-            <div class="send"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l16-8-6 8 6 8-16-8z" fill="#fff"/></svg></div>
+      <div class="phone-stage hero-phone reveal in">
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-head">
+              <div class="phone-avatar">Y</div>
+              <div>
+                <div class="phone-name">Yaroslav</div>
+                <div class="phone-status">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                  <span data-i18n="hero.phone.private">private</span>
+                </div>
+              </div>
+            </div>
+            <div class="phone-body">
+              <div class="bub bub-in" data-i18n="hero.phone.msg1">made it to the airport, flight's delayed though</div>
+              <div class="bub bub-out" data-i18n="hero.phone.msg2">ugh. want me to send the hotel address again</div>
+              <div class="bub bub-in" data-i18n="hero.phone.msg3">yes please, and the wifi password lol</div>
+            </div>
           </div>
         </div>
       </div>
@@ -421,272 +290,413 @@
   </section>
 </div>
 
-<div class="trust-strip">
-  <div class="wrap trust-grid reveal-stagger reveal">
-    <div class="trust-item stagger-item">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 3.5v6c0 5-3.4 8.7-8 10.5-4.6-1.8-8-5.5-8-10.5v-6L12 2z" stroke="currentColor" stroke-width="1.5"/></svg>
-      <span>Row-level security on every table</span>
+<section id="why">
+  <div class="wrap why-grid reveal">
+    <div>
+      <h2 data-i18n="why.title">Most apps ask you to trust them. We just made it so you don't have to.</h2>
     </div>
-    <div class="trust-item stagger-item">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 15a3 3 0 003-3V7a3 3 0 10-6 0v5a3 3 0 003 3z" stroke="currentColor" stroke-width="1.5"/><path d="M19 11v1a7 7 0 01-14 0v-1M12 19v3" stroke="currentColor" stroke-width="1.5"/></svg>
-      <span>Contacts matched by hash, never uploaded</span>
+    <div class="why-copy">
+      <p data-i18n="why.p1">When you open a Secret Chat, your phone creates the keys that will lock it, right there in your hand. Those keys never travel to a server. A message you send is already sealed before it leaves your device, and only the person you're talking to can open it.</p>
+      <p data-i18n="why.p2">If someone asked us to hand over a Secret Chat, we'd have nothing readable to give them. Not a policy we follow — a fact about how the math works.</p>
+      <div class="pill-row">
+        <span class="pill" data-i18n="why.pill1">Locked on your device</span>
+        <span class="pill" data-i18n="why.pill2">Built to last decades</span>
+        <span class="pill" data-i18n="why.pill3">Verifiable by you</span>
+      </div>
     </div>
-    <div class="trust-item stagger-item">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M12 2l8 3.5v6c0 5-3.4 8.7-8 10.5-4.6-1.8-8-5.5-8-10.5v-6L12 2z" stroke="currentColor" stroke-width="1.5"/></svg>
-      <span>No ad network, no data broker</span>
+  </div>
+</section>
+
+<section id="moments">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 data-i18n="moments.title">Built for the conversations that actually matter to you.</h2>
+      <p data-i18n="moments.sub">Not a feature list. Just what happens when you reach for your phone. Chats sync live across every device you're signed into, and Secret Chats add a lock only you and the other person can open.</p>
+    </div>
+    <div class="moment-grid reveal">
+      <div class="moment">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.55-2.4a1 1 0 011.45.9v7l-1.45.9L15 14"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg>
+        <div>
+          <div class="moment-title" data-i18n="moments.1.title">You call your mom on a Tuesday.</div>
+          <div class="moment-body" data-i18n="moments.1.body">The call is encrypted in transit, start to finish. Video stays clear, the call stays private, and neither of you thinks about either one for a second.</div>
+        </div>
+      </div>
+      <div class="moment">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div>
+          <div class="moment-title" data-i18n="moments.2.title">You send something you'd rather not keep around.</div>
+          <div class="moment-body" data-i18n="moments.2.body">Set it to disappear in 30 seconds, an hour, or a week. The timer travels with the message, not the screen — it goes from both phones, no follow-up needed.</div>
+        </div>
+      </div>
+      <div class="moment">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <div>
+          <div class="moment-title" data-i18n="moments.3.title">A friend asks who else can read your chats.</div>
+          <div class="moment-body" data-i18n="moments.3.body">You get to say "no one," and mean it — not us either, in a Secret Chat. Two-step verification and a passcode lock keep the rest of the app just as closed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="privacy">
+  <div class="wrap reveal">
+    <div style="max-width:640px; margin-bottom:48px;">
+      <h2 style="font-size:36px; margin-bottom:18px;" data-i18n="privacy.title">Turn any chat into one only two people can read.</h2>
+      <p style="font-size:17px; color:var(--text-dim); line-height:1.65;" data-i18n="privacy.sub">Tap the lock icon and Televo starts a Secret Chat: your phone and theirs agree on a private key between themselves, without us in the middle. From that point on, what you send is locked before it leaves your phone — we simply couldn't hand it over if we wanted to.</p>
+    </div>
+    <div class="moment-grid">
+      <div class="moment">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+        <div>
+          <div class="moment-title" data-i18n="privacy.1.title">Locked on your phone, not our servers</div>
+          <div class="moment-body" data-i18n="privacy.1.body">The key that unlocks your chat is made on your device and stays there. We never see it, so we never see your messages either.</div>
+        </div>
+      </div>
+      <div class="moment">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div>
+          <div class="moment-title" data-i18n="privacy.2.title">Built to hold up for decades</div>
+          <div class="moment-body" data-i18n="privacy.2.body">Televo uses next-generation encryption designed to stay unbreakable even against future computers, not just today's.</div>
+        </div>
+      </div>
+      <div class="moment">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 2l8 3.5v6c0 5-3.4 8.7-8 10.5-4.6-1.8-8-5.5-8-10.5v-6L12 2z"/></svg>
+        <div>
+          <div class="moment-title" data-i18n="privacy.3.title">You can check it yourself</div>
+          <div class="moment-body" data-i18n="privacy.3.body">Compare a short code with the other person, in person or on a call. If it matches, you know no one else is listening in.</div>
+        </div>
+      </div>
+    </div>
+
+    <details class="tech-details">
+      <summary><svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg> <span data-i18n="tech.summary">Technical details, for the curious</span></summary>
+      <div class="tech-details-body crypto">
+        <div>
+          <div class="crypto-steps" style="margin-top:0;">
+            <div class="crypto-step" style="padding-top:0; border-top:none;"><div class="n">01</div><div><h4 data-i18n="privacy.step1.h">Device generates two keypairs</h4><p data-i18n="privacy.step1.p">An X25519 keypair and an ML-KEM-768 (post-quantum) keypair are created locally the first time you open Televo and stored in the secure enclave — neither private half ever leaves the device.</p></div></div>
+            <div class="crypto-step"><div class="n">02</div><div><h4 data-i18n="privacy.step2.h">Both public keys are exchanged</h4><p data-i18n="privacy.step2.p">Only the public halves are published to your profile. Your contact's app combines a classic X25519 Diffie–Hellman handshake with an ML-KEM-768 encapsulation, so the conversation stays secure even against a future quantum computer, not just today's attackers.</p></div></div>
+            <div class="crypto-step"><div class="n">03</div><div><h4 data-i18n="privacy.step3.h">You verify it yourself</h4><p data-i18n="privacy.step3.p">Compare safety numbers in person or over another channel. A match means no one sat in the middle of that handshake.</p></div></div>
+          </div>
+        </div>
+        <div class="crypto-panel">
+          <div class="row"><span class="k" data-i18n="panel.chat">Chat</span><span class="v">Maya · Secret Chat</span></div>
+          <div class="row"><span class="k" data-i18n="panel.keyExchange">Key exchange</span><span class="v">X25519 + ML-KEM-768 (hybrid, post-quantum)</span></div>
+          <div class="row"><span class="k" data-i18n="panel.cipher">Cipher</span><span class="v">XSalsa20-Poly1305</span></div>
+          <div class="row"><span class="k" data-i18n="panel.selfDestruct">Self-destruct</span><span class="v" data-i18n="panel.selfDestructVal">1h · per-message</span></div>
+          <div class="row"><span class="k" data-i18n="panel.readable">Readable by Televo</span><span class="v" style="color:var(--danger)" data-i18n="panel.never">never</span></div>
+          <div class="fp"><div class="k" data-i18n="panel.safetyNumber">Safety number</div><div class="v">3841&nbsp; 9902&nbsp; 1174<br>5530&nbsp; 0287&nbsp; 6619</div></div>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="calls">
+  <div class="wrap calls reveal">
+    <div class="calls-visual">
+      <div class="ring-avatar">M</div>
+      <div class="call-status" data-i18n="calls.visual.status">Calling Maya…</div>
+      <div class="call-sub" data-i18n="calls.visual.sub">Native WebRTC · relayed over TURN when needed</div>
+      <div class="call-actions">
+        <div class="call-btn call-decline"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="#1A1414" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+        <div class="call-btn call-accept"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M4 5c0-1 1-2 2-2h1a1 1 0 011 .8l1 3a1 1 0 01-.3 1L7 9.3a12 12 0 007 7l1.5-1.7a1 1 0 011-.3l3 1a1 1 0 01.8 1v1c0 1-1 2-2 2C10.5 20.5 3.5 13.5 4 5z" fill="#1A1414"/></svg></div>
+      </div>
+    </div>
+    <div>
+      <div class="section-head" style="margin-bottom:28px;">
+        <h2 style="font-size:32px;" data-i18n="calls.title">Calls that just work, and stay private.</h2>
+        <p data-i18n="calls.sub">No embedded browser tricks — Televo talks to your phone's camera and microphone directly, so the permission prompts appear exactly when they should. Every call is encrypted in transit, start to finish, and you get a real log of who called, when, and whether you picked up.</p>
+      </div>
+      <details class="tech-details">
+        <summary><svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg> <span data-i18n="tech.summary">Technical details, for the curious</span></summary>
+        <div class="tech-details-body spec-list">
+          <div class="spec-row" style="border-top:none; padding-top:0;"><span class="k" data-i18n="calls.spec.signaling">Signaling</span><span class="v">Realtime broadcast, per-call channel</span></div>
+          <div class="spec-row"><span class="k" data-i18n="calls.spec.media">Media transport</span><span class="v">DTLS-SRTP (encrypted in transit)</span></div>
+          <div class="spec-row"><span class="k" data-i18n="calls.spec.nat">NAT traversal</span><span class="v">STUN + TURN relay fallback</span></div>
+          <div class="spec-row"><span class="k" data-i18n="calls.spec.log">Call log</span><span class="v" data-i18n="calls.spec.logVal">Incoming · outgoing · missed · declined</span></div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="honesty">
+  <div class="wrap reveal">
+    <div class="section-head" style="margin-bottom:0;">
+      <h2 data-i18n="honesty.title">What's shipped, and what we're still building.</h2>
+      <p data-i18n="honesty.sub">Most apps market the roadmap as if it's already done. We'd rather tell you exactly where the line is today.</p>
+    </div>
+    <div class="roadmap-grid">
+      <div class="roadmap-col col-ship">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="honesty.shipped">Shipped today</span></h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="honesty.ship.1">Secret Chats only you and the other person can read</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="honesty.ship.2">1:1 voice &amp; video calls that feel like a native phone call</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="honesty.ship.3">Block anyone, and report what shouldn't be there</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="honesty.ship.4">Two-step verification, passcode lock, delete your account anytime</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="honesty.ship.5">Calls ring you properly, even with the app closed</span></li>
+        </ul>
+      </div>
+      <div class="roadmap-col col-next">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg> <span data-i18n="honesty.building">Actively building</span></h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg> <span data-i18n="honesty.next.1">Group calls</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg> <span data-i18n="honesty.next.2">Message search, voice notes, and reactions</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg> <span data-i18n="honesty.next.3">Even stronger protection if a key is ever compromised</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" style="padding: 48px 0 0;">
+  <div class="promise-band reveal">
+    <div class="promise-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2l8 3.5v6c0 5-3.4 8.7-8 10.5-4.6-1.8-8-5.5-8-10.5v-6L12 2z"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div>
+      <h3 data-i18n="promise.title">Our promise</h3>
+      <p data-i18n="promise.body">Televo is, and always will be, free for personal 1:1 communication. To sustain server costs, we plan to introduce premium features for teams and power users in the future. No ads, no data selling — ever.</p>
     </div>
   </div>
 </div>
 
-<div class="wrap">
-  <section id="features">
-    <div class="section-head reveal">
-      <div class="section-tag">Everyday messaging</div>
-      <h2>Everything a fast messenger needs — nothing it doesn't.</h2>
-      <p>Chats sync live across every device you're signed into. No lag, no "last seen 3 hours ago" surprises.</p>
-      <p class="section-subline">Everyday chats are safely stored in your isolated Supabase instance using Row-Level Security (RLS), while Secret Chats add end-to-end encryption on top.</p>
-    </div>
-    <div class="feature-grid reveal-stagger reveal">
-      <div class="feature stagger-item">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" stroke="currentColor" stroke-width="1.7"/></svg></div>
-        <h3>Live everywhere</h3>
-        <p>One account, every device — messages, read state and typing indicators sync in real time over Supabase Realtime.</p>
-      </div>
-      <div class="feature stagger-item">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 10l9-7 9 7v9a2 2 0 01-2 2H5a2 2 0 01-2-2v-9z" stroke="currentColor" stroke-width="1.7"/><path d="M9 21V12h6v9" stroke="currentColor" stroke-width="1.7"/></svg></div>
-        <h3>Groups you actually run</h3>
-        <p>Create a group, name it, hand out admin. Reply, edit and forward with full "forwarded from" attribution.</p>
-      </div>
-      <div class="feature stagger-item">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" fill="currentColor"/></svg></div>
-        <h3>Self-destruct timers</h3>
-        <p>Set a chat to erase itself after 30 seconds or a week. The timer travels with the message, not the screen.</p>
-      </div>
-      <div class="feature stagger-item">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <h3>Files that stay files</h3>
-        <p>Photos and documents of any type, delivered through signed URLs from a private bucket — not re-compressed junk.</p>
-      </div>
-      <div class="feature stagger-item">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2a5 5 0 015 5v3a5 5 0 01-10 0V7a5 5 0 015-5z" stroke="currentColor" stroke-width="1.7"/><path d="M5 11a7 7 0 0014 0M12 18v4" stroke="currentColor" stroke-width="1.7"/></svg></div>
-        <h3>Passcode + Face ID</h3>
-        <p>A local 4-digit lock with biometric unlock gates the whole app the moment it's backgrounded.</p>
-      </div>
-      <div class="feature stagger-item">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 15a4 4 0 004-4V6a4 4 0 00-8 0v5a4 4 0 004 4z" stroke="currentColor" stroke-width="1.7"/><path d="M4 18h4M6 16v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="17" cy="17" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 17l1 1 2-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <h3>Two-step verification</h3>
-        <p>Add a TOTP code from any authenticator app on top of your password — enforced server-side, not cosmetic.</p>
-      </div>
-    </div>
-  </section>
+<section id="download" style="border-bottom: none;">
+  <div class="wrap download-inner reveal">
+    <h2 data-i18n="download.title">Some things are just between you and them.</h2>
+    <p data-i18n="download.sub">Televo is free, carries no ads, and never sells a byte of your data. Join the beta waitlist — we'll email you the moment it's live on the App Store.</p>
 
-  <section id="privacy">
-    <div class="crypto reveal">
-      <div class="crypto-glow"></div>
-      <div>
-        <div class="section-tag">Secret Chats</div>
-        <h2>Turn any chat into one only two devices can read.</h2>
-        <p class="lead">Keys are generated on-device and never touch our servers. Tap the lock icon, and the conversation from that point on is unreadable to us.</p>
-        <div class="crypto-steps">
-          <div class="crypto-step"><div class="n">01</div><div class="body"><h4>Device generates two keypairs</h4><p>An X25519 keypair and an ML-KEM-768 (post-quantum) keypair are created locally the first time you open Televo and stored in the secure enclave — neither private half ever leaves the device.</p></div></div>
-          <div class="crypto-step"><div class="n">02</div><div class="body"><h4>Both public keys are exchanged</h4><p>Only the public halves are published to your profile. Your contact's app combines a classic X25519 Diffie–Hellman handshake with an ML-KEM-768 encapsulation, so the conversation stays secure even against a future quantum computer, not just today's attackers.</p></div></div>
-          <div class="crypto-step"><div class="n">03</div><div class="body"><h4>You verify it yourself</h4><p>Compare safety numbers in person or over another channel. A match means no one sat in the middle of that handshake.</p></div></div>
-        </div>
+    <form id="waitlist-form" class="waitlist-form" novalidate>
+      <div class="waitlist-input-row">
+        <input
+          type="email"
+          id="waitlist-email"
+          class="waitlist-input"
+          data-i18n-placeholder="download.placeholder"
+          placeholder="you@example.com"
+          autocomplete="email"
+          required
+        >
+        <button type="submit" class="btn btn-accent waitlist-submit">
+          <span class="waitlist-submit-label" data-i18n="download.cta">Join the Beta</span>
+          <svg class="waitlist-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="40" stroke-dashoffset="10"/></svg>
+        </button>
       </div>
-      <div class="crypto-panel">
-        <div class="row"><span class="k">Chat</span><span class="v">Maya · Secret Chat</span></div>
-        <div class="row"><span class="k">Key exchange</span><span class="v">X25519 + ML-KEM-768 (hybrid, post-quantum)</span></div>
-        <div class="row"><span class="k">Cipher</span><span class="v">XSalsa20-Poly1305</span></div>
-        <div class="row"><span class="k">Self-destruct</span><span class="v">1h · per-message</span></div>
-        <div class="row"><span class="k">Readable by Televo</span><span class="v" style="color:#FF8A80">never</span></div>
-        <div class="fp"><div class="k">Safety number</div><div class="v">3841 &nbsp;9902 &nbsp;1174&nbsp;<br>5530 &nbsp;0287 &nbsp;6619</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="calls">
-    <div class="calls">
-      <div class="calls-visual reveal">
-        <div class="ring-avatar">M</div>
-        <div class="call-status">Calling Maya…</div>
-        <div class="call-sub">Native WebRTC · relayed over TURN when needed</div>
-        <div class="call-actions">
-          <div class="call-btn call-decline"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></div>
-          <div class="call-btn call-accept"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 5c0-1 1-2 2-2h1a1 1 0 011 .8l1 3a1 1 0 01-.3 1L7 9.3a12 12 0 007 7l1.5-1.7a1 1 0 011-.3l3 1a1 1 0 01.8 1v1c0 1-1 2-2 2C10.5 20.5 3.5 13.5 4 5z" fill="#fff"/></svg></div>
-        </div>
-      </div>
-      <div class="calls-copy reveal">
-        <div class="section-head" style="margin-bottom:28px;">
-          <div class="section-tag">Voice &amp; video</div>
-          <h2>Real calls, real WebRTC.</h2>
-          <p>No embedded browser tricks — Televo talks to the device's native media engine directly, so the microphone and camera prompts appear exactly when they should.</p>
-        </div>
-        <div class="spec-list">
-          <div class="spec-row"><span class="k">Signaling</span><span class="v">Realtime broadcast, per-call channel</span></div>
-          <div class="spec-row"><span class="k">Media transport</span><span class="v">DTLS-SRTP (encrypted in transit)</span></div>
-          <div class="spec-row"><span class="k">NAT traversal</span><span class="v">STUN + TURN relay fallback</span></div>
-          <div class="spec-row"><span class="k">Call log</span><span class="v">Incoming · outgoing · missed · declined</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="honesty">
-    <div class="honesty reveal">
-      <div class="section-head" style="margin-bottom:0;">
-        <div class="section-tag">Built in the open</div>
-        <h2>What's shipped, and what we're still building.</h2>
-        <p>Most apps market the roadmap as if it's already done. We'd rather tell you exactly where the line is today.</p>
-      </div>
-      <div class="honesty-grid">
-        <div class="honesty-col col-ship">
-          <h3><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Shipped today</h3>
-          <ul>
-            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> End-to-end encrypted Secret Chats with safety-number verification</li>
-            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> 1:1 voice &amp; video calls over native WebRTC</li>
-            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Server-enforced blocking &amp; content reporting</li>
-            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Two-step verification, passcode lock, in-app account deletion</li>
-            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> CallKit &amp; PushKit, so calls ring even when Televo is backgrounded</li>
-          </ul>
-        </div>
-        <div class="honesty-col col-next">
-          <h3><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Actively building</h3>
-          <ul>
-            <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Group calls</li>
-            <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Message search, voice notes, and reactions</li>
-            <li><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Forward secrecy (ratcheting keys) for Secret Chats</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="promise" style="padding-top:0;">
-    <div class="promise-band reveal">
-      <div class="promise-icon">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 3.5v6c0 5-3.4 8.7-8 10.5-4.6-1.8-8-5.5-8-10.5v-6L12 2z" stroke="currentColor" stroke-width="1.7"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div>
-        <h3>Our promise</h3>
-        <p>Televo is, and always will be, free for personal 1:1 communication. To sustain server costs, we plan to introduce premium features for teams and power users in the future. No ads, no data selling — ever.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="download">
-    <div class="cta-band reveal">
-      <div class="blob blob1"></div><div class="blob blob2"></div>
-      <h2>Your conversations. Your devices. Your rules.</h2>
-      <p>Televo is free, carries no ads, and never sells a byte of your data. Join the beta waitlist — we'll email you the moment it's live on the App Store.</p>
-
-      <form id="waitlist-form" class="waitlist-form" novalidate>
-        <div class="waitlist-input-row">
-          <input
-            type="email"
-            id="waitlist-email"
-            class="waitlist-input"
-            placeholder="you@example.com"
-            autocomplete="email"
-            required
-          >
-          <button type="submit" class="btn-primary btn-glow waitlist-submit">
-            <span class="waitlist-submit-label">Join the Beta</span>
-            <svg class="waitlist-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="40" stroke-dashoffset="10"/></svg>
-          </button>
-        </div>
-        <p class="waitlist-status" id="waitlist-status" role="status" aria-live="polite"></p>
-      </form>
-
-      <div class="cta-badges">
-        <div class="badge">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M16.365 1.43c0 1.14-.469 2.213-1.212 2.994-.822.866-2.184 1.548-3.16 1.548a3.4 3.4 0 01-.02-.313c0-1.101.507-2.28 1.279-3.081.822-.866 2.184-1.548 3.16-1.548l-.047.4z" fill="#fff"/><path d="M20.8 17.5c-.622 1.437-.92 2.08-1.72 3.36-1.116 1.79-2.69 4.02-4.64 4.04-1.73.017-2.176-1.126-4.523-1.113-2.348.013-2.84 1.133-4.573 1.116-1.95-.02-3.44-2.03-4.556-3.82C-2.13 16.53-1.34 8.35 4.14 4.7c1.79-1.19 3.65-1.35 4.98-.5.8.51 2.03 1.13 3.03 1.13.94 0 2.06-.66 3.13-.66 1.66 0 3.32.68 4.48 1.86-3.96 2.16-3.33 7.85 1.04 9.97z" fill="#fff"/></svg>
-          <span>Coming to App Store<small>iPhone · iOS 15.1+</small></span>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+      <p class="waitlist-status" id="waitlist-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
 
 <footer>
   <div class="wrap">
     <div class="footer-inner">
-      <div>
-        <div class="brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" fill="#fff"/></svg></span>Televo</div>
-        <p style="margin-top:14px; font-size:13.5px; color:var(--muted); max-width:32ch; line-height:1.6;">A private messenger built with Expo and Supabase. No ads, no tracking, no data broker.</p>
+      <div style="max-width:32ch;">
+        <div class="brand"><span class="brand-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span><span class="brand-name">Televo</span></div>
+        <p style="margin-top:14px; font-size:13.5px; color:var(--text-dim); line-height:1.6;" data-i18n="footer.tagline">A private messenger built with Expo and Supabase. No ads, no tracking, no data broker.</p>
       </div>
       <div class="footer-links">
-        <div class="footer-col"><h4>Product</h4><a href="#features">Features</a><a href="#privacy">Secret Chats</a><a href="#calls">Calls</a></div>
-        <div class="footer-col"><h4>Legal</h4><a href="/terms">Terms of Service</a><a href="/privacy">Privacy Policy</a></div>
-        <div class="footer-col"><h4>Contact</h4><a href="/support">Support &amp; FAQ</a><a href="mailto:ssirojov@gmail.com">ssirojov@gmail.com</a></div>
+        <div class="footer-col"><h4 data-i18n="footer.product">Product</h4><a href="#moments" data-i18n="footer.features">Features</a><a href="#privacy" data-i18n="nav.privacy">Secret Chats</a><a href="#calls" data-i18n="nav.calls">Calls</a></div>
+        <div class="footer-col"><h4 data-i18n="footer.legal">Legal</h4><a href="/terms" data-i18n="footer.terms">Terms of Service</a><a href="/privacy" data-i18n="footer.privacyPolicy">Privacy Policy</a></div>
+        <div class="footer-col"><h4 data-i18n="footer.contact">Contact</h4><a href="/support" data-i18n="footer.supportFaq">Support &amp; FAQ</a><a href="mailto:ssirojov@gmail.com">ssirojov@gmail.com</a></div>
       </div>
     </div>
-    <div class="footer-bottom"><span>© 2026 Televo. Built for people, not ad networks.</span><span class="mono">v1.0.0</span></div>
+    <div class="footer-bottom"><span data-i18n="footer.copyright">© 2026 Televo. Built for people, not ad networks.</span><span class="mono">v1.0.0</span></div>
   </div>
 </footer>
 
 <script>
-  // Aurora backdrop — soft animated blobs on canvas, cheap alternative to a
-  // WebGL noise shader, same "living gradient" feel without a GL dependency.
-  (function () {
-    var canvas = document.getElementById('aurora');
-    var ctx = canvas.getContext('2d');
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
-    resize(); addEventListener('resize', resize);
-    var blobs = [
-      { x: .15, y: .1, r: .35, c: isDark ? '94,181,247' : '51,144,236', dx: .00012, dy: .00009, t: 0 },
-      { x: .8, y: .25, r: .30, c: isDark ? '56,193,114' : '94,181,247', dx: -.00010, dy: .00013, t: 2 },
-      { x: .5, y: .6, r: .28, c: isDark ? '133,203,255' : '56,193,114', dx: .00008, dy: -.00011, t: 4 },
-    ];
-    if (reduced) {
-      blobs.forEach(function (b) { draw(b); });
-    } else {
-      requestAnimationFrame(loop);
+  // ---------- i18n ----------
+  var I18N = {
+    en: {
+      'nav.privacy': 'Secret Chats', 'nav.calls': 'Calls', 'nav.roadmap': 'Roadmap', 'nav.support': 'Support', 'nav.cta': 'Get Televo',
+      'hero.title': 'A quiet place<br>to say what you mean.',
+      'hero.sub': 'Televo encrypts your private conversations on your own phone before they go anywhere. Not because we don’t trust you — because you shouldn’t have to trust us with something this personal. Live sync, real voice &amp; video calls, and Secret Chats built on transparent cryptographic standards.',
+      'hero.cta': 'Get Televo', 'hero.secondary': 'Why it matters',
+      'hero.phone.private': 'private',
+      'hero.phone.msg1': 'made it to the airport, flight’s delayed though',
+      'hero.phone.msg2': 'ugh. want me to send the hotel address again',
+      'hero.phone.msg3': 'yes please, and the wifi password lol',
+      'why.title': 'Most apps ask you to trust them. We just made it so you don’t have to.',
+      'why.p1': 'When you open a Secret Chat, your phone creates the keys that will lock it, right there in your hand. Those keys never travel to a server. A message you send is already sealed before it leaves your device, and only the person you’re talking to can open it.',
+      'why.p2': 'If someone asked us to hand over a Secret Chat, we’d have nothing readable to give them. Not a policy we follow — a fact about how the math works.',
+      'why.pill1': 'Locked on your device', 'why.pill2': 'Built to last decades', 'why.pill3': 'Verifiable by you',
+      'moments.title': 'Built for the conversations that actually matter to you.',
+      'moments.sub': 'Not a feature list. Just what happens when you reach for your phone. Chats sync live across every device you’re signed into, and Secret Chats add a lock only you and the other person can open.',
+      'moments.1.title': 'You call your mom on a Tuesday.',
+      'moments.1.body': 'The call is encrypted in transit, start to finish. Video stays clear, the call stays private, and neither of you thinks about either one for a second.',
+      'moments.2.title': 'You send something you’d rather not keep around.',
+      'moments.2.body': 'Set it to disappear in 30 seconds, an hour, or a week. The timer travels with the message, not the screen — it goes from both phones, no follow-up needed.',
+      'moments.3.title': 'A friend asks who else can read your chats.',
+      'moments.3.body': 'You get to say “no one,” and mean it — not us either, in a Secret Chat. Two-step verification and a passcode lock keep the rest of the app just as closed.',
+      'privacy.title': 'Turn any chat into one only two people can read.',
+      'privacy.sub': 'Tap the lock icon and Televo starts a Secret Chat: your phone and theirs agree on a private key between themselves, without us in the middle. From that point on, what you send is locked before it leaves your phone — we simply couldn’t hand it over if we wanted to.',
+      'privacy.1.title': 'Locked on your phone, not our servers',
+      'privacy.1.body': 'The key that unlocks your chat is made on your device and stays there. We never see it, so we never see your messages either.',
+      'privacy.2.title': 'Built to hold up for decades',
+      'privacy.2.body': 'Televo uses next-generation encryption designed to stay unbreakable even against future computers, not just today’s.',
+      'privacy.3.title': 'You can check it yourself',
+      'privacy.3.body': 'Compare a short code with the other person, in person or on a call. If it matches, you know no one else is listening in.',
+      'tech.summary': 'Technical details, for the curious',
+      'privacy.step1.h': 'Device generates two keypairs',
+      'privacy.step1.p': 'An X25519 keypair and an ML-KEM-768 (post-quantum) keypair are created locally the first time you open Televo and stored in the secure enclave — neither private half ever leaves the device.',
+      'privacy.step2.h': 'Both public keys are exchanged',
+      'privacy.step2.p': 'Only the public halves are published to your profile. Your contact’s app combines a classic X25519 Diffie–Hellman handshake with an ML-KEM-768 encapsulation, so the conversation stays secure even against a future quantum computer, not just today’s attackers.',
+      'privacy.step3.h': 'You verify it yourself',
+      'privacy.step3.p': 'Compare safety numbers in person or over another channel. A match means no one sat in the middle of that handshake.',
+      'panel.chat': 'Chat', 'panel.keyExchange': 'Key exchange', 'panel.cipher': 'Cipher',
+      'panel.selfDestruct': 'Self-destruct', 'panel.selfDestructVal': '1h · per-message',
+      'panel.readable': 'Readable by Televo', 'panel.never': 'never', 'panel.safetyNumber': 'Safety number',
+      'calls.visual.status': 'Calling Maya…', 'calls.visual.sub': 'Native WebRTC · relayed over TURN when needed',
+      'calls.title': 'Calls that just work, and stay private.',
+      'calls.sub': 'No embedded browser tricks — Televo talks to your phone’s camera and microphone directly, so the permission prompts appear exactly when they should. Every call is encrypted in transit, start to finish, and you get a real log of who called, when, and whether you picked up.',
+      'calls.spec.signaling': 'Signaling', 'calls.spec.media': 'Media transport', 'calls.spec.nat': 'NAT traversal',
+      'calls.spec.log': 'Call log', 'calls.spec.logVal': 'Incoming · outgoing · missed · declined',
+      'honesty.title': 'What’s shipped, and what we’re still building.',
+      'honesty.sub': 'Most apps market the roadmap as if it’s already done. We’d rather tell you exactly where the line is today.',
+      'honesty.shipped': 'Shipped today', 'honesty.building': 'Actively building',
+      'honesty.ship.1': 'Secret Chats only you and the other person can read',
+      'honesty.ship.2': '1:1 voice &amp; video calls that feel like a native phone call',
+      'honesty.ship.3': 'Block anyone, and report what shouldn’t be there',
+      'honesty.ship.4': 'Two-step verification, passcode lock, delete your account anytime',
+      'honesty.ship.5': 'Calls ring you properly, even with the app closed',
+      'honesty.next.1': 'Group calls',
+      'honesty.next.2': 'Message search, voice notes, and reactions',
+      'honesty.next.3': 'Even stronger protection if a key is ever compromised',
+      'promise.title': 'Our promise',
+      'promise.body': 'Televo is, and always will be, free for personal 1:1 communication. To sustain server costs, we plan to introduce premium features for teams and power users in the future. No ads, no data selling — ever.',
+      'download.title': 'Some things are just between you and them.',
+      'download.sub': 'Televo is free, carries no ads, and never sells a byte of your data. Join the beta waitlist — we’ll email you the moment it’s live on the App Store.',
+      'download.placeholder': 'you@example.com', 'download.cta': 'Join the Beta',
+      'footer.tagline': 'A private messenger built with Expo and Supabase. No ads, no tracking, no data broker.',
+      'footer.product': 'Product', 'footer.features': 'Features',
+      'footer.legal': 'Legal', 'footer.terms': 'Terms of Service', 'footer.privacyPolicy': 'Privacy Policy',
+      'footer.contact': 'Contact', 'footer.supportFaq': 'Support &amp; FAQ',
+      'footer.copyright': '© 2026 Televo. Built for people, not ad networks.',
+      'waitlist.invalidEmail': 'Enter a valid email address.',
+      'waitlist.joined': 'You’re on the list — we’ll email you when the beta opens.',
+      'waitlist.alreadyJoined': 'You’re already on the list.',
+      'waitlist.error': 'Something went wrong — please try again.',
+      'waitlist.networkError': 'Network error — please try again.',
+      'waitlist.joinedLabel': 'Joined',
+    },
+    ru: {
+      'nav.privacy': 'Секретные чаты', 'nav.calls': 'Звонки', 'nav.roadmap': 'Роадмап', 'nav.support': 'Поддержка', 'nav.cta': 'Скачать Televo',
+      'hero.title': 'Тихое место,<br>чтобы сказать то, что думаешь.',
+      'hero.sub': 'Televo шифрует ваши личные переписки прямо на телефоне, прежде чем они куда-либо уходят. Не потому, что мы вам не доверяем — а потому, что вам не должно быть нужно доверять нам что-то настолько личное. Синхронизация в реальном времени, настоящие голосовые и видеозвонки, и Секретные чаты на основе открытых криптографических стандартов.',
+      'hero.cta': 'Скачать Televo', 'hero.secondary': 'Почему это важно',
+      'hero.phone.private': 'приватно',
+      'hero.phone.msg1': 'добралась до аэропорта, но рейс задерживают',
+      'hero.phone.msg2': 'ооо. скинуть адрес отеля ещё раз?',
+      'hero.phone.msg3': 'да, и пароль от вайфая тоже, пожалуйста))',
+      'why.title': 'Большинство приложений просят вам довериться. Мы просто сделали так, чтобы это было не нужно.',
+      'why.p1': 'Когда вы открываете Секретный чат, ваш телефон сам создаёт ключи, которые его защищают — прямо у вас в руках. Эти ключи никогда не попадают на сервер. Сообщение уже зашифровано до того, как покинет устройство, и открыть его может только собеседник.',
+      'why.p2': 'Если бы нас попросили передать содержимое Секретного чата, нам было бы просто нечего передавать. Это не политика, которой мы следуем — это факт о том, как устроена математика.',
+      'why.pill1': 'Хранится на вашем устройстве', 'why.pill2': 'Рассчитано на десятилетия', 'why.pill3': 'Можно проверить самому',
+      'moments.title': 'Создано для разговоров, которые для вас действительно важны.',
+      'moments.sub': 'Это не список функций. Это то, что происходит, когда вы берёте телефон в руки. Чаты синхронизируются мгновенно на всех ваших устройствах, а Секретные чаты добавляют замок, который можете открыть только вы и собеседник.',
+      'moments.1.title': 'Вы звоните маме во вторник вечером.',
+      'moments.1.body': 'Звонок зашифрован от начала до конца. Видео не тормозит, разговор остаётся приватным, и вы оба ни на секунду об этом не задумываетесь.',
+      'moments.2.title': 'Вы отправляете то, что не хочется хранить вечно.',
+      'moments.2.body': 'Поставьте таймер на 30 секунд, час или неделю. Отсчёт идёт вместе с сообщением, а не с экраном — оно исчезает с обоих телефонов само, без лишних действий.',
+      'moments.3.title': 'Друг спрашивает, кто ещё может прочитать вашу переписку.',
+      'moments.3.body': 'Вы отвечаете "никто" — и это правда. Даже мы не можем, если это Секретный чат. Двухфакторная проверка и код-пароль держат закрытым и остальное приложение.',
+      'privacy.title': 'Превратите любой чат в тот, который прочитают только двое.',
+      'privacy.sub': 'Нажмите на значок замка — и Televo начинает Секретный чат: ваш телефон и телефон собеседника сами договариваются об общем ключе, без нашего участия. С этого момента всё, что вы отправляете, зашифровано ещё до того, как покинет телефон — мы физически не смогли бы это передать, даже если бы захотели.',
+      'privacy.1.title': 'Хранится на вашем телефоне, не на наших серверах',
+      'privacy.1.body': 'Ключ, который открывает ваш чат, создаётся на вашем устройстве и там же остаётся. Мы его никогда не видим — а значит, не видим и ваши сообщения.',
+      'privacy.2.title': 'Рассчитано на десятилетия вперёд',
+      'privacy.2.body': 'Televo использует шифрование нового поколения, устойчивое даже к компьютерам будущего, а не только к сегодняшним угрозам.',
+      'privacy.3.title': 'Вы можете проверить это сами',
+      'privacy.3.body': 'Сравните короткий код с собеседником лично или по другому каналу связи. Если он совпадает — значит, между вами точно никто не вклинился.',
+      'tech.summary': 'Технические детали, для любопытных',
+      'privacy.step1.h': 'Устройство создаёт две пары ключей',
+      'privacy.step1.p': 'Пара ключей X25519 и пара ML-KEM-768 (постквантовая) создаются локально при первом запуске Televo и хранятся в защищённом хранилище устройства — закрытая часть ключей никогда его не покидает.',
+      'privacy.step2.h': 'Обмен происходит только открытыми ключами',
+      'privacy.step2.p': 'На ваш профиль публикуются только открытые половины ключей. Приложение собеседника сочетает классическое рукопожатие X25519 Диффи-Хеллмана с инкапсуляцией ML-KEM-768, чтобы переписка оставалась защищённой даже от будущего квантового компьютера, а не только от сегодняшних атак.',
+      'privacy.step3.h': 'Вы проверяете это сами',
+      'privacy.step3.p': 'Сравните коды безопасности лично или по другому каналу. Совпадение означает, что никто не встроился в это рукопожатие посередине.',
+      'panel.chat': 'Чат', 'panel.keyExchange': 'Обмен ключами', 'panel.cipher': 'Шифр',
+      'panel.selfDestruct': 'Самоуничтожение', 'panel.selfDestructVal': '1ч · на каждое сообщение',
+      'panel.readable': 'Доступно Televo', 'panel.never': 'никогда', 'panel.safetyNumber': 'Код безопасности',
+      'calls.visual.status': 'Звонок Майе…', 'calls.visual.sub': 'Нативный WebRTC · с резервом через TURN при необходимости',
+      'calls.title': 'Звонки, которые просто работают и остаются приватными.',
+      'calls.sub': 'Никаких трюков со встроенным браузером — Televo обращается к камере и микрофону телефона напрямую, поэтому запросы на доступ появляются именно тогда, когда должны. Каждый звонок зашифрован от начала до конца, а в истории вы видите, кто звонил, когда и ответили ли вы.',
+      'calls.spec.signaling': 'Сигнализация', 'calls.spec.media': 'Передача медиа', 'calls.spec.nat': 'Обход NAT',
+      'calls.spec.log': 'Журнал звонков', 'calls.spec.logVal': 'Входящие · исходящие · пропущенные · отклонённые',
+      'honesty.title': 'Что уже готово, а что мы ещё делаем.',
+      'honesty.sub': 'Многие приложения рекламируют план развития так, будто всё уже сделано. Мы лучше честно скажем, где сейчас граница.',
+      'honesty.shipped': 'Уже готово', 'honesty.building': 'В активной разработке',
+      'honesty.ship.1': 'Секретные чаты, которые прочитаете только вы и собеседник',
+      'honesty.ship.2': 'Голосовые и видеозвонки один на один, как обычный телефонный звонок',
+      'honesty.ship.3': 'Блокировка любого пользователя и жалобы на то, чего быть не должно',
+      'honesty.ship.4': 'Двухфакторная проверка, код-пароль, удаление аккаунта в любой момент',
+      'honesty.ship.5': 'Звонки доходят по-настоящему, даже если приложение закрыто',
+      'honesty.next.1': 'Групповые звонки',
+      'honesty.next.2': 'Поиск по сообщениям, голосовые сообщения и реакции',
+      'honesty.next.3': 'Ещё более надёжная защита на случай компрометации ключа',
+      'promise.title': 'Наше обещание',
+      'promise.body': 'Televo есть и всегда будет бесплатным для личного общения один на один. Чтобы покрывать расходы на серверы, в будущем мы планируем ввести платные функции для команд и продвинутых пользователей. Никакой рекламы, никакой продажи данных — никогда.',
+      'download.title': 'Некоторые вещи касаются только вас двоих.',
+      'download.sub': 'Televo бесплатен, без рекламы и никогда не продаёт ваши данные. Запишитесь в лист ожидания бета-версии — мы напишем вам, как только приложение появится в App Store.',
+      'download.placeholder': 'you@example.com', 'download.cta': 'Записаться в бету',
+      'footer.tagline': 'Приватный мессенджер на Expo и Supabase. Без рекламы, без слежки, без продажи данных.',
+      'footer.product': 'Продукт', 'footer.features': 'Возможности',
+      'footer.legal': 'Документы', 'footer.terms': 'Условия использования', 'footer.privacyPolicy': 'Политика конфиденциальности',
+      'footer.contact': 'Контакты', 'footer.supportFaq': 'Поддержка и вопросы',
+      'footer.copyright': '© 2026 Televo. Сделано для людей, а не для рекламных сетей.',
+      'waitlist.invalidEmail': 'Введите корректный email.',
+      'waitlist.joined': 'Вы в списке — напишем вам, как только откроется бета.',
+      'waitlist.alreadyJoined': 'Вы уже в списке.',
+      'waitlist.error': 'Что-то пошло не так — попробуйте ещё раз.',
+      'waitlist.networkError': 'Ошибка сети — попробуйте ещё раз.',
+      'waitlist.joinedLabel': 'Готово',
     }
-    function draw(b) {
-      var cx = b.x * canvas.width, cy = b.y * canvas.height, r = b.r * Math.max(canvas.width, canvas.height);
-      var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-      g.addColorStop(0, 'rgba(' + b.c + ',.35)');
-      g.addColorStop(1, 'rgba(' + b.c + ',0)');
-      ctx.fillStyle = g;
-      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
-    }
-    function loop(ts) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      blobs.forEach(function (b) {
-        b.t += 1;
-        b.x += Math.sin(b.t * .002 + b.dy * 1000) * b.dx;
-        b.y += Math.cos(b.t * .0017) * b.dy;
-        draw(b);
-      });
-      requestAnimationFrame(loop);
-    }
-  })();
+  };
 
-  // Floating chat-bubble motif scattered behind content.
   (function () {
-    var field = document.getElementById('bubbleField');
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var n = innerWidth < 760 ? 5 : 10;
-    for (var i = 0; i < n; i++) {
-      var el = document.createElement('div');
-      el.className = 'fbubble';
-      var size = 30 + Math.random() * 70;
-      el.style.width = size + 'px';
-      el.style.height = size * .8 + 'px';
-      el.style.left = Math.random() * 100 + 'vw';
-      el.style.top = Math.random() * 100 + 'vh';
-      el.style.background = i % 2 === 0 ? 'var(--accent)' : 'var(--online)';
-      el.style.animationDuration = (10 + Math.random() * 10) + 's';
-      el.style.animationDelay = (Math.random() * -10) + 's';
-      field.appendChild(el);
+    var STORAGE_KEY = 'televo-lang';
+    var supported = ['en', 'ru'];
+
+    function detectLang() {
+      try {
+        var saved = localStorage.getItem(STORAGE_KEY);
+        if (saved && supported.indexOf(saved) !== -1) return saved;
+      } catch (e) {}
+      var nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+      return nav.indexOf('ru') === 0 ? 'ru' : 'en';
     }
+
+    function applyLang(lang) {
+      var dict = I18N[lang] || I18N.en;
+      document.documentElement.setAttribute('lang', lang);
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.innerHTML = dict[key];
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n-placeholder');
+        if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+      });
+      document.querySelectorAll('[data-lang-btn]').forEach(function (btn) {
+        btn.classList.toggle('is-active', btn.getAttribute('data-lang-btn') === lang);
+      });
+      try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+      window.__televoLang = lang;
+    }
+
+    document.querySelectorAll('[data-lang-btn]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        applyLang(btn.getAttribute('data-lang-btn'));
+      });
+    });
+
+    applyLang(detectLang());
   })();
 
   // Scroll-reveal
   (function () {
-    var els = document.querySelectorAll('.reveal, .reveal-stagger');
+    var els = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -711,6 +721,11 @@
     var status = document.getElementById('waitlist-status');
     var button = form.querySelector('.waitlist-submit');
 
+    function t(key) {
+      var lang = window.__televoLang || 'en';
+      return (I18N[lang] && I18N[lang][key]) || I18N.en[key] || key;
+    }
+
     function setStatus(message, isError) {
       status.textContent = message;
       status.classList.toggle('is-error', !!isError);
@@ -720,7 +735,7 @@
       event.preventDefault();
       var email = input.value.trim();
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-        setStatus('Enter a valid email address.', true);
+        setStatus(t('waitlist.invalidEmail'), true);
         input.focus();
         return;
       }
@@ -741,24 +756,21 @@
       })
         .then(function (response) {
           if (response.ok) {
-            setStatus("You're on the list — we'll email you when the beta opens.");
+            setStatus(t('waitlist.joined'));
             input.value = '';
             input.disabled = true;
-            button.textContent = 'Joined';
+            button.textContent = t('waitlist.joinedLabel');
             button.disabled = true;
           } else if (response.status === 409) {
-            // Unique index on lower(email) — this address already signed up.
-            // Treated as a soft success, not an error: the user's intent
-            // (be on the list) is already satisfied.
-            setStatus("You're already on the list.");
+            setStatus(t('waitlist.alreadyJoined'));
           } else {
-            setStatus('Something went wrong — please try again.', true);
+            setStatus(t('waitlist.error'), true);
             button.disabled = false;
             button.classList.remove('is-loading');
           }
         })
         .catch(function () {
-          setStatus('Network error — please try again.', true);
+          setStatus(t('waitlist.networkError'), true);
           button.disabled = false;
           button.classList.remove('is-loading');
         });
