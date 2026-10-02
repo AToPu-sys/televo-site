@@ -1,36 +1,33 @@
 <title>Page not found — Televo</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233390EC'/%3E%3Cpath d='M8 10a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2h-8l-5 4v-4h-1a2 2 0 01-2-2v-8z' fill='white'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23E3A085'/%3E%3Cpath d='M18 9.8a7 7 0 01-.75 3.2 7.1 7.1 0 01-6.3 3.9 7 7 0 01-3.2-.75L4.5 17.5l1.6-4.75a7 7 0 01-.75-3.2 7.1 7.1 0 013.9-6.3A7 7 0 0113 2.5h.4a7.1 7.1 0 016.6 6.7v.6z' fill='%231A1414'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#17161B">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap');
 
   :root {
-    --bg: #FBFCFE; --ink: #0E1621; --ink-soft: #4B5A68; --muted: #707579;
-    --border: #E4E8EE; --accent: #3390EC; --accent-strong: #1E6FC4;
+    --bg: #17161B; --surface: #211F26; --ink: #F4EFE9; --ink-soft: #A39C94;
+    --muted: #716B64; --border: #332F3A; --accent: #E3A085; --accent-strong: #EDB49B;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0B121B; --ink: #F2F5F8; --ink-soft: #B9C6D2; --muted: #8A9AA9;
-      --border: #223040; --accent: #5EB5F7; --accent-strong: #85CBFF;
-    }
-  }
+  
 
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--ink); min-height: 100vh;
-    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
     display: grid; place-items: center; padding: 24px; text-align: center;
   }
   .mark {
     width: 64px; height: 64px; border-radius: 18px; margin: 0 auto 28px;
-    background: linear-gradient(155deg, var(--accent), var(--accent-strong));
+    background: var(--accent);
     display: grid; place-items: center;
   }
   .mark svg { width: 32px; height: 32px; }
   h1 {
-    font-family: 'Manrope'; font-weight: 800; font-size: 30px;
+    font-family: 'Lora', Georgia, serif; font-weight: 500; font-size: 30px;
     letter-spacing: -0.02em; margin: 0 0 12px;
   }
   p { color: var(--ink-soft); margin: 0 0 32px; font-size: 16px; line-height: 1.6; }
@@ -39,7 +36,7 @@
     display: inline-flex; padding: 12px 24px; border-radius: 12px;
     text-decoration: none; font-weight: 600; font-size: 14.5px;
   }
-  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary { background: var(--accent); color: #1A1414; }
   .btn-primary:hover { background: var(--accent-strong); }
   .btn-ghost { border: 1px solid var(--border); color: var(--ink); }
   .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
@@ -47,7 +44,7 @@
 
 <div>
   <div class="mark">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" fill="#fff"/></svg>
+    <svg viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" fill="#1A1414"/></svg>
   </div>
   <h1>Page not found</h1>
   <p>That link doesn't lead anywhere on Televo.</p>

@@ -3,31 +3,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="What Televo collects, why, and what control you have. Written to match what the app actually does.">
 <link rel="canonical" href="https://gettelevo.space/privacy">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233390EC'/%3E%3Cpath d='M8 10a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2h-8l-5 4v-4h-1a2 2 0 01-2-2v-8z' fill='white'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23E3A085'/%3E%3Cpath d='M18 9.8a7 7 0 01-.75 3.2 7.1 7.1 0 01-6.3 3.9 7 7 0 01-3.2-.75L4.5 17.5l1.6-4.75a7 7 0 01-.75-3.2 7.1 7.1 0 013.9-6.3A7 7 0 0113 2.5h.4a7.1 7.1 0 016.6 6.7v.6z' fill='%231A1414'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#17161B">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap');
 
   :root {
-    --bg: #FBFCFE;
-    --surface: #FFFFFF;
-    --ink: #0E1621;
-    --ink-soft: #4B5A68;
-    --muted: #707579;
-    --border: #E4E8EE;
-    --accent: #3390EC;
-    --accent-strong: #1E6FC4;
+    --bg: #17161B; --surface: #211F26; --ink: #F4EFE9; --ink-soft: #A39C94;
+    --muted: #716B64; --border: #332F3A; --accent: #E3A085; --accent-strong: #EDB49B;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0B121B; --surface: #131D28; --ink: #F2F5F8; --ink-soft: #B9C6D2;
-      --muted: #8A9AA9; --border: #223040; --accent: #5EB5F7; --accent-strong: #85CBFF;
-    }
-  }
+  
 
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
-    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased; line-height: 1.65;
   }
   .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
@@ -39,12 +30,12 @@
   }
   .brand {
     display: flex; align-items: center; gap: 10px;
-    font-family: 'Manrope'; font-weight: 800; font-size: 18px;
+    font-family: 'Lora', Georgia, serif; font-weight: 500; font-size: 18px;
     text-decoration: none; color: var(--ink);
   }
   .brand-mark {
     width: 30px; height: 30px; border-radius: 9px;
-    background: linear-gradient(155deg, var(--accent), var(--accent-strong));
+    background: var(--accent);
     display: grid; place-items: center; flex-shrink: 0;
   }
   .brand-mark svg { width: 16px; height: 16px; }
@@ -53,7 +44,7 @@
 
   header.doc { padding: 56px 0 8px; }
   h1 {
-    font-family: 'Manrope'; font-weight: 800; font-size: clamp(30px, 5vw, 40px);
+    font-family: 'Lora', Georgia, serif; font-weight: 500; font-size: clamp(30px, 5vw, 40px);
     letter-spacing: -0.02em; margin: 0 0 10px; line-height: 1.15;
   }
   .updated { color: var(--muted); font-size: 14px; margin: 0; }
@@ -61,7 +52,7 @@
 
   main { padding-bottom: 72px; }
   h2 {
-    font-family: 'Manrope'; font-weight: 700; font-size: 21px;
+    font-family: 'Lora', Georgia, serif; font-weight: 500; font-size: 21px;
     letter-spacing: -0.01em; margin: 44px 0 14px; padding-top: 18px;
     border-top: 1px solid var(--border);
   }
@@ -85,30 +76,64 @@
   }
   footer a { color: var(--muted); text-decoration: none; }
   footer a:hover { color: var(--accent); }
+
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .lang-switch { display: flex; background: var(--surface); border: 1px solid var(--border); border-radius: 99px; padding: 3px; }
+  .lang-btn { border: none; background: transparent; color: var(--muted); font: 700 12.5px 'Manrope', sans-serif; padding: 6px 11px; border-radius: 99px; cursor: pointer; }
+  .lang-btn.is-active { background: var(--accent); color: #1A1414; }
+  [data-lang] { display: none; }
+  html:not([lang="ru"]) [data-lang="en"], html[lang="ru"] [data-lang="ru"] { display: revert; }
+  .glance { width: 100%; border-collapse: collapse; margin: 6px 0 18px; font-size: 14.5px; }
+  .glance th, .glance td { text-align: left; padding: 11px 10px 11px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .glance th { color: var(--muted); font-weight: 600; font-size: 12.5px; letter-spacing: .03em; }
+  .glance td { color: var(--ink-soft); }
+  .glance td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; padding-right: 16px; }
+  .lang-note { font-size: 13.5px; color: var(--muted); border-left: 2px solid var(--accent); padding-left: 12px; margin-top: 18px; }
 </style>
+<script>(function(){var l;try{l=localStorage.getItem('televo-lang')}catch(e){}if(l!=='ru'&&l!=='en'){l=(navigator.language||'en').toLowerCase().indexOf('ru')===0?'ru':'en'}document.documentElement.lang=l})();</script>
 
 <nav>
   <div class="nav-inner">
     <a class="brand" href="/">
-      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" fill="#fff"/></svg></span>
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" fill="#1A1414"/></svg></span>
       Televo
     </a>
-    <a class="nav-back" href="/">← Back to site</a>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang-btn="en">EN</button>
+        <button type="button" class="lang-btn" data-lang-btn="ru">RU</button>
+      </div>
+      <a class="nav-back" href="/"><span data-lang="en">← Home</span><span data-lang="ru">← На главную</span></a>
+    </div>
   </div>
 </nav>
 
 <div class="wrap">
+<div data-lang="en">
   <header class="doc">
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: 14 September 2026</p>
+    <p class="updated">Last updated: 2 October 2026</p>
     <p class="lede">
-      This policy describes what Televo collects, why, and what control you have.
-      It is written to match what the app actually does — every item below
-      corresponds to real behaviour in the code.
+      This policy describes what Televo collects, why, who else touches it, and what
+      control you have. It is written to match what the app actually does — every
+      item below corresponds to real behaviour in the code.
     </p>
   </header>
 
   <main>
+    <h2>At a glance</h2>
+    <table class="glance">
+      <tr><th>Data</th><th>Why</th><th>Can we read it?</th></tr>
+      <tr><td>Email</td><td>Signing in</td><td>Yes</td></tr>
+      <tr><td>Phone number</td><td>Letting people who have your number find you</td><td>Stored, never shown to others</td></tr>
+      <tr><td>Regular chats</td><td>Delivering messages, your history</td><td>Encrypted at rest, technically accessible</td></tr>
+      <tr><td>Secret Chats</td><td>Delivering messages</td><td>No — end-to-end encrypted</td></tr>
+      <tr><td>Address book</td><td>Finding friends (optional)</td><td>No — only one-way hashes, never stored</td></tr>
+      <tr><td>Device city/country</td><td>Showing where your account is signed in</td><td>Yes, approximate only</td></tr>
+      <tr><td>Call records</td><td>Your call history, call quality</td><td>Metadata only, never call audio/video</td></tr>
+    </table>
+    <p><strong>We never use any of it for advertising, never sell it, and never track you across other apps or websites.</strong></p>
+
     <h2>What we collect</h2>
     <p>
       <strong>Account information.</strong> Your email address (used to sign in),
@@ -121,8 +146,7 @@
       address book find you on Televo. Your number is never shown to other users
       and cannot be read in bulk — matching happens by comparing cryptographic
       hashes, so another user only ever confirms a number they already had. You
-      can update or remove it afterward in Settings — removing it only stops
-      future contact matching; it does not delete your account.
+      can update or remove it afterward in Settings.
     </p>
     <p>
       <strong>Messages and media.</strong> The messages, photos and files you send
@@ -139,58 +163,77 @@
       never uploaded or stored.
     </p>
     <p>
-      <strong>Usage and technical data.</strong> When you were last active (if you
-      leave "Last Seen" enabled), and a push notification token for your device so
-      we can deliver notifications.
+      <strong>Signed-in devices.</strong> So you can see and sign out every device
+      on your account (Settings → Devices), we store each device's model name, when
+      it was last active, and its approximate city and country. The city and
+      country are looked up from the device's IP address at sign-in; the IP address
+      itself is not stored.
     </p>
+    <p>
+      <strong>Calls.</strong> A call record (who, when, duration, whether it was
+      answered) for your call history, and a technical quality report for each
+      call — connection type, which relay server was used, packet loss and timing.
+      This exists to diagnose calls that fail or have no sound. It never contains
+      what was said or shown.
+    </p>
+    <p>
+      <strong>Usage and technical data.</strong> When you were last active (if you
+      leave "Last Seen" enabled), and push notification tokens for your devices so
+      we can deliver notifications and incoming calls.
+    </p>
+
+    <h2>AI assistant</h2>
+    <p>
+      Televo includes an optional built-in assistant chat. Messages you send
+      <strong>to the assistant</strong> are processed by Anthropic (the provider of
+      the Claude AI model) to generate a reply. Nothing else is shared with
+      Anthropic — not your other chats, not your contacts, and never Secret Chat
+      contents. If you never message the assistant, nothing is sent at all.
+    </p>
+
+    <h2>Services we rely on</h2>
+    <ul>
+      <li><strong>Supabase</strong> — hosting and database for accounts, chats and media.</li>
+      <li><strong>Resend</strong> — delivering sign-in codes and other email.</li>
+      <li><strong>Apple Push Notification service / Expo</strong> — delivering notifications and incoming-call alerts.</li>
+      <li><strong>ExpressTURN</strong> — relaying encrypted call media when a direct connection is not possible. The relay cannot decrypt the call.</li>
+      <li><strong>ip-api.com</strong> — turning a sign-in IP address into an approximate city and country.</li>
+      <li><strong>Anthropic</strong> — only for messages you send to the AI assistant.</li>
+    </ul>
+    <p>Each receives only what it needs to perform that one job.</p>
 
     <h2>What we do NOT do</h2>
     <ul>
       <li>We do not sell your data.</li>
-      <li>We do not use your data for advertising.</li>
+      <li>We do not use your data for advertising or tracking.</li>
       <li>We do not read the contents of Secret Chats — we cannot.</li>
       <li>We do not upload your address book.</li>
+      <li>We do not record calls.</li>
     </ul>
-
-    <h2>Calls</h2>
-    <p>
-      Voice and video calls connect directly between devices where possible, and
-      their media is encrypted in transit (DTLS-SRTP). Call <strong>contents</strong>
-      are not recorded or stored. We do store a call record (who, when, duration,
-      whether it was answered) so you can see your call history.
-    </p>
 
     <h2>Encryption</h2>
     <p>
       Regular chats are encrypted in transit and stored encrypted at rest by our
       hosting provider. <strong>Secret Chats</strong> add end-to-end encryption:
       the encryption keys never leave your device, and message contents are
-      unreadable to us and to our hosting provider. You can verify a Secret Chat
-      has not been intercepted by comparing safety numbers with the other person
-      (chat menu → Verify encryption).
+      unreadable to us and to our hosting provider. Calls are encrypted in transit
+      (DTLS-SRTP). You can verify a Secret Chat has not been intercepted by
+      comparing safety numbers with the other person (chat menu → Verify encryption).
     </p>
 
     <h2>Your control over your data</h2>
     <ul>
-      <li>
-        <strong>Delete your account.</strong> Settings → Delete account. This
-        permanently erases your account, profile, messages, media and push tokens.
-        It cannot be undone.
-      </li>
-      <li>
-        <strong>Privacy settings.</strong> You can turn off Last Seen and read
-        receipts in Settings → Privacy &amp; Security.
-      </li>
-      <li>
-        <strong>Blocking and reporting.</strong> You can block any user and report
-        messages. Reports are reviewed within 24 hours.
-      </li>
+      <li><strong>Delete your account.</strong> Settings → Delete account. This permanently erases your account, profile, messages, media, device records, call records and push tokens. It cannot be undone, and no email or support request is needed.</li>
+      <li><strong>Sign out other devices.</strong> Settings → Devices.</li>
+      <li><strong>Privacy settings.</strong> Turn off Last Seen and read receipts in Settings → Privacy &amp; Security.</li>
+      <li><strong>Blocking and reporting.</strong> Block any user and report messages. Reports are reviewed within 24 hours.</li>
     </ul>
 
     <h2>Data retention</h2>
     <p>
-      Your data is kept while your account exists. When you delete your account,
-      your data is deleted along with it.
+      Your data is kept while your account exists. Self-destructing messages are
+      removed when their timer runs out. When you delete your account, your data is
+      deleted along with it.
     </p>
 
     <h2>Children</h2>
@@ -203,15 +246,174 @@
     <div class="contact-card">
       <p>Questions, privacy requests, or content reports:</p>
       <p class="email"><a href="mailto:ssirojov@gmail.com">ssirojov@gmail.com</a></p>
-      <p style="margin-top:12px; font-size:14.5px;">
-        We respond to privacy requests within 30 days and review content reports
-        within 24 hours.
-      </p>
+      <p style="margin-top:12px; font-size:14.5px;">We respond to privacy requests within 30 days and review content reports within 24 hours.</p>
     </div>
   </main>
+</div>
+
+<div data-lang="ru">
+  <header class="doc">
+    <h1>Политика конфиденциальности</h1>
+    <p class="updated">Обновлено: 2 октября 2026</p>
+    <p class="lede">
+      Здесь описано, какие данные собирает Televo, зачем, кто ещё к ним прикасается
+      и как вы ими управляете. Текст соответствует тому, что реально делает
+      приложение, — каждый пункт ниже отражает настоящее поведение кода.
+    </p>
+    <p class="lang-note">Русская версия предоставлена для удобства. При расхождениях действует английская версия.</p>
+  </header>
+
+  <main>
+    <h2>Коротко</h2>
+    <table class="glance">
+      <tr><th>Данные</th><th>Зачем</th><th>Видим ли мы их?</th></tr>
+      <tr><td>Email</td><td>Вход в аккаунт</td><td>Да</td></tr>
+      <tr><td>Номер телефона</td><td>Чтобы вас нашли те, у кого есть ваш номер</td><td>Хранится, другим не показывается</td></tr>
+      <tr><td>Обычные чаты</td><td>Доставка сообщений, история</td><td>Зашифрованы при хранении, технически доступны</td></tr>
+      <tr><td>Секретные чаты</td><td>Доставка сообщений</td><td>Нет — сквозное шифрование</td></tr>
+      <tr><td>Контакты</td><td>Поиск друзей (по желанию)</td><td>Нет — только необратимые хэши, не хранятся</td></tr>
+      <tr><td>Город/страна устройства</td><td>Показать, где выполнен вход в аккаунт</td><td>Да, приблизительно</td></tr>
+      <tr><td>Записи о звонках</td><td>История звонков, качество связи</td><td>Только метаданные, никогда звук и видео</td></tr>
+    </table>
+    <p><strong>Мы никогда не используем данные для рекламы, не продаём их и не отслеживаем вас в других приложениях и на сайтах.</strong></p>
+
+    <h2>Что мы собираем</h2>
+    <p>
+      <strong>Данные аккаунта.</strong> Email (для входа), имя пользователя и
+      отображаемое имя. По желанию — фото профиля и короткое описание.
+    </p>
+    <p>
+      <strong>Номер телефона.</strong> Нужен при создании аккаунта. Используется
+      для одной цели: чтобы люди, у которых ваш номер уже записан в контактах,
+      могли найти вас в Televo. Номер никогда не показывается другим и не может
+      быть прочитан массово — сопоставление идёт по криптографическим хэшам, так
+      что человек может лишь подтвердить номер, который у него уже был. Номер
+      можно изменить или удалить в Настройках.
+    </p>
+    <p>
+      <strong>Сообщения и медиа.</strong> Сообщения, фото и файлы хранятся, чтобы
+      их можно было доставить и чтобы вы видели историю. В
+      <strong>секретном чате</strong> содержимое шифруется на вашем устройстве до
+      отправки и доступно только вам и собеседнику — мы прочитать его не можем.
+    </p>
+    <p>
+      <strong>Контакты (по желанию).</strong> Если вы используете «Найти друзей» и
+      даёте разрешение, приложение читает номера из адресной книги
+      <strong>на вашем устройстве</strong>, превращает их в необратимые хэши и
+      отправляет только хэши для поиска совпадений. Сама адресная книга никуда не
+      загружается и не хранится.
+    </p>
+    <p>
+      <strong>Устройства с выполненным входом.</strong> Чтобы вы видели и могли
+      завершить сеанс на любом устройстве (Настройки → Устройства), мы храним
+      модель устройства, время последней активности и примерные город и страну.
+      Город и страна определяются по IP-адресу при входе; сам IP-адрес не
+      сохраняется.
+    </p>
+    <p>
+      <strong>Звонки.</strong> Запись о звонке (кто, когда, длительность, был ли
+      ответ) для истории звонков и технический отчёт о качестве — тип соединения,
+      использованный relay-сервер, потери пакетов и задержки. Он нужен, чтобы
+      разбираться со звонками, которые обрываются или идут без звука. Содержимого
+      разговора в нём нет никогда.
+    </p>
+    <p>
+      <strong>Технические данные.</strong> Время последней активности (если
+      «Был(а) в сети» включено) и push-токены ваших устройств для уведомлений и
+      входящих звонков.
+    </p>
+
+    <h2>AI-ассистент</h2>
+    <p>
+      В Televo есть встроенный чат с ассистентом — пользоваться им не обязательно.
+      Сообщения, которые вы отправляете <strong>ассистенту</strong>, обрабатывает
+      Anthropic (разработчик модели Claude), чтобы сформировать ответ. Больше
+      ничего в Anthropic не передаётся — ни другие чаты, ни контакты, и никогда
+      содержимое секретных чатов. Если вы не пишете ассистенту, не передаётся
+      ничего.
+    </p>
+
+    <h2>Сервисы, на которые мы опираемся</h2>
+    <ul>
+      <li><strong>Supabase</strong> — хостинг и база данных для аккаунтов, чатов и медиа.</li>
+      <li><strong>Resend</strong> — доставка кодов входа и других писем.</li>
+      <li><strong>Apple Push Notification service / Expo</strong> — доставка уведомлений и входящих звонков.</li>
+      <li><strong>ExpressTURN</strong> — ретрансляция зашифрованного звонка, когда прямое соединение невозможно. Ретранслятор не может расшифровать звонок.</li>
+      <li><strong>ip-api.com</strong> — определение примерного города и страны по IP при входе.</li>
+      <li><strong>Anthropic</strong> — только для сообщений, отправленных AI-ассистенту.</li>
+    </ul>
+    <p>Каждый получает ровно то, что нужно для своей задачи.</p>
+
+    <h2>Чего мы НЕ делаем</h2>
+    <ul>
+      <li>Не продаём ваши данные.</li>
+      <li>Не используем их для рекламы и отслеживания.</li>
+      <li>Не читаем секретные чаты — и не можем.</li>
+      <li>Не загружаем вашу адресную книгу.</li>
+      <li>Не записываем звонки.</li>
+    </ul>
+
+    <h2>Шифрование</h2>
+    <p>
+      Обычные чаты шифруются при передаче и хранятся зашифрованными у хостинг-провайдера.
+      <strong>Секретные чаты</strong> добавляют сквозное шифрование: ключи никогда не
+      покидают ваше устройство, и содержимое недоступно ни нам, ни провайдеру.
+      Звонки шифруются при передаче (DTLS-SRTP). Убедиться, что секретный чат не
+      перехвачен, можно, сравнив коды безопасности с собеседником (меню чата →
+      Проверить шифрование).
+    </p>
+
+    <h2>Ваш контроль над данными</h2>
+    <ul>
+      <li><strong>Удаление аккаунта.</strong> Настройки → Удалить аккаунт. Навсегда удаляет аккаунт, профиль, сообщения, медиа, записи об устройствах и звонках, push-токены. Отменить нельзя; письмо или обращение в поддержку не нужно.</li>
+      <li><strong>Выход на других устройствах.</strong> Настройки → Устройства.</li>
+      <li><strong>Настройки приватности.</strong> «Был(а) в сети» и отметки о прочтении отключаются в Настройки → Конфиденциальность.</li>
+      <li><strong>Блокировка и жалобы.</strong> Можно заблокировать любого пользователя и пожаловаться на сообщение. Жалобы рассматриваются в течение 24 часов.</li>
+    </ul>
+
+    <h2>Срок хранения</h2>
+    <p>
+      Данные хранятся, пока существует аккаунт. Исчезающие сообщения удаляются по
+      истечении таймера. При удалении аккаунта удаляются и данные.
+    </p>
+
+    <h2>Дети</h2>
+    <p>Televo не предназначен для детей младше 13 лет, и мы сознательно не собираем их данные.</p>
+
+    <h2>Контакты</h2>
+    <div class="contact-card">
+      <p>Вопросы, запросы о данных и жалобы на контент:</p>
+      <p class="email"><a href="mailto:ssirojov@gmail.com">ssirojov@gmail.com</a></p>
+      <p style="margin-top:12px; font-size:14.5px;">Запросы о данных обрабатываем в течение 30 дней, жалобы на контент — в течение 24 часов.</p>
+    </div>
+  </main>
+</div>
 
   <footer>
     <span>© 2026 Televo</span>
-    <span><a href="/terms">Terms of Service</a> · <a href="/">Home</a></span>
+    <span>
+      <a href="/privacy"><span data-lang="en">Privacy</span><span data-lang="ru">Конфиденциальность</span></a> ·
+      <a href="/terms"><span data-lang="en">Terms</span><span data-lang="ru">Условия</span></a> ·
+      <a href="/support"><span data-lang="en">Support</span><span data-lang="ru">Поддержка</span></a> ·
+      <a href="/"><span data-lang="en">Home</span><span data-lang="ru">Главная</span></a>
+    </span>
   </footer>
 </div>
+
+<script>
+  (function () {
+    var btns = document.querySelectorAll('[data-lang-btn]');
+    function sync() {
+      btns.forEach(function (b) { b.classList.toggle('is-active', document.documentElement.lang === b.getAttribute('data-lang-btn')); });
+    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var l = b.getAttribute('data-lang-btn');
+        document.documentElement.lang = l;
+        try { localStorage.setItem('televo-lang', l); } catch (e) {}
+        sync();
+      });
+    });
+    sync();
+  })();
+</script>

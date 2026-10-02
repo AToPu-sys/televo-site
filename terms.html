@@ -3,34 +3,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="The terms you agree to when you create a Televo account.">
 <link rel="canonical" href="https://gettelevo.space/terms">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233390EC'/%3E%3Cpath d='M8 10a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2h-8l-5 4v-4h-1a2 2 0 01-2-2v-8z' fill='white'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='7' fill='%23E3A085'/%3E%3Cpath d='M18 9.8a7 7 0 01-.75 3.2 7.1 7.1 0 01-6.3 3.9 7 7 0 01-3.2-.75L4.5 17.5l1.6-4.75a7 7 0 01-.75-3.2 7.1 7.1 0 013.9-6.3A7 7 0 0113 2.5h.4a7.1 7.1 0 016.6 6.7v.6z' fill='%231A1414'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#17161B">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap');
 
   :root {
-    --bg: #FBFCFE;
-    --surface: #FFFFFF;
-    --ink: #0E1621;
-    --ink-soft: #4B5A68;
-    --muted: #707579;
-    --border: #E4E8EE;
-    --accent: #3390EC;
-    --accent-strong: #1E6FC4;
-    --warn-bg: rgba(229, 71, 63, 0.08);
-    --warn-ink: #C0392B;
+    --bg: #17161B; --surface: #211F26; --ink: #F4EFE9; --ink-soft: #A39C94;
+    --muted: #716B64; --border: #332F3A; --accent: #E3A085; --accent-strong: #EDB49B;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0B121B; --surface: #131D28; --ink: #F2F5F8; --ink-soft: #B9C6D2;
-      --muted: #8A9AA9; --border: #223040; --accent: #5EB5F7; --accent-strong: #85CBFF;
-      --warn-bg: rgba(229, 71, 63, 0.14); --warn-ink: #FF8A80;
-    }
-  }
+  
 
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
-    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased; line-height: 1.65;
   }
   .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
@@ -42,12 +30,12 @@
   }
   .brand {
     display: flex; align-items: center; gap: 10px;
-    font-family: 'Manrope'; font-weight: 800; font-size: 18px;
+    font-family: 'Lora', Georgia, serif; font-weight: 500; font-size: 18px;
     text-decoration: none; color: var(--ink);
   }
   .brand-mark {
     width: 30px; height: 30px; border-radius: 9px;
-    background: linear-gradient(155deg, var(--accent), var(--accent-strong));
+    background: var(--accent);
     display: grid; place-items: center; flex-shrink: 0;
   }
   .brand-mark svg { width: 16px; height: 16px; }
@@ -56,7 +44,7 @@
 
   header.doc { padding: 56px 0 8px; }
   h1 {
-    font-family: 'Manrope'; font-weight: 800; font-size: clamp(30px, 5vw, 40px);
+    font-family: 'Lora', Georgia, serif; font-weight: 500; font-size: clamp(30px, 5vw, 40px);
     letter-spacing: -0.02em; margin: 0 0 10px; line-height: 1.15;
   }
   .updated { color: var(--muted); font-size: 14px; margin: 0; }
@@ -64,7 +52,7 @@
 
   main { padding-bottom: 72px; }
   h2 {
-    font-family: 'Manrope'; font-weight: 700; font-size: 21px;
+    font-family: 'Lora', Georgia, serif; font-weight: 500; font-size: 21px;
     letter-spacing: -0.01em; margin: 44px 0 14px; padding-top: 18px;
     border-top: 1px solid var(--border);
   }
@@ -94,115 +82,171 @@
   }
   footer a { color: var(--muted); text-decoration: none; }
   footer a:hover { color: var(--accent); }
+
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .lang-switch { display: flex; background: var(--surface); border: 1px solid var(--border); border-radius: 99px; padding: 3px; }
+  .lang-btn { border: none; background: transparent; color: var(--muted); font: 700 12.5px 'Manrope', sans-serif; padding: 6px 11px; border-radius: 99px; cursor: pointer; }
+  .lang-btn.is-active { background: var(--accent); color: #1A1414; }
+  [data-lang] { display: none; }
+  html:not([lang="ru"]) [data-lang="en"], html[lang="ru"] [data-lang="ru"] { display: revert; }
+  .glance { width: 100%; border-collapse: collapse; margin: 6px 0 18px; font-size: 14.5px; }
+  .glance th, .glance td { text-align: left; padding: 11px 10px 11px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .glance th { color: var(--muted); font-weight: 600; font-size: 12.5px; letter-spacing: .03em; }
+  .glance td { color: var(--ink-soft); }
+  .glance td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; padding-right: 16px; }
+  .lang-note { font-size: 13.5px; color: var(--muted); border-left: 2px solid var(--accent); padding-left: 12px; margin-top: 18px; }
 </style>
+<script>(function(){var l;try{l=localStorage.getItem('televo-lang')}catch(e){}if(l!=='ru'&&l!=='en'){l=(navigator.language||'en').toLowerCase().indexOf('ru')===0?'ru':'en'}document.documentElement.lang=l})();</script>
 
 <nav>
   <div class="nav-inner">
     <a class="brand" href="/">
-      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" fill="#fff"/></svg></span>
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2H9l-4 4v-4H6a2 2 0 01-2-2V5z" fill="#1A1414"/></svg></span>
       Televo
     </a>
-    <a class="nav-back" href="/">← Back to site</a>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang-btn="en">EN</button>
+        <button type="button" class="lang-btn" data-lang-btn="ru">RU</button>
+      </div>
+      <a class="nav-back" href="/"><span data-lang="en">← Home</span><span data-lang="ru">← На главную</span></a>
+    </div>
   </div>
 </nav>
 
 <div class="wrap">
+<div data-lang="en">
   <header class="doc">
     <h1>Terms of Service</h1>
-    <p class="updated">Last updated: 10 September 2026</p>
-    <p class="lede">
-      By creating a Televo account you agree to these terms. If you do not agree,
-      do not use the app.
-    </p>
+    <p class="updated">Last updated: 2 October 2026</p>
+    <p class="lede">By creating a Televo account you agree to these terms. If you do not agree, do not use the app.</p>
   </header>
 
   <main>
     <h2>1. Who may use Televo</h2>
-    <p>
-      You must be at least 13 years old, or the minimum age of digital consent in
-      your country if that is higher. By using Televo you confirm that you meet
-      this requirement.
-    </p>
+    <p>You must be at least 13 years old, or the minimum age of digital consent in your country if that is higher. By using Televo you confirm that you meet this requirement.</p>
 
     <h2>2. Your account</h2>
-    <p>
-      You are responsible for your account and for keeping your password and
-      passcode confidential. Do not share your account with anyone else. Tell us
-      immediately if you believe someone else has accessed your account.
-    </p>
+    <p>You are responsible for your account and for keeping your password and passcode confidential. Do not share your account with anyone else. Tell us immediately if you believe someone else has accessed your account — you can also sign out any device yourself in Settings → Devices.</p>
 
     <h2>3. Rules of conduct — zero tolerance for abuse</h2>
-    <p>Televo is a communication service. When using it you agree <strong>not</strong> to:</p>
+    <p>Televo is a communication service. When using it you agree not to:</p>
     <ul>
-      <li>
-        post, send, or share content that is illegal, sexually explicit involving
-        minors, or that depicts or promotes violence, terrorism, or self-harm;
-      </li>
+      <li>post, send, or share content that is illegal, sexually explicit involving minors, or that depicts or promotes violence, terrorism, or self-harm;</li>
       <li>harass, threaten, stalk, impersonate, or bully any person;</li>
       <li>send spam, bulk unsolicited messages, malware, or phishing links;</li>
       <li>infringe anyone's intellectual property or privacy rights;</li>
       <li>attempt to break, probe, overload, or reverse-engineer the service.</li>
     </ul>
-    <div class="callout">We do not tolerate objectionable content or abusive users.</div>
+    <p class="callout"><strong>We do not tolerate objectionable content or abusive users.</strong></p>
 
     <h2>4. Reporting and enforcement</h2>
-    <p>
-      Every message can be reported from inside the app: press and hold a message
-      and choose <strong>Report</strong>. Any user can also be blocked from their
-      chat.
-    </p>
-    <p>
-      Reports are screened automatically and escalated to human review, and we act
-      promptly on confirmed violations. Where a report is upheld we may remove
-      content, warn the account, suspend it, or terminate it permanently. Accounts
-      terminated for abuse may not be recreated. Repeated reports against the same
-      account within a short window are rate-limited to prevent abuse of the
-      reporting system itself.
-    </p>
-    <p>
-      Because chats may be end-to-end encrypted, we cannot read message content on
-      our servers. A report submitted from the app includes the reported message so
-      that it can be reviewed.
-    </p>
+    <p>Every message can be reported from inside the app: press and hold a message and choose <strong>Report</strong>. Any user can also be <strong>blocked</strong> from their chat.</p>
+    <p>Reports are screened automatically and escalated to human review, and we act promptly on confirmed violations — within 24 hours. Where a report is upheld we may remove content, warn the account, suspend it, or terminate it permanently. Accounts terminated for abuse may not be recreated. Repeated reports against the same account within a short window are rate-limited to prevent abuse of the reporting system itself.</p>
+    <p>Because chats may be end-to-end encrypted, we cannot read message content on our servers. A report submitted from the app includes the reported message so that it can be reviewed.</p>
 
     <h2>5. Content you send</h2>
-    <p>
-      You keep ownership of everything you send. You grant Televo only the limited
-      permission needed to transmit, store, and deliver your content so the service
-      works.
-    </p>
+    <p>You keep ownership of everything you send. You grant Televo only the limited permission needed to transmit, store, and deliver your content so the service works.</p>
 
-    <h2>6. Deleting your account</h2>
-    <p>
-      You can delete your account at any time from
-      <strong>Settings → Delete account</strong>. Deletion removes your profile,
-      messages, media, and encryption keys. It is permanent and cannot be undone.
-    </p>
+    <h2>6. AI assistant</h2>
+    <p>The built-in assistant's replies are generated by an AI model and may be inaccurate. Do not rely on them for medical, legal, financial or safety decisions. Messages you send to the assistant are processed as described in the <a href="/privacy">Privacy Policy</a>.</p>
 
-    <h2>7. Service provided "as is"</h2>
-    <p>
-      Televo is provided without warranties of any kind. We do not guarantee that
-      messages will always be delivered or that the service will be uninterrupted.
-      To the maximum extent permitted by law we are not liable for indirect or
-      consequential loss arising from your use of the service.
-    </p>
+    <h2>7. Deleting your account</h2>
+    <p>You can delete your account at any time from <strong>Settings → Delete account</strong>. Deletion removes your profile, messages, media, and encryption keys. It is permanent and cannot be undone.</p>
 
-    <h2>8. Changes</h2>
-    <p>
-      We may update these terms. If we make a material change we will notify you in
-      the app. Continuing to use Televo after a change means you accept the updated
-      terms.
-    </p>
+    <h2>8. Service provided "as is"</h2>
+    <p>Televo is provided without warranties of any kind. We do not guarantee that messages will always be delivered or that the service will be uninterrupted. To the maximum extent permitted by law we are not liable for indirect or consequential loss arising from your use of the service.</p>
 
-    <h2>9. Contact</h2>
+    <h2>9. Changes</h2>
+    <p>We may update these terms. If we make a material change we will notify you in the app. Continuing to use Televo after a change means you accept the updated terms.</p>
+
+    <h2>10. Contact</h2>
     <div class="contact-card">
       <p>Questions, reports, or legal notices:</p>
       <p class="email"><a href="mailto:ssirojov@gmail.com">ssirojov@gmail.com</a></p>
     </div>
   </main>
+</div>
+
+<div data-lang="ru">
+  <header class="doc">
+    <h1>Условия использования</h1>
+    <p class="updated">Обновлено: 2 октября 2026</p>
+    <p class="lede">Создавая аккаунт в Televo, вы соглашаетесь с этими условиями. Если вы не согласны — не используйте приложение.</p>
+    <p class="lang-note">Русская версия предоставлена для удобства. При расхождениях действует английская версия.</p>
+  </header>
+
+  <main>
+    <h2>1. Кто может пользоваться Televo</h2>
+    <p>Вам должно быть не меньше 13 лет — или больше, если в вашей стране установлен более высокий возраст цифрового согласия. Пользуясь Televo, вы подтверждаете, что соответствуете этому требованию.</p>
+
+    <h2>2. Ваш аккаунт</h2>
+    <p>Вы отвечаете за свой аккаунт и за сохранность пароля и код-пароля. Не передавайте аккаунт другим. Если вы думаете, что кто-то получил к нему доступ, сообщите нам сразу — а также можете сами завершить сеанс на любом устройстве в Настройки → Устройства.</p>
+
+    <h2>3. Правила поведения — нулевая терпимость к нарушениям</h2>
+    <p>Televo — сервис для общения. Пользуясь им, вы обязуетесь не:</p>
+    <ul>
+      <li>публиковать, отправлять или распространять незаконный контент, сексуальный контент с участием несовершеннолетних, а также контент, изображающий или пропагандирующий насилие, терроризм или самоповреждение;</li>
+      <li>преследовать, угрожать, выслеживать, выдавать себя за других или травить кого-либо;</li>
+      <li>рассылать спам, массовые нежелательные сообщения, вредоносные программы или фишинговые ссылки;</li>
+      <li>нарушать чьи-либо права на интеллектуальную собственность или частную жизнь;</li>
+      <li>пытаться взломать, исследовать, перегрузить сервис или провести его обратную разработку.</li>
+    </ul>
+    <p class="callout"><strong>Мы не терпим недопустимый контент и пользователей, которые нарушают правила.</strong></p>
+
+    <h2>4. Жалобы и меры</h2>
+    <p>На любое сообщение можно пожаловаться прямо в приложении: зажмите сообщение и выберите <strong>Пожаловаться</strong>. Любого пользователя также можно <strong>заблокировать</strong> из чата с ним.</p>
+    <p>Жалобы проходят автоматическую проверку и передаются на рассмотрение человеку; по подтверждённым нарушениям мы действуем быстро — в течение 24 часов. Мы можем удалить контент, вынести предупреждение, временно заблокировать аккаунт или удалить его навсегда. Аккаунты, удалённые за нарушения, нельзя создать заново. Повторные жалобы на один и тот же аккаунт за короткое время ограничиваются, чтобы систему жалоб нельзя было использовать во вред.</p>
+    <p>Поскольку чаты могут быть защищены сквозным шифрованием, мы не можем читать сообщения на сервере. Жалоба, отправленная из приложения, содержит само сообщение, чтобы его можно было рассмотреть.</p>
+
+    <h2>5. Ваш контент</h2>
+    <p>Всё, что вы отправляете, остаётся вашим. Вы даёте Televo только то ограниченное разрешение, которое нужно для передачи, хранения и доставки контента.</p>
+
+    <h2>6. AI-ассистент</h2>
+    <p>Ответы встроенного ассистента генерирует AI-модель, и они могут быть неточными. Не полагайтесь на них в медицинских, юридических, финансовых вопросах и вопросах безопасности. Сообщения ассистенту обрабатываются так, как описано в <a href="/privacy">Политике конфиденциальности</a>.</p>
+
+    <h2>7. Удаление аккаунта</h2>
+    <p>Удалить аккаунт можно в любой момент: <strong>Настройки → Удалить аккаунт</strong>. Удаляются профиль, сообщения, медиа и ключи шифрования. Это навсегда и отменить нельзя.</p>
+
+    <h2>8. Сервис «как есть»</h2>
+    <p>Televo предоставляется без каких-либо гарантий. Мы не гарантируем, что сообщения всегда будут доставлены или что сервис будет работать без перерывов. В максимально допустимой законом мере мы не несём ответственности за косвенные убытки от использования сервиса.</p>
+
+    <h2>9. Изменения</h2>
+    <p>Мы можем обновлять эти условия. О существенных изменениях мы сообщим в приложении. Продолжая пользоваться Televo после изменений, вы принимаете обновлённые условия.</p>
+
+    <h2>10. Контакты</h2>
+    <div class="contact-card">
+      <p>Вопросы, жалобы и юридические уведомления:</p>
+      <p class="email"><a href="mailto:ssirojov@gmail.com">ssirojov@gmail.com</a></p>
+    </div>
+  </main>
+</div>
 
   <footer>
     <span>© 2026 Televo</span>
-    <span><a href="/privacy">Privacy Policy</a> · <a href="/">Home</a></span>
+    <span>
+      <a href="/privacy"><span data-lang="en">Privacy</span><span data-lang="ru">Конфиденциальность</span></a> ·
+      <a href="/terms"><span data-lang="en">Terms</span><span data-lang="ru">Условия</span></a> ·
+      <a href="/support"><span data-lang="en">Support</span><span data-lang="ru">Поддержка</span></a> ·
+      <a href="/"><span data-lang="en">Home</span><span data-lang="ru">Главная</span></a>
+    </span>
   </footer>
 </div>
+
+<script>
+  (function () {
+    var btns = document.querySelectorAll('[data-lang-btn]');
+    function sync() {
+      btns.forEach(function (b) { b.classList.toggle('is-active', document.documentElement.lang === b.getAttribute('data-lang-btn')); });
+    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var l = b.getAttribute('data-lang-btn');
+        document.documentElement.lang = l;
+        try { localStorage.setItem('televo-lang', l); } catch (e) {}
+        sync();
+      });
+    });
+    sync();
+  })();
+</script>
