@@ -244,6 +244,10 @@
   .waitlist-status.is-error { color: var(--danger); }
   @media (max-width: 480px) { .waitlist-input-row { flex-direction: column; } .waitlist-submit { justify-content: center; } }
 
+  /* ---------- android download ---------- */
+  .android-download { margin-top: -8px; }
+  .android-note { font-size: 13px; color: var(--muted); max-width: 40ch; margin-top: -16px; }
+
   /* ---------- footer ---------- */
   footer { padding: 48px 0; }
   .footer-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
@@ -511,6 +515,12 @@
       </div>
       <p class="waitlist-status" id="waitlist-status" role="status" aria-live="polite"></p>
     </form>
+
+    <a class="btn btn-outline android-download" href="https://github.com/AToPu-sys/televo-site/releases/download/android-v1.0.0/televo-android.apk" download>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M6.5 8.5l1.6-2.77M17.5 8.5l-1.6-2.77" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 15.5a5 5 0 0110 0v2a1 1 0 01-1 1H8a1 1 0 01-1-1v-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9.5" cy="12.5" r=".9" fill="currentColor"/><circle cx="14.5" cy="12.5" r=".9" fill="currentColor"/><path d="M4 18.5h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span data-i18n="download.android">Download for Android (APK)</span>
+    </a>
+    <p class="android-note" data-i18n="download.androidNote">Not on Google Play yet — this installs directly. You may need to allow "install from unknown sources."</p>
   </div>
 </section>
 
@@ -594,6 +604,8 @@
       'download.title': 'Some things are just between you and them.',
       'download.sub': 'Televo is free, carries no ads, and never sells a byte of your data. Join the beta waitlist — we’ll email you the moment it’s live on the App Store.',
       'download.placeholder': 'you@example.com', 'download.cta': 'Join the Beta',
+      'download.android': 'Download for Android (APK)',
+      'download.androidNote': 'Not on Google Play yet — this installs directly. You may need to allow "install from unknown sources."',
       'footer.tagline': 'A private messenger built with Expo and Supabase. No ads, no tracking, no data broker.',
       'footer.product': 'Product', 'footer.features': 'Features',
       'footer.legal': 'Legal', 'footer.terms': 'Terms of Service', 'footer.privacyPolicy': 'Privacy Policy',
@@ -666,6 +678,8 @@
       'download.title': 'Некоторые вещи касаются только вас двоих.',
       'download.sub': 'Televo бесплатен, без рекламы и никогда не продаёт ваши данные. Запишитесь в лист ожидания бета-версии — мы напишем вам, как только приложение появится в App Store.',
       'download.placeholder': 'you@example.com', 'download.cta': 'Записаться в бету',
+      'download.android': 'Скачать для Android (APK)',
+      'download.androidNote': 'Пока нет в Google Play — устанавливается напрямую. Возможно, потребуется разрешить «установку из неизвестных источников».',
       'footer.tagline': 'Приватный мессенджер на Expo и Supabase. Без рекламы, без слежки, без продажи данных.',
       'footer.product': 'Продукт', 'footer.features': 'Возможности',
       'footer.legal': 'Документы', 'footer.terms': 'Условия использования', 'footer.privacyPolicy': 'Политика конфиденциальности',
