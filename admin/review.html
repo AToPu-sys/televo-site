@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Проверка запроса · Televo</title>
+<style>
+  :root { --bg:#1A1414; --card:#241D1C; --ink:#F4EDE8; --muted:#A89B95; --accent:#E3A085; --danger:#E5675C; --line:#3A302E; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  main { max-width:520px; margin:48px auto; padding:0 16px; }
+  h1 { font-size:22px; margin:0 0 20px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; }
+  dl { margin:0; display:grid; grid-template-columns:auto 1fr; gap:8px 14px; }
+  dt { color:var(--muted); }
+  dd { margin:0; word-break:break-word; }
+  .actions { display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
+  button { font:inherit; font-weight:600; border:0; border-radius:999px; padding:12px 22px; cursor:pointer; }
+  button.primary { background:var(--accent); color:#1A1414; }
+  button.danger { background:var(--danger); color:#1A1414; }
+  button.ghost { background:transparent; color:var(--ink); border:1px solid var(--line); }
+  button:disabled { opacity:.5; cursor:default; }
+  button:focus-visible { outline:2px solid var(--ink); outline-offset:2px; }
+  #status { margin-top:18px; color:var(--muted); }
+  #status.ok { color:var(--accent); }
+  #status.err { color:var(--danger); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Проверка запроса поддержки</h1>
+  <div class="card">
+    <dl id="details"></dl>
+    <div class="actions" id="actions" hidden>
+      <button id="confirm" class="primary"></button>
+      <button id="cancel" class="ghost">Отклонить</button>
+    </div>
+    <p id="status">Загружаю…</p>
+  </div>
+</main>
+<script>
+(() => {
+  // Nothing on this page acts on load: the link that opened it may have been
+  // followed automatically by a mail scanner. Only a button press sends POST.
+  const ENDPOINT = "https://dzoemidyjeeqzifucvpt.supabase.co/functions/v1/approve-support-action";
+  const params = new URLSearchParams(location.search);
+  const token = params.get("token");
+  const wanted = params.get("decision") === "reject" ? "reject" : "approve";
+
+  const details = document.getElementById("details");
+  const actions = document.getElementById("actions");
+  const confirmBtn = document.getElementById("confirm");
+  const cancelBtn = document.getElementById("cancel");
+  const statusEl = document.getElementById("status");
+
+  function setStatus(text, kind) {
+    statusEl.textContent = text;
+    statusEl.className = kind || "";
+  }
+  function row(label, value) {
+    const dt = document.createElement("dt");
+    dt.textContent = label;
+    const dd = document.createElement("dd");
+    dd.textContent = value == null || value === "" ? "—" : String(value);
+    details.append(dt, dd);
+  }
+  const ACTION_RU = {
+    "ban for 6 hours": "Бан на 6 часов",
+    "ban for 24 hours": "Бан на 24 часа",
+    "ban permanently": "Бан навсегда",
+    "lift the ban": "Снять бан",
+  };
+
+  async function submit(decision) {
+    confirmBtn.disabled = true;
+    cancelBtn.disabled = true;
+    setStatus("Отправляю…");
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ token, decision }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setStatus(decision === "reject" ? "Отклонено. Ничего не применено." : "Готово, действие применено.", "ok");
+        actions.hidden = true;
+      } else if (data.error === "already_handled") {
+        setStatus("Этот запрос уже обработан.", "err");
+        actions.hidden = true;
+      } else {
+        setStatus("Не получилось: " + (data.detail || data.error || res.status), "err");
+        confirmBtn.disabled = false;
+        cancelBtn.disabled = false;
+      }
+    } catch (e) {
+      setStatus("Нет соединения. Попробуйте ещё раз.", "err");
+      confirmBtn.disabled = false;
+      cancelBtn.disabled = false;
+    }
+  }
+
+  async function load() {
+    if (!token) { setStatus("В ссылке нет токена.", "err"); return; }
+    try {
+      const res = await fetch(ENDPOINT + "?token=" + encodeURIComponent(token));
+      const data = await res.json();
+      if (!res.ok) {
+        setStatus(data.error === "not_found" ? "Запрос не найден или ссылка устарела." : "Ошибка: " + (data.error || res.status), "err");
+        return;
+      }
+      row("Действие", ACTION_RU[data.proposedAction] || data.proposedAction);
+      row("Пользователь", (data.targetDisplayName || "—") + (data.targetUserId ? " · " + data.targetUserId : ""));
+      row("От кого", data.fromEmail);
+      row("Суть запроса", data.intent);
+      row("Создан", data.createdAt ? new Date(data.createdAt).toLocaleString("ru-RU") : "—");
+
+      if (data.status !== "pending") {
+        setStatus("Уже обработан: " + data.status + (data.decidedAt ? " (" + new Date(data.decidedAt).toLocaleString("ru-RU") + ")" : ""), "err");
+        return;
+      }
+      if (wanted === "reject") {
+        confirmBtn.textContent = "Подтвердить отклонение";
+        confirmBtn.className = "ghost";
+        confirmBtn.onclick = () => submit("reject");
+        cancelBtn.hidden = true;
+      } else {
+        const isBan = data.proposedAction !== "lift the ban";
+        confirmBtn.textContent = isBan ? "Подтвердить бан" : "Подтвердить разбан";
+        confirmBtn.className = isBan ? "danger" : "primary";
+        confirmBtn.onclick = () => submit("approve");
+        cancelBtn.onclick = () => submit("reject");
+      }
+      actions.hidden = false;
+      setStatus("Ничего не применено, пока вы не нажмёте кнопку.");
+    } catch (e) {
+      setStatus("Нет соединения с сервером.", "err");
+    }
+  }
+  load();
+})();
+</script>
+</body>
+</html>
