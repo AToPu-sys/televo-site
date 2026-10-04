@@ -289,7 +289,7 @@
     <div class="hero-grid">
       <div class="reveal in">
         <h1 data-i18n="hero.title">A quiet place<br>to say what you mean.</h1>
-        <p class="hero-sub" data-i18n="hero.sub">Televo encrypts your private conversations on your own phone before they go anywhere. Not because we don't trust you — because you shouldn't have to trust us with something this personal. Live sync, real voice &amp; video calls, and Secret Chats built on transparent cryptographic standards.</p>
+        <p class="hero-sub" data-i18n="hero.sub">Secret Chats in Televo are encrypted on your own phone before they go anywhere, and not even we can read them. You shouldn't have to trust us with something this personal. Live sync across your devices, real voice &amp; video calls, and encryption built on open standards.</p>
         <div class="hero-actions">
           <a class="btn btn-accent btn-lg" href="#download" data-i18n="hero.cta">Get Televo</a>
           <a class="btn btn-outline btn-lg" href="#why" data-i18n="hero.secondary">Why it matters</a>
@@ -404,7 +404,7 @@
       <div class="tech-details-body crypto">
         <div>
           <div class="crypto-steps" style="margin-top:0;">
-            <div class="crypto-step" style="padding-top:0; border-top:none;"><div class="n">01</div><div><h4 data-i18n="privacy.step1.h">Device generates two keypairs</h4><p data-i18n="privacy.step1.p">An X25519 keypair and an ML-KEM-768 (post-quantum) keypair are created locally the first time you open Televo and stored in the secure enclave — neither private half ever leaves the device.</p></div></div>
+            <div class="crypto-step" style="padding-top:0; border-top:none;"><div class="n">01</div><div><h4 data-i18n="privacy.step1.h">Device generates two keypairs</h4><p data-i18n="privacy.step1.p">An X25519 keypair and an ML-KEM-768 (post-quantum) keypair are created locally the first time you open Televo and stored in your device’s secure storage (Keychain on iPhone, Keystore on Android) — neither private half ever leaves the device.</p></div></div>
             <div class="crypto-step"><div class="n">02</div><div><h4 data-i18n="privacy.step2.h">Both public keys are exchanged</h4><p data-i18n="privacy.step2.p">Only the public halves are published to your profile. Your contact's app combines a classic X25519 Diffie–Hellman handshake with an ML-KEM-768 encapsulation, so the conversation stays secure even against a future quantum computer, not just today's attackers.</p></div></div>
             <div class="crypto-step"><div class="n">03</div><div><h4 data-i18n="privacy.step3.h">You verify it yourself</h4><p data-i18n="privacy.step3.p">Compare safety numbers in person or over another channel. A match means no one sat in the middle of that handshake.</p></div></div>
           </div>
@@ -551,7 +551,7 @@
     en: {
       'nav.privacy': 'Secret Chats', 'nav.calls': 'Calls', 'nav.roadmap': 'Roadmap', 'nav.support': 'Support', 'nav.cta': 'Get Televo',
       'hero.title': 'A quiet place<br>to say what you mean.',
-      'hero.sub': 'Televo encrypts your private conversations on your own phone before they go anywhere. Not because we don’t trust you — because you shouldn’t have to trust us with something this personal. Live sync, real voice &amp; video calls, and Secret Chats built on transparent cryptographic standards.',
+      'hero.sub': 'Secret Chats in Televo are encrypted on your own phone before they go anywhere, and not even we can read them. You shouldn’t have to trust us with something this personal. Live sync across your devices, real voice &amp; video calls, and encryption built on open standards.',
       'hero.cta': 'Get Televo', 'hero.secondary': 'Why it matters',
       'hero.phone.private': 'private',
       'hero.phone.msg1': 'made it to the airport, flight’s delayed though',
@@ -579,7 +579,7 @@
       'privacy.3.body': 'Compare a short code with the other person, in person or on a call. If it matches, you know no one else is listening in.',
       'tech.summary': 'Technical details, for the curious',
       'privacy.step1.h': 'Device generates two keypairs',
-      'privacy.step1.p': 'An X25519 keypair and an ML-KEM-768 (post-quantum) keypair are created locally the first time you open Televo and stored in the secure enclave — neither private half ever leaves the device.',
+      'privacy.step1.p': 'An X25519 keypair and an ML-KEM-768 (post-quantum) keypair are created locally the first time you open Televo and stored in your device’s secure storage (Keychain on iPhone, Keystore on Android) — neither private half ever leaves the device.',
       'privacy.step2.h': 'Both public keys are exchanged',
       'privacy.step2.p': 'Only the public halves are published to your profile. Your contact’s app combines a classic X25519 Diffie–Hellman handshake with an ML-KEM-768 encapsulation, so the conversation stays secure even against a future quantum computer, not just today’s attackers.',
       'privacy.step3.h': 'You verify it yourself',
@@ -629,7 +629,7 @@
     ru: {
       'nav.privacy': 'Секретные чаты', 'nav.calls': 'Звонки', 'nav.roadmap': 'Роадмап', 'nav.support': 'Поддержка', 'nav.cta': 'Скачать Televo',
       'hero.title': 'Тихое место,<br>чтобы сказать то, что думаешь.',
-      'hero.sub': 'Televo шифрует ваши личные переписки прямо на телефоне, прежде чем они куда-либо уходят. Не потому, что мы вам не доверяем — а потому, что вам не должно быть нужно доверять нам что-то настолько личное. Синхронизация в реальном времени, настоящие голосовые и видеозвонки, и Секретные чаты на основе открытых криптографических стандартов.',
+      'hero.sub': 'Секретные чаты в Televo шифруются прямо на вашем телефоне, прежде чем куда-либо уйти, и прочитать их не можем даже мы. Доверять нам что-то настолько личное вам не должно быть нужно. Синхронизация на всех ваших устройствах, настоящие голосовые и видеозвонки и шифрование на открытых стандартах.',
       'hero.cta': 'Скачать Televo', 'hero.secondary': 'Почему это важно',
       'hero.phone.private': 'приватно',
       'hero.phone.msg1': 'добралась до аэропорта, но рейс задерживают',
@@ -657,7 +657,7 @@
       'privacy.3.body': 'Сравните короткий код с собеседником лично или по другому каналу связи. Если он совпадает — значит, между вами точно никто не вклинился.',
       'tech.summary': 'Технические детали, для любопытных',
       'privacy.step1.h': 'Устройство создаёт две пары ключей',
-      'privacy.step1.p': 'Пара ключей X25519 и пара ML-KEM-768 (постквантовая) создаются локально при первом запуске Televo и хранятся в защищённом хранилище устройства — закрытая часть ключей никогда его не покидает.',
+      'privacy.step1.p': 'Пара ключей X25519 и пара ML-KEM-768 (постквантовая) создаются локально при первом запуске Televo и хранятся в защищённом хранилище устройства (Keychain на iPhone, Keystore на Android) — закрытая часть ключей никогда его не покидает.',
       'privacy.step2.h': 'Обмен происходит только открытыми ключами',
       'privacy.step2.p': 'На ваш профиль публикуются только открытые половины ключей. Приложение собеседника сочетает классическое рукопожатие X25519 Диффи-Хеллмана с инкапсуляцией ML-KEM-768, чтобы переписка оставалась защищённой даже от будущего квантового компьютера, а не только от сегодняшних атак.',
       'privacy.step3.h': 'Вы проверяете это сами',
