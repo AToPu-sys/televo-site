@@ -79,6 +79,15 @@
   .nav-links { display: flex; align-items: center; gap: 36px; font-size: 14px; color: var(--text-dim); }
   .nav-links a { transition: color .15s; }
   .nav-links a:hover { color: var(--text); }
+  /* Where you are on the page: the link of the section on screen. */
+  .nav-links a.is-active { color: var(--text); }
+  @media (min-width: 761px) { .nav-links a.is-active { box-shadow: inset 0 -2px 0 var(--accent); padding-bottom: 4px; } }
+  /* Anchors land below the sticky nav instead of under it. */
+  section[id] { scroll-margin-top: 72px; }
+  /* Keyboard users see where focus is. */
+  a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+  .skip-link { position: absolute; left: 16px; top: -60px; z-index: 200; background: var(--accent); color: var(--accent-ink); padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 14px; }
+  .skip-link:focus { top: 12px; }
   .nav-toggle { display: none; width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg-raised); color: var(--text); align-items: center; justify-content: center; }
   .nav-toggle .bar-close { display: none; }
   nav.is-open .nav-toggle .bar-open { display: none; }
@@ -202,11 +211,14 @@
   @media (max-width: 900px) { .calls { grid-template-columns: 1fr; } }
 
   /* ---------- roadmap / honesty ---------- */
-  .roadmap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 8px; }
+  .roadmap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 36px; }
   .roadmap-col h3 { font-family: var(--sans); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
   .roadmap-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 13px; }
   .roadmap-col li { font-size: 14.5px; line-height: 1.5; display: flex; gap: 10px; color: var(--text-dim); }
   .roadmap-col li svg { flex-shrink: 0; margin-top: 3px; width: 15px; height: 15px; }
+  /* The column headings' icons had no size, so an SVG without width/height
+     stretched to the full column: a half-screen checkmark and clock. */
+  .roadmap-col h3 svg { flex-shrink: 0; width: 16px; height: 16px; }
   .col-ship h3 { color: var(--online); } .col-ship svg { color: var(--online); }
   .col-next h3 { color: var(--accent); } .col-next svg { color: var(--accent); }
   @media (max-width: 760px) { .roadmap-grid { grid-template-columns: 1fr; } }
@@ -217,6 +229,17 @@
   .promise-band h3 { font-weight: 600; font-size: 17px; margin-bottom: 8px; }
   .promise-band p { font-size: 14.5px; color: var(--text-dim); line-height: 1.65; }
   @media (max-width: 600px) { .promise-band { flex-direction: column; padding: 28px 24px; } }
+
+  /* ---------- open code ---------- */
+  .code-band { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+  .code-band h2 { font-size: clamp(28px, 3.1vw, 36px); line-height: 1.2; margin-bottom: 16px; }
+  .code-band p { font-size: 16px; color: var(--text-dim); line-height: 1.65; }
+  .code-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+  .code-facts { display: flex; flex-direction: column; gap: 12px; }
+  .code-fact { border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; background: var(--bg-raised); }
+  .code-fact strong { display: block; font-size: 15px; margin-bottom: 4px; }
+  .code-fact span { font-size: 14px; color: var(--text-dim); line-height: 1.55; }
+  @media (max-width: 900px) { .code-band { grid-template-columns: 1fr; gap: 28px; } }
 
   /* ---------- download ---------- */
   .download-inner { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 24px; }
@@ -260,6 +283,7 @@
   .footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--muted); }
 </style>
 
+<a class="skip-link" href="#download" data-i18n="nav.skip">Skip to download</a>
 <nav>
   <div class="nav-inner">
     <a href="#top" class="brand">
@@ -270,6 +294,7 @@
       <div class="nav-links">
         <a href="#privacy" data-i18n="nav.privacy">Secret Chats</a>
         <a href="#calls" data-i18n="nav.calls">Calls</a>
+        <a href="#code" data-i18n="nav.code">Open code</a>
         <a href="#honesty" data-i18n="nav.roadmap">Roadmap</a>
         <a href="/support" data-i18n="nav.support">Support</a>
       </div>
@@ -453,6 +478,27 @@
   </div>
 </section>
 
+<section id="code">
+  <div class="wrap code-band reveal">
+    <div>
+      <h2 data-i18n="code.title">Don't take our word for it. Read the code.</h2>
+      <p data-i18n="code.sub">Everything on this page can be checked. The full source of Televo — the app, the servers and the encryption — is public on GitHub, so anyone can see exactly how Secret Chats are locked and what our servers keep.</p>
+      <div class="code-actions">
+        <a class="btn btn-accent" href="https://github.com/AToPu-sys/televo" target="_blank" rel="noopener">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg>
+          <span data-i18n="code.cta">Read the code on GitHub</span>
+        </a>
+        <a class="btn btn-outline" href="mailto:hello@gettelevo.space?subject=Televo%20security%20report" data-i18n="code.report">Report a vulnerability</a>
+      </div>
+    </div>
+    <div class="code-facts">
+      <div class="code-fact"><strong data-i18n="code.fact1.title">Every change is public</strong><span data-i18n="code.fact1.body">The history shows when anything changed and why — including the fixes.</span></div>
+      <div class="code-fact"><strong data-i18n="code.fact2.title">Encryption you can audit</strong><span data-i18n="code.fact2.body">Built on audited, open primitives — nothing secret, nothing home-grown hidden away.</span></div>
+      <div class="code-fact"><strong data-i18n="code.fact3.title">Open to read, not to copy</strong><span data-i18n="code.fact3.body">The code is source-available: reading and reviewing it is welcome, reusing it for another app is not.</span></div>
+    </div>
+  </div>
+</section>
+
 <section id="honesty">
   <div class="wrap reveal">
     <div class="section-head" style="margin-bottom:0;">
@@ -472,6 +518,8 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="honesty.ship.7">Group chats with admins, photos and member management</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="honesty.ship.8">Picture-in-Picture: keep the video call on screen while you use other apps</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="honesty.ship.9">See every device signed in to your account and sign any of them out</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="honesty.ship.10">Regular chats are stored encrypted on our servers too — Secret Chats stay end-to-end</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="honesty.ship.11">The full source code is public to read</span></li>
         </ul>
       </div>
       <div class="roadmap-col col-next">
@@ -480,6 +528,7 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg> <span data-i18n="honesty.next.1">Group calls</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg> <span data-i18n="honesty.next.2">Message search and reactions</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg> <span data-i18n="honesty.next.3">Even stronger protection if a key is ever compromised</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg> <span data-i18n="honesty.next.4">Clearer calls: noise suppression, and sending call audio to AirPods, the speaker or your car (in testing)</span></li>
         </ul>
       </div>
     </div>
@@ -523,11 +572,11 @@
     </form>
 
     <div class="download-buttons">
-      <a class="btn btn-outline" href="https://testflight.apple.com/join/yxDepS3N" target="_blank" rel="noopener">
+      <a class="btn btn-outline" id="download-ios" href="https://testflight.apple.com/join/yxDepS3N" target="_blank" rel="noopener">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 2a1 1 0 011 1v9.59l2.3-2.3a1 1 0 111.4 1.42l-4 4a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.42l2.3 2.3V3a1 1 0 011-1z" fill="currentColor"/><path d="M5 14a1 1 0 011 1v4a1 1 0 001 1h10a1 1 0 001-1v-4a1 1 0 112 0v4a3 3 0 01-3 3H7a3 3 0 01-3-3v-4a1 1 0 011-1z" fill="currentColor"/></svg>
         <span data-i18n="download.ios">Try it on iPhone (TestFlight)</span>
       </a>
-      <a class="btn btn-outline" href="https://github.com/AToPu-sys/televo-site/releases/download/android-v1.0.0/televo-android.apk" download>
+      <a class="btn btn-outline" id="download-android" href="https://github.com/AToPu-sys/televo-site/releases/download/android-v1.0.0/televo-android.apk" download>
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M6.5 8.5l1.6-2.77M17.5 8.5l-1.6-2.77" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 15.5a5 5 0 0110 0v2a1 1 0 01-1 1H8a1 1 0 01-1-1v-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9.5" cy="12.5" r=".9" fill="currentColor"/><circle cx="14.5" cy="12.5" r=".9" fill="currentColor"/><path d="M4 18.5h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         <span data-i18n="download.android">Download for Android (APK)</span>
       </a>
@@ -542,10 +591,10 @@
     <div class="footer-inner">
       <div style="max-width:32ch;">
         <div class="brand"><span class="brand-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span><span class="brand-name">Televo</span></div>
-        <p style="margin-top:14px; font-size:13.5px; color:var(--text-dim); line-height:1.6;" data-i18n="footer.tagline">A private messenger built with Expo and Supabase. No ads, no tracking, no data broker.</p>
+        <p style="margin-top:14px; font-size:13.5px; color:var(--text-dim); line-height:1.6;" data-i18n="footer.tagline">A private messenger. No ads, no tracking, no data broker.</p>
       </div>
       <div class="footer-links">
-        <div class="footer-col"><h4 data-i18n="footer.product">Product</h4><a href="#moments" data-i18n="footer.features">Features</a><a href="#privacy" data-i18n="nav.privacy">Secret Chats</a><a href="#calls" data-i18n="nav.calls">Calls</a></div>
+        <div class="footer-col"><h4 data-i18n="footer.product">Product</h4><a href="#moments" data-i18n="footer.features">Features</a><a href="#privacy" data-i18n="nav.privacy">Secret Chats</a><a href="#calls" data-i18n="nav.calls">Calls</a><a href="https://github.com/AToPu-sys/televo" target="_blank" rel="noopener" data-i18n="footer.code">Source code</a></div>
         <div class="footer-col"><h4 data-i18n="footer.legal">Legal</h4><a href="/terms" data-i18n="footer.terms">Terms of Service</a><a href="/privacy" data-i18n="footer.privacyPolicy">Privacy Policy</a></div>
         <div class="footer-col"><h4 data-i18n="footer.contact">Contact</h4><a href="/support" data-i18n="footer.supportFaq">Support &amp; FAQ</a><a href="mailto:hello@gettelevo.space">hello@gettelevo.space</a></div>
       </div>
@@ -559,6 +608,17 @@
   var I18N = {
     en: {
       'nav.privacy': 'Secret Chats', 'nav.calls': 'Calls', 'nav.roadmap': 'Roadmap', 'nav.support': 'Support', 'nav.cta': 'Get Televo',
+      'nav.code': 'Open code', 'nav.skip': 'Skip to download',
+      'code.title': "Don't take our word for it. Read the code.",
+      'code.sub': 'Everything on this page can be checked. The full source of Televo — the app, the servers and the encryption — is public on GitHub, so anyone can see exactly how Secret Chats are locked and what our servers keep.',
+      'code.cta': 'Read the code on GitHub', 'code.report': 'Report a vulnerability',
+      'code.fact1.title': 'Every change is public', 'code.fact1.body': 'The history shows when anything changed and why — including the fixes.',
+      'code.fact2.title': 'Encryption you can audit', 'code.fact2.body': 'Built on audited, open primitives — nothing secret, nothing home-grown hidden away.',
+      'code.fact3.title': 'Open to read, not to copy', 'code.fact3.body': 'The code is source-available: reading and reviewing it is welcome, reusing it for another app is not.',
+      'honesty.ship.10': 'Regular chats are stored encrypted on our servers too — Secret Chats stay end-to-end',
+      'honesty.ship.11': 'The full source code is public to read',
+      'honesty.next.4': 'Clearer calls: noise suppression, and sending call audio to AirPods, the speaker or your car (in testing)',
+      'footer.code': 'Source code',
       'hero.title': 'A quiet place<br>to say what you mean.',
       'hero.sub': 'Secret Chats in Televo are encrypted on your own phone before they go anywhere, and not even we can read them. You shouldn’t have to trust us with something this personal. Live sync across your devices, real voice &amp; video calls, and encryption built on open standards.',
       'hero.cta': 'Get Televo', 'hero.secondary': 'Why it matters',
@@ -625,7 +685,7 @@
       'download.iosNote': 'iPhone needs TestFlight (Apple’s own beta app) first — Televo isn’t on the App Store yet.',
       'download.android': 'Download for Android (APK)',
       'download.androidNote': 'Not on Google Play yet — this installs directly. You may need to allow "install from unknown sources."',
-      'footer.tagline': 'A private messenger built with Expo and Supabase. No ads, no tracking, no data broker.',
+      'footer.tagline': 'A private messenger. No ads, no tracking, no data broker.',
       'footer.product': 'Product', 'footer.features': 'Features',
       'footer.legal': 'Legal', 'footer.terms': 'Terms of Service', 'footer.privacyPolicy': 'Privacy Policy',
       'footer.contact': 'Contact', 'footer.supportFaq': 'Support &amp; FAQ',
@@ -639,6 +699,17 @@
     },
     ru: {
       'nav.privacy': 'Секретные чаты', 'nav.calls': 'Звонки', 'nav.roadmap': 'Роадмап', 'nav.support': 'Поддержка', 'nav.cta': 'Скачать Televo',
+      'nav.code': 'Открытый код', 'nav.skip': 'Перейти к скачиванию',
+      'code.title': 'Не верьте нам на слово. Прочитайте код.',
+      'code.sub': 'Всё, что написано на этой странице, можно проверить. Исходный код Televo — приложение, серверы и шифрование — открыт на GitHub: любой может посмотреть, как именно запираются секретные чаты и что хранят наши серверы.',
+      'code.cta': 'Читать код на GitHub', 'code.report': 'Сообщить об уязвимости',
+      'code.fact1.title': 'Каждое изменение на виду', 'code.fact1.body': 'В истории видно, что и когда менялось и почему — включая исправления.',
+      'code.fact2.title': 'Шифрование можно проверить', 'code.fact2.body': 'Только проверенные открытые алгоритмы — ничего секретного и самодельного.',
+      'code.fact3.title': 'Читать можно, копировать нельзя', 'code.fact3.body': 'Код открыт для чтения: изучать и проверять — пожалуйста, использовать для другого приложения — нет.',
+      'honesty.ship.10': 'Обычные чаты тоже хранятся на серверах в зашифрованном виде — секретные остаются сквозными',
+      'honesty.ship.11': 'Весь исходный код открыт для чтения',
+      'honesty.next.4': 'Звонки чище: шумоподавление и выбор, куда идёт звук — AirPods, динамик или машина (тестируем)',
+      'footer.code': 'Исходный код',
       'hero.title': 'Тихое место,<br>чтобы сказать то, что думаешь.',
       'hero.sub': 'Секретные чаты в Televo шифруются прямо на вашем телефоне, прежде чем куда-либо уйти, и прочитать их не можем даже мы. Доверять нам что-то настолько личное вам не должно быть нужно. Синхронизация на всех ваших устройствах, настоящие голосовые и видеозвонки и шифрование на открытых стандартах.',
       'hero.cta': 'Скачать Televo', 'hero.secondary': 'Почему это важно',
@@ -705,7 +776,7 @@
       'download.iosNote': 'На iPhone сначала нужен TestFlight — фирменное приложение Apple для бета-тестов. Televo ещё не в App Store.',
       'download.android': 'Скачать для Android (APK)',
       'download.androidNote': 'Пока нет в Google Play — устанавливается напрямую. Возможно, потребуется разрешить «установку из неизвестных источников».',
-      'footer.tagline': 'Приватный мессенджер на Expo и Supabase. Без рекламы, без слежки, без продажи данных.',
+      'footer.tagline': 'Приватный мессенджер. Без рекламы, без слежки, без продажи данных.',
       'footer.product': 'Продукт', 'footer.features': 'Возможности',
       'footer.legal': 'Документы', 'footer.terms': 'Условия использования', 'footer.privacyPolicy': 'Политика конфиденциальности',
       'footer.contact': 'Контакты', 'footer.supportFaq': 'Поддержка и вопросы',
@@ -855,5 +926,35 @@
           button.classList.remove('is-loading');
         });
     });
+  })();
+
+  // Highlights the nav link of the section currently on screen.
+  (function () {
+    var links = {};
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+    if (!('IntersectionObserver' in window)) return;
+    var visible = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) { visible[entry.target.id] = entry.isIntersecting ? entry.intersectionRatio : 0; });
+      var best = null, bestRatio = 0;
+      Object.keys(visible).forEach(function (id) { if (visible[id] > bestRatio) { best = id; bestRatio = visible[id]; } });
+      Object.keys(links).forEach(function (id) {
+        links[id].classList.toggle('is-active', id === best);
+        if (id === best) links[id].setAttribute('aria-current', 'location'); else links[id].removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-72px 0px -40% 0px', threshold: [0, 0.15, 0.4, 0.7] });
+    Object.keys(links).forEach(function (id) { var section = document.getElementById(id); if (section) io.observe(section); });
+  })();
+
+  // Puts the download for the visitor's own phone first, as the main button.
+  (function () {
+    var ua = navigator.userAgent || '';
+    var isIOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    var isAndroid = /Android/.test(ua);
+    var primary = isIOS ? document.getElementById('download-ios') : isAndroid ? document.getElementById('download-android') : null;
+    if (!primary) return;
+    primary.classList.remove('btn-outline');
+    primary.classList.add('btn-accent');
+    primary.parentNode.insertBefore(primary, primary.parentNode.firstChild);
   })();
 </script>

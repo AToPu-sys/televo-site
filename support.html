@@ -125,6 +125,15 @@
   .glance th { color: var(--muted); font-weight: 600; font-size: 12.5px; letter-spacing: .03em; }
   .glance td { color: var(--ink-soft); }
   .glance td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; padding-right: 16px; }
+  .faq-search {
+    width: 100%; margin: 4px 0 10px; padding: 13px 16px 13px 42px; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E") no-repeat 14px center;
+    color: var(--ink); font: 500 15px 'Manrope', sans-serif; outline: none;
+  }
+  .faq-search:focus { border-color: var(--accent); }
+  .faq-empty { display: none; font-size: 14.5px; color: var(--muted); padding: 14px 0; }
+  .faq-empty.is-visible { display: block; }
+  summary:focus-visible, .faq-search:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
   .lang-note { font-size: 13.5px; color: var(--muted); border-left: 2px solid var(--accent); padding-left: 12px; margin-top: 18px; }
 </style>
 <script>(function(){var l;try{l=localStorage.getItem('televo-lang')}catch(e){}if(l!=='ru'&&l!=='en'){l=(navigator.language||'en').toLowerCase().indexOf('ru')===0?'ru':'en'}document.documentElement.lang=l})();</script>
@@ -165,6 +174,8 @@
     </div>
 
     <h2>Common questions</h2>
+    <input class="faq-search" type="search" placeholder="Search questions" aria-label="Search questions">
+    <p class="faq-empty" role="status">Nothing matches. Email us at <a href="mailto:hello@gettelevo.space?subject=Televo%20support">hello@gettelevo.space</a> — a person will answer.</p>
 
     <details>
       <summary>Is Televo free?</summary>
@@ -235,6 +246,11 @@
       <p>So people who already have your number in their address book can find you on Televo. Your number is never shown to other users and cannot be read in bulk — matching compares cryptographic hashes, so someone only ever confirms a number they already had. You can change or remove it later in Settings.</p>
     </details>
 
+    <details id="open-code">
+      <summary>Is Televo's code open?</summary>
+      <p>Yes, to read. The full source of the app, the servers and the encryption is public on <a href="https://github.com/AToPu-sys/televo" target="_blank" rel="noopener">GitHub</a>, so anyone can check how Secret Chats are encrypted and what our servers store. It is source-available rather than open source: reading and reviewing it is welcome, copying it into another app is not. Found a security problem? Email <a href="mailto:hello@gettelevo.space?subject=Televo%20security%20report">hello@gettelevo.space</a>.</p>
+    </details>
+
     <p class="response-note">We respond to support email within a few days, privacy requests within 30 days, and content reports within 24 hours.</p>
   </main>
 </div>
@@ -258,6 +274,8 @@
     </div>
 
     <h2>Частые вопросы</h2>
+    <input class="faq-search" type="search" placeholder="Поиск по вопросам" aria-label="Поиск по вопросам">
+    <p class="faq-empty" role="status">Ничего не нашлось. Напишите на <a href="mailto:hello@gettelevo.space?subject=Televo%20support">hello@gettelevo.space</a> — ответит человек.</p>
 
     <details>
       <summary>Televo бесплатный?</summary>
@@ -328,6 +346,11 @@
       <p>Чтобы вас могли найти те, у кого ваш номер уже записан в контактах. Номер никогда не показывается другим и не может быть прочитан массово — сопоставление идёт по криптографическим хэшам, так что человек может лишь подтвердить номер, который у него уже был. Номер можно изменить или удалить в Настройках.</p>
     </details>
 
+    <details id="open-code-ru">
+      <summary>Код Televo открыт?</summary>
+      <p>Да, для чтения. Исходный код приложения, серверов и шифрования опубликован на <a href="https://github.com/AToPu-sys/televo" target="_blank" rel="noopener">GitHub</a> — любой может проверить, как шифруются секретные чаты и что хранят наши серверы. Это «открытый для чтения» код, а не свободная лицензия: изучать и проверять — пожалуйста, переносить в другое приложение — нельзя. Нашли уязвимость? Напишите на <a href="mailto:hello@gettelevo.space?subject=Televo%20security%20report">hello@gettelevo.space</a>.</p>
+    </details>
+
     <p class="response-note">На письма в поддержку отвечаем в течение нескольких дней, на запросы о данных — в течение 30 дней, жалобы на контент рассматриваем в течение 24 часов.</p>
   </main>
 </div>
@@ -358,5 +381,37 @@
       });
     });
     sync();
+  })();
+
+  // Search the questions in the language shown, opening the matches.
+  (function () {
+    document.querySelectorAll('.faq-search').forEach(function (input) {
+      var main = input.closest('main');
+      var items = Array.prototype.slice.call(main.querySelectorAll('details'));
+      var empty = main.querySelector('.faq-empty');
+      input.addEventListener('input', function () {
+        var words = input.value.toLowerCase().split(/\s+/).filter(Boolean);
+        var shown = 0;
+        items.forEach(function (item) {
+          var text = item.textContent.toLowerCase();
+          var match = words.every(function (w) { return text.indexOf(w) !== -1; });
+          item.style.display = match ? '' : 'none';
+          item.open = words.length > 0 && match;
+          if (match) shown++;
+        });
+        empty.classList.toggle('is-visible', shown === 0);
+      });
+    });
+  })();
+
+  // A link to /support#delete-account opens that answer and scrolls to it.
+  (function () {
+    function openFromHash() {
+      if (!location.hash) return;
+      var target = document.getElementById(location.hash.slice(1));
+      if (target && target.tagName === 'DETAILS') { target.open = true; target.scrollIntoView({ block: 'start' }); }
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
   })();
 </script>
