@@ -3,8 +3,15 @@
     "details": [
       {
         "appID": "P37BNY7C4J.com.televo.app",
-        "paths": ["/auth/*"]
+        "paths": [
+          "/auth/*"
+        ]
       }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "P37BNY7C4J.com.televo.app"
     ]
   }
 }
