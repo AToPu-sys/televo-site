@@ -173,9 +173,69 @@
       <a class="mail-btn" href="mailto:hello@gettelevo.space?subject=Televo%20support">hello@gettelevo.space</a>
     </div>
 
-    <h2>Common questions</h2>
     <input class="faq-search" type="search" placeholder="Search questions" aria-label="Search questions">
     <p class="faq-empty" role="status">Nothing matches. Email us at <a href="mailto:hello@gettelevo.space?subject=Televo%20support">hello@gettelevo.space</a> — a person will answer.</p>
+
+    <h2 id="encryption">Encryption and privacy</h2>
+
+    <details>
+      <summary>How does Televo encrypt my messages?</summary>
+      <p>Televo has two kinds of chats with two layers of encryption, the same approach as Telegram.</p>
+      <p><strong>Everyday chats</strong> are encrypted on the way to our servers (TLS) and stored encrypted with AES-256. The key is kept in a separate vault, apart from the messages, and that vault is itself locked with a master key that is not stored in the database. This is what lets your chats sync to every device and stay with you when you change phones.</p>
+      <p><strong>Secret Chats</strong> add a second, end-to-end layer: messages are sealed on your phone before they leave it, and only the other person's phone can open them.</p>
+    </details>
+
+    <details>
+      <summary>Can Televo read my messages?</summary>
+      <p><strong>Secret Chats: no.</strong> The keys exist only on your phone and the other person's. We have nothing that could open them.</p>
+      <p><strong>Everyday chats</strong> are decrypted automatically only to deliver them to your devices, and to check a message when someone reports it. Nobody at Televo browses chats, messages are never used for ads or sold, and we have never handed a message to anyone. If you want a conversation that even we can't open, start a Secret Chat.</p>
+    </details>
+
+    <details>
+      <summary>Why aren't all chats secret?</summary>
+      <p>Because a Secret Chat's keys live only on two phones, its history can't follow you to a new phone or your other devices. Everyday chats give you sync, groups and history everywhere; Secret Chats give you a conversation nobody else can open. You choose for each conversation.</p>
+    </details>
+
+    <details>
+      <summary>What is a Secret Chat, and how do I check it?</summary>
+      <p>A one-to-one chat with end-to-end encryption. To confirm nobody is in the middle, compare safety numbers with the other person in person or on a call: <strong>chat menu → Verify encryption</strong>. If the numbers match, the chat is really between the two of you.</p>
+      <p>If the other person's key ever changes, for example after they reinstall the app, Televo shows a warning and won't send anything until you decide.</p>
+    </details>
+
+    <details>
+      <summary>What encryption do Secret Chats use, technically?</summary>
+      <p>Each phone creates an X25519 key pair and an ML-KEM-768 key pair and keeps the private halves in its secure storage (Keychain on iPhone, Keystore-backed storage on Android). Each Secret Chat gets its own random key, which is shared with the other phone using both X25519 and ML-KEM-768, mixed with SHA-512. Breaking it would mean breaking both methods, including with a future quantum computer. Messages and files are encrypted with XSalsa20-Poly1305, which also detects any change made in transit.</p>
+      <p>Calls are encrypted between the two phones with DTLS-SRTP. When a direct connection isn't possible, a relay server passes the encrypted stream along without being able to decrypt it.</p>
+    </details>
+
+    <details>
+      <summary>What can Televo see, even in Secret Chats?</summary>
+      <p>Like every messenger that delivers messages through servers, we see who sends a message to whom and when, your email and phone number, and which devices are signed in to your account. Our <a href="/privacy">Privacy Policy</a> lists everything we keep and for how long.</p>
+    </details>
+
+    <details>
+      <summary>Has Televo's encryption been audited?</summary>
+      <p>Not by an independent firm yet. The code is public so anyone can check it, and the Secret Chat design uses standard, published algorithms rather than anything home-grown. Found a problem? Write to <a href="mailto:hello@gettelevo.space?subject=Televo%20security%20report">hello@gettelevo.space</a>.</p>
+    </details>
+
+    <details>
+      <summary>What's coming next?</summary>
+      <p>Group calls, message search and reactions, clearer call audio, and Secret Chat keys that change as you talk, so one stolen key can't open old messages.</p>
+    </details>
+
+    <h2>Using Televo</h2>
+
+    <details>
+      <summary>Why isn't Televo in the App Store yet?</summary>
+      <p>Televo is in beta and waiting for App Store review. Until then, iPhone installs go through TestFlight, Apple's own app for beta versions. On Android, download the app from the <a href="/#download">home page</a>.</p>
+    </details>
+
+    <details>
+      <summary>What happens when I change phones?</summary>
+      <p>Sign in and your everyday chats are all there. Secret Chats stay on the old phone, because their keys never leave it.</p>
+    </details>
+
+    <h2>Account and help</h2>
 
     <details>
       <summary>Is Televo free?</summary>
@@ -191,12 +251,6 @@
       <summary>I didn't get my sign-in code</summary>
       <p>Televo signs you in with a 6-digit code sent to your email. Check your spam folder first — the code arrives from an automated sender and some providers filter it.</p>
       <p><strong>Use the code, not the link.</strong> Codes are single-use and expire quickly, so request a fresh one if it has been sitting for a while.</p>
-    </details>
-
-    <details>
-      <summary>What is a Secret Chat, and how is it different?</summary>
-      <p>A regular chat is encrypted in transit and stored encrypted at rest with a key Televo holds — like cloud chats in Telegram, so we could technically read it. A Secret Chat adds <strong>end-to-end encryption</strong>: the keys are generated on your device and never leave it, so message contents are unreadable to us and to our hosting provider.</p>
-      <p>You can confirm nobody intercepted the exchange by comparing safety numbers with the other person — <strong>chat menu → Verify encryption</strong>.</p>
     </details>
 
     <details>
@@ -273,9 +327,69 @@
       <a class="mail-btn" href="mailto:hello@gettelevo.space?subject=Televo%20support">hello@gettelevo.space</a>
     </div>
 
-    <h2>Частые вопросы</h2>
     <input class="faq-search" type="search" placeholder="Поиск по вопросам" aria-label="Поиск по вопросам">
     <p class="faq-empty" role="status">Ничего не нашлось. Напишите на <a href="mailto:hello@gettelevo.space?subject=Televo%20support">hello@gettelevo.space</a> — ответит человек.</p>
+
+    <h2 id="encryption-ru">Шифрование и конфиденциальность</h2>
+
+    <details>
+      <summary>Как Televo шифрует сообщения?</summary>
+      <p>В Televo два вида чатов и два слоя шифрования — тот же подход, что у Telegram.</p>
+      <p><strong>Обычные чаты</strong> шифруются по пути к нашим серверам (TLS) и хранятся зашифрованными AES-256. Ключ лежит в отдельном хранилище, отдельно от сообщений, а само хранилище заперто мастер-ключом, которого нет в базе данных. Благодаря этому чаты синхронизируются на всех устройствах и остаются с вами при смене телефона.</p>
+      <p><strong>Секретные чаты</strong> добавляют второй, сквозной слой: сообщения запечатываются на вашем телефоне ещё до отправки, и открыть их может только телефон собеседника.</p>
+    </details>
+
+    <details>
+      <summary>Может ли Televo прочитать мои сообщения?</summary>
+      <p><strong>Секретные чаты — нет.</strong> Ключи есть только на вашем телефоне и телефоне собеседника. Нам просто нечем их открыть.</p>
+      <p><strong>Обычные чаты</strong> расшифровываются автоматически только для доставки на ваши устройства и для проверки сообщения, на которое пожаловались. Никто в Televo не просматривает переписки, сообщения не используются для рекламы и не продаются, и мы ни разу никому не передавали ни одного сообщения. Если нужен разговор, который не сможем открыть даже мы, начните Секретный чат.</p>
+    </details>
+
+    <details>
+      <summary>Почему не все чаты секретные?</summary>
+      <p>Ключи Секретного чата живут только на двух телефонах, поэтому его история не может переехать на новый телефон или другие ваши устройства. Обычные чаты дают синхронизацию, группы и историю везде; Секретные — разговор, который не откроет никто другой. Вы выбираете для каждого разговора.</p>
+    </details>
+
+    <details>
+      <summary>Что такое Секретный чат и как его проверить?</summary>
+      <p>Чат один на один со сквозным шифрованием. Чтобы убедиться, что между вами никого нет, сравните коды безопасности с собеседником лично или по звонку: <strong>меню чата → Проверить шифрование</strong>. Если коды совпали, чат действительно только ваш.</p>
+      <p>Если ключ собеседника сменится — например, после переустановки приложения, — Televo покажет предупреждение и ничего не отправит, пока вы не решите.</p>
+    </details>
+
+    <details>
+      <summary>Какое шифрование в Секретных чатах, технически?</summary>
+      <p>Каждый телефон создаёт пару ключей X25519 и пару ML-KEM-768 и хранит закрытые части в защищённом хранилище (Keychain на iPhone, хранилище на базе Keystore на Android). У каждого Секретного чата свой случайный ключ; он передаётся второму телефону сразу двумя способами — X25519 и ML-KEM-768, смешанными через SHA-512. Чтобы его вскрыть, нужно взломать оба метода, в том числе квантовым компьютером будущего. Сообщения и файлы шифруются XSalsa20-Poly1305, который заодно замечает любое изменение по дороге.</p>
+      <p>Звонки шифруются между двумя телефонами (DTLS-SRTP). Если прямое соединение невозможно, сервер-ретранслятор передаёт зашифрованный поток, не имея возможности его расшифровать.</p>
+    </details>
+
+    <details>
+      <summary>Что Televo видит даже в Секретных чатах?</summary>
+      <p>Как любой мессенджер, который доставляет сообщения через серверы, мы видим, кто кому и когда пишет, вашу почту и номер телефона и какие устройства вошли в аккаунт. В <a href="/privacy">Политике конфиденциальности</a> перечислено всё, что мы храним, и как долго.</p>
+    </details>
+
+    <details>
+      <summary>Проходило ли шифрование Televo аудит?</summary>
+      <p>Независимого аудита пока не было. Код открыт, чтобы любой мог его проверить, а Секретные чаты построены на стандартных опубликованных алгоритмах, без самодельной криптографии. Нашли проблему? Напишите на <a href="mailto:hello@gettelevo.space?subject=Televo%20security%20report">hello@gettelevo.space</a>.</p>
+    </details>
+
+    <details>
+      <summary>Что будет дальше?</summary>
+      <p>Групповые звонки, поиск по сообщениям и реакции, более чистый звук в звонках и ключи Секретных чатов, которые меняются по ходу разговора, чтобы один украденный ключ не открыл старые сообщения.</p>
+    </details>
+
+    <h2>Пользование Televo</h2>
+
+    <details>
+      <summary>Почему Televo ещё нет в App Store?</summary>
+      <p>Televo в бета-версии и ждёт проверки App Store. Пока на iPhone он ставится через TestFlight — приложение Apple для бета-версий. На Android скачайте приложение на <a href="/#download">главной странице</a>.</p>
+    </details>
+
+    <details>
+      <summary>Что будет при смене телефона?</summary>
+      <p>Войдите — и все обычные чаты на месте. Секретные чаты остаются на старом телефоне: их ключи никогда его не покидают.</p>
+    </details>
+
+    <h2>Аккаунт и помощь</h2>
 
     <details>
       <summary>Televo бесплатный?</summary>
@@ -291,12 +405,6 @@
       <summary>Не пришёл код для входа</summary>
       <p>Televo присылает 6-значный код на вашу почту. Сначала проверьте папку «Спам» — письмо приходит от автоматического отправителя, и некоторые почтовые сервисы его фильтруют.</p>
       <p><strong>Вводите код, а не переходите по ссылке.</strong> Код одноразовый и быстро истекает — если письмо пришло давно, запросите новый.</p>
-    </details>
-
-    <details>
-      <summary>Что такое секретный чат и чем он отличается?</summary>
-      <p>Обычный чат шифруется при передаче и хранится зашифрованным ключом, который есть у Televo, — как облачные чаты в Telegram, поэтому технически мы можем его прочитать. Секретный чат добавляет <strong>сквозное шифрование</strong>: ключи создаются на вашем устройстве и никогда его не покидают, поэтому содержимое недоступно ни нам, ни хостинг-провайдеру.</p>
-      <p>Убедиться, что переписку никто не перехватил, можно, сравнив коды безопасности с собеседником — <strong>меню чата → Проверить шифрование</strong>.</p>
     </details>
 
     <details>
@@ -415,3 +523,4 @@
     window.addEventListener('hashchange', openFromHash);
   })();
 </script>
+<script>(function(){if(location.hash==='#encryption'&&document.documentElement.lang==='ru'){var e=document.getElementById('encryption-ru');if(e)setTimeout(function(){e.scrollIntoView()},50)}})();</script>
