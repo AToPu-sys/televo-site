@@ -382,6 +382,14 @@
   .hero-more a { color: var(--text); border-bottom: 1px solid var(--line-2); }
   .hero-more a:hover { border-color: var(--text); }
   @media (max-width: 480px) { .hero-dl .btn { width: 100%; } }
+  .tiles { margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .tile { border: 1px solid var(--line); border-radius: 24px; padding: 32px 28px; background: var(--bg-2); display: flex; flex-direction: column; gap: 10px; }
+  .tile h3 { font-size: 28px; letter-spacing: -0.015em; }
+  .tile p { color: var(--dim); font-size: 16px; }
+  .tile-ic { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--cloud-soft); color: var(--cloud); margin-bottom: 8px; }
+  .t-private .tile-ic, .t-future .tile-ic { background: var(--secret-soft); color: var(--secret); }
+  @media (max-width: 900px) { .tiles { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .tiles { grid-template-columns: 1fr; } .tile { padding: 26px 22px; } }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MobileApplication","name":"Televo","operatingSystem":"iOS, Android","applicationCategory":"CommunicationApplication","description":"Free private messenger: chats on all your devices, voice and video calls, and end-to-end encrypted Secret Chats.","url":"https://gettelevo.space/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Televo","url":"https://gettelevo.space/","email":"hello@gettelevo.space"}}
@@ -398,10 +406,9 @@
       <span class="brand-name">Televo</span>
     </a>
     <div class="nav-links">
-      <a href="#how" data-i18n="nav.how">Privacy</a>
-      <a href="#features" data-i18n="nav.features">Features</a>
-      <a href="#calls" data-i18n="nav.calls">Calls</a>
+      <a href="#why" data-i18n="nav.why">Why Televo</a>
       <a href="/support" data-i18n="nav.faq">FAQ</a>
+      <a href="/privacy" data-i18n="nav.privacy">Privacy</a>
     </div>
     <div class="nav-right">
       <div class="lang-switch" role="group" aria-label="Language">
@@ -433,7 +440,7 @@
           <span data-i18n="dl.android">Download for Android</span>
         </a>
       </div>
-      <p class="hero-more" data-i18n="hero.more">Free, without ads. <a href="#how">How we keep chats private</a></p>
+      <p class="hero-more" data-i18n="hero.more">Free, without ads. <a href="#why">Why Televo</a></p>
     </div>
 
     <div class="phone-stage" aria-hidden="true">
@@ -469,94 +476,20 @@
   </div>
 </header>
 
-<section class="sec" id="how">
+<section class="sec" id="why">
   <div class="wrap">
-    <h2 class="h2" data-i18n="how.title">Two kinds of chats. You choose.</h2>
-    <p class="lede" data-i18n="how.sub">Most of the time you just want to talk. Sometimes you want a conversation nobody else could ever open. Televo has a chat for each.</p>
-
-    <div class="kinds">
-      <article class="kind k-cloud">
-        <div class="kind-tag"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 100-9h-1.26A7 7 0 104 16.25"/><path d="M8 19h9.5"/></svg></span><span data-i18n="how.cloudTag">Everyday chats</span></div>
-        <h3 data-i18n="how.cloudH">On every device you own.</h3>
-        <p data-i18n="how.cloudP">Start on your phone, carry on from your tablet, get a new phone and everything is still there.</p>
-        <ul>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="how.c1">Stored encrypted with AES-256 in the Televo cloud</span></li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="how.c2">The key lives in a separate vault, away from your messages</span></li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="how.c3">Groups, photos, files and voice messages</span></li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="how.c4">Your messages are never used for ads or sold</span></li>
-        </ul>
-        <p class="kind-hint" data-i18n="how.cloudHint">Works like cloud chats in Telegram.</p>
-      </article>
-      <article class="kind k-secret">
-        <div class="kind-tag"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span><span data-i18n="how.secretTag">Secret Chats</span></div>
-        <h3 data-i18n="how.secretH">Only the two of you.</h3>
-        <p data-i18n="how.secretP">Tap the lock and your messages are sealed on your phone before they leave it. Televo can’t open them, and neither can anyone else.</p>
-        <ul>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="how.s1">The keys exist only on your two phones</span></li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="how.s2">Built to stay safe against future quantum computers</span></li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="how.s3">Compare a short code to be sure it’s really them</span></li>
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="how.s4">If their key changes, Televo warns you before sending</span></li>
-        </ul>
-        <p class="kind-hint" data-i18n="how.secretHint">The same idea as Signal, inside a messenger your family already knows how to use.</p>
-      </article>
+    <h2 class="h2" data-i18n="why.title">Why Televo?</h2>
+    <div class="tiles">
+      <article class="tile t-private"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div><h3 data-i18n="t.private.h"></h3><p data-i18n="t.private.p"></p></article>
+      <article class="tile t-free"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4l-7.2 7.2a2 2 0 01-2.8 0L3 13V3h10l7.6 7.6a2 2 0 010 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg></div><h3 data-i18n="t.free.h"></h3><p data-i18n="t.free.p"></p></article>
+      <article class="tile t-synced"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0114-5.3M20 12a8 8 0 01-14 5.3M18 3v4h-4M6 21v-4h4"/></svg></div><h3 data-i18n="t.synced.h"></h3><p data-i18n="t.synced.p"></p></article>
+      <article class="tile t-calls"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-1 1-2 2-2h1a1 1 0 011 .8l1 3a1 1 0 01-.3 1L7 9.3a12 12 0 007 7l1.5-1.7a1 1 0 011-.3l3 1a1 1 0 01.8 1v1c0 1-1 2-2 2C10.5 20.5 3.5 13.5 4 5z"/></svg></div><h3 data-i18n="t.calls.h"></h3><p data-i18n="t.calls.p"></p></article>
+      <article class="tile t-vanish"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3 data-i18n="t.vanish.h"></h3><p data-i18n="t.vanish.p"></p></article>
+      <article class="tile t-future"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.4 8.7-8 10.5-4.6-1.8-8-5.5-8-10.5v-6L12 2z"/><path d="M9 12l2 2 4-4"/></svg></div><h3 data-i18n="t.future.h"></h3><p data-i18n="t.future.p"></p></article>
     </div>
-
-    <p class="hero-more" style="margin-top:28px" data-i18n="how.more"><a href="/support#encryption">How the encryption works</a> and other questions in the FAQ.</p>
+    <p class="hero-more" style="margin-top:32px" data-i18n="why.more"></p>
   </div>
 </section>
-
-<section class="sec" id="features">
-  <div class="wrap">
-    <h2 class="h2" data-i18n="ft.title">Everything you’d expect from a messenger.</h2>
-    <div class="feat-grid">
-      <article class="feat f-7">
-        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-        <h3 data-i18n="ft.1h">Messages that disappear on their own.</h3>
-        <p data-i18n="ft.1p">Set a timer and the message is deleted from both phones and from our servers when it runs out.</p>
-        <div class="timer-demo" aria-hidden="true"><span>30s</span><span>1m</span><span class="on">1h</span><span>1d</span><span>1w</span></div>
-      </article>
-      <article class="feat f-5">
-        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
-        <h3 data-i18n="ft.2h">Group chats.</h3>
-        <p data-i18n="ft.2p">Family, friends, the building chat. Add a group photo and choose who can manage it.</p>
-      </article>
-      <article class="feat f-4">
-        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 17v4"/></svg></div>
-        <h3 data-i18n="ft.3h">Voice messages.</h3>
-        <p data-i18n="ft.3p">Record and send in a couple of taps, or cancel before it goes.</p>
-      </article>
-      <article class="feat f-4">
-        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
-        <h3 data-i18n="ft.4h">Sign in with a QR code.</h3>
-        <p data-i18n="ft.4p">Scan from your phone to sign in on another device. See every device and sign any of them out.</p>
-      </article>
-      <article class="feat f-4">
-        <div class="feat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
-        <h3 data-i18n="ft.5h">Your account stays yours.</h3>
-        <p data-i18n="ft.5p">Two-step verification, a passcode or Face ID lock, blocking, and deleting your account whenever you want.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="calls">
-  <div class="wrap calls">
-    <div class="call-card" aria-hidden="true">
-      <div class="ring">A</div>
-      <div class="call-name">Alisher</div>
-      <div class="call-sub" data-i18n="call.sub">Televo video call…</div>
-      <div class="call-actions">
-        <div class="cbtn cbtn-no"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="#1A1414" stroke-width="2.4" stroke-linecap="round"/></svg></div>
-        <div class="cbtn cbtn-yes"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M4 5c0-1 1-2 2-2h1a1 1 0 011 .8l1 3a1 1 0 01-.3 1L7 9.3a12 12 0 007 7l1.5-1.7a1 1 0 011-.3l3 1a1 1 0 01.8 1v1c0 1-1 2-2 2C10.5 20.5 3.5 13.5 4 5z" fill="#1A1414"/></svg></div>
-      </div>
-    </div>
-    <div>
-      <h2 class="h2" data-i18n="call.title">Calls that ring like a phone call.</h2>
-      <p class="lede" data-i18n="call.p">Voice and video calls show up on your lock screen like a normal call, even when Televo is closed. The call is encrypted between the two phones. Leave the app and the video keeps playing in a small window.</p>
-    </div>
-  </div>
-</section>
-
 
 <section class="download" id="download">
   <div class="wrap">
@@ -572,10 +505,7 @@
         <span data-i18n="dl.android">Download for Android</span>
       </a>
     </div>
-    <div class="dl-notes">
-      <p data-i18n="dl.iosNote">iPhone: the link opens TestFlight, Apple’s app for beta versions. Install it, then Televo.</p>
-      <p data-i18n="dl.androidNote">Android: open the downloaded file. If your phone asks, allow installs from your browser.</p>
-    </div>
+    <div class="dl-notes"><p data-i18n="dl.note">On iPhone, the link opens TestFlight, Apple’s app for beta versions.</p></div>
 
     <form id="waitlist-form" class="waitlist" novalidate>
       <label for="waitlist-email" data-i18n="dl.wlLabel">Rather wait for the App Store? We’ll email you once, on launch day.</label>
@@ -600,7 +530,7 @@
         <p style="margin-top:14px;font-size:14px;color:var(--dim)" data-i18n="footer.tagline">A private messenger for you and your people.</p>
       </div>
       <div class="f-cols">
-        <div class="f-col"><h4 data-i18n="footer.product">Product</h4><a href="#how" data-i18n="nav.how">Privacy</a><a href="#features" data-i18n="nav.features">Features</a><a href="#calls" data-i18n="nav.calls">Calls</a><a href="https://github.com/AToPu-sys/televo" target="_blank" rel="noopener" data-i18n="footer.code">Source code</a></div>
+        <div class="f-col"><h4 data-i18n="footer.product">Product</h4><a href="#why" data-i18n="nav.why">Why Televo</a><a href="/support" data-i18n="nav.faq">FAQ</a><a href="https://github.com/AToPu-sys/televo" target="_blank" rel="noopener" data-i18n="footer.code">Source code</a></div>
         <div class="f-col"><h4 data-i18n="footer.legal">Legal</h4><a href="/terms" data-i18n="footer.terms">Terms of Service</a><a href="/privacy" data-i18n="footer.privacy">Privacy Policy</a></div>
         <div class="f-col"><h4 data-i18n="footer.contact">Contact</h4><a href="/support" data-i18n="footer.support">Support &amp; FAQ</a><a href="mailto:hello@gettelevo.space">hello@gettelevo.space</a></div>
       </div>
@@ -612,10 +542,29 @@
 <script>
   var I18N = {
     en: {
+      'nav.why': 'Why Televo',
+      'nav.privacy': 'Privacy',
+      'hero.title': 'Private messaging for you and your people.',
+      'hero.sub': 'Fast, free and without ads. Chat, call and send voice messages on iPhone and Android.',
+      'hero.more': 'Free. No ads. No catch.',
+      'why.title': 'Why Televo?',
+      't.private.h': 'Private',
+      't.private.p': 'Secret Chats only the two of you can read. Not even we can open them.',
+      't.free.h': 'Free',
+      't.free.p': 'Free for personal use, forever. No ads, and your data is never sold.',
+      't.synced.h': 'Synced',
+      't.synced.p': 'Your chats on your phone, tablet and every new phone you sign in to.',
+      't.calls.h': 'Real calls',
+      't.calls.p': 'Voice and video calls that ring like a normal phone call.',
+      't.vanish.h': 'Disappearing',
+      't.vanish.p': 'Set a timer and messages delete themselves from both phones.',
+      't.future.h': 'Built to last',
+      't.future.p': 'Secret Chats are protected even against the computers of the future.',
+      'why.more': 'Curious how it works? <a href="/support#encryption">Read the FAQ</a>',
+      'dl.title': 'Some things are just between you and them.',
+      'dl.sub': 'Download Televo and invite the people you talk to most.',
+      'dl.note': 'On iPhone, the link opens TestFlight, Apple’s app for beta versions.',
       'nav.skip': 'Skip to download', 'nav.how': 'Privacy', 'nav.features': 'Features', 'nav.calls': 'Calls', 'nav.faq': 'FAQ', 'nav.cta': 'Download',
-      'hero.title': 'A private messenger for you and your people.',
-      'hero.sub': 'Chat, send voice messages and call on iPhone and Android. Your chats follow you to every device. For the really personal things, open a <strong>Secret Chat</strong> that only the two of you can read.',
-      'hero.more': 'Free, without ads. <a href="#how">How we keep chats private</a>',
       'dl.ios': 'Download for iPhone', 'dl.android': 'Download for Android',
       'phone.status': 'Secret Chat', 'phone.day': 'Today', 'phone.sys': 'Only you and Maya can read this chat.',
       'phone.m1': 'landed. the results came back', 'phone.m2': 'it’s fine. it’s really fine 🙂', 'phone.m3': 'oh thank god. calling you in 5', 'phone.input': 'Message',
@@ -638,8 +587,6 @@
       'ft.5h': 'Your account stays yours.', 'ft.5p': 'Two-step verification, a passcode or Face ID lock, blocking, and deleting your account whenever you want.',
       'call.sub': 'Televo video call…', 'call.title': 'Calls that ring like a phone call.',
       'call.p': 'Voice and video calls show up on your lock screen like a normal call, even when Televo is closed. The call is encrypted between the two phones. Leave the app and the video keeps playing in a small window.',
-      'dl.title': 'Some things are just between you and them.',
-      'dl.sub': 'Free on iPhone and Android. Install it, then send the link to the people you talk to most.',
       'dl.iosNote': 'iPhone: the link opens TestFlight, Apple’s app for beta versions. Install it, then Televo.',
       'dl.androidNote': 'Android: open the downloaded file. If your phone asks, allow installs from your browser.',
       'dl.wlLabel': 'Rather wait for the App Store? We’ll email you once, on launch day.', 'dl.placeholder': 'you@example.com', 'dl.cta': 'Email me',
@@ -652,10 +599,29 @@
       'waitlist.joinedLabel': 'Added'
     },
     ru: {
-      'nav.skip': 'Перейти к скачиванию', 'nav.how': 'Приватность', 'nav.features': 'Возможности', 'nav.calls': 'Звонки', 'nav.faq': 'Вопросы', 'nav.cta': 'Скачать',
+      'nav.why': 'Почему Televo',
+      'nav.privacy': 'Конфиденциальность',
       'hero.title': 'Приватный мессенджер для вас и ваших близких.',
-      'hero.sub': 'Переписывайтесь, отправляйте голосовые и звоните на iPhone и Android. Чаты с вами на всех устройствах. А для самого личного откройте <strong>Секретный чат</strong>, который прочитаете только вы двое.',
-      'hero.more': 'Бесплатно и без рекламы. <a href="#how">Как мы защищаем переписку</a>',
+      'hero.sub': 'Быстрый, бесплатный и без рекламы. Переписка, звонки и голосовые на iPhone и Android.',
+      'hero.more': 'Бесплатно. Без рекламы. Без подвоха.',
+      'why.title': 'Почему Televo?',
+      't.private.h': 'Приватный',
+      't.private.p': 'Секретные чаты прочитаете только вы двое. Даже мы не можем их открыть.',
+      't.free.h': 'Бесплатный',
+      't.free.p': 'Бесплатно для личного общения, навсегда. Без рекламы, данные не продаются.',
+      't.synced.h': 'Везде с вами',
+      't.synced.p': 'Чаты на телефоне, планшете и на каждом новом телефоне, где вы войдёте.',
+      't.calls.h': 'Настоящие звонки',
+      't.calls.p': 'Голосовые и видеозвонки звонят как обычный телефонный вызов.',
+      't.vanish.h': 'Исчезающие',
+      't.vanish.p': 'Поставьте таймер — и сообщения сами удалятся с обоих телефонов.',
+      't.future.h': 'На годы вперёд',
+      't.future.p': 'Секретные чаты защищены даже от компьютеров будущего.',
+      'why.more': 'Интересно, как это устроено? <a href="/support#encryption">Читайте вопросы и ответы</a>',
+      'dl.title': 'Некоторые вещи касаются только вас двоих.',
+      'dl.sub': 'Скачайте Televo и позовите тех, с кем общаетесь чаще всего.',
+      'dl.note': 'На iPhone ссылка откроет TestFlight — приложение Apple для бета-версий.',
+      'nav.skip': 'Перейти к скачиванию', 'nav.how': 'Приватность', 'nav.features': 'Возможности', 'nav.calls': 'Звонки', 'nav.faq': 'Вопросы', 'nav.cta': 'Скачать',
       'dl.ios': 'Скачать для iPhone', 'dl.android': 'Скачать для Android',
       'phone.status': 'Секретный чат', 'phone.day': 'Сегодня', 'phone.sys': 'Этот чат можете прочитать только вы и Майя.',
       'phone.m1': 'приземлилась. результаты пришли', 'phone.m2': 'всё хорошо. правда хорошо 🙂', 'phone.m3': 'фух, слава богу. наберу через 5 минут', 'phone.input': 'Сообщение',
@@ -678,8 +644,6 @@
       'ft.5h': 'Аккаунт остаётся вашим.', 'ft.5p': 'Двухфакторная проверка, код-пароль или Face ID, блокировка людей и удаление аккаунта в любой момент.',
       'call.sub': 'Видеозвонок Televo…', 'call.title': 'Звонки, как обычный телефонный вызов.',
       'call.p': 'Голосовые и видеозвонки появляются на экране блокировки как обычный звонок, даже когда Televo закрыт. Звонок зашифрован между двумя телефонами. Выйдите из приложения — видео продолжится в маленьком окне.',
-      'dl.title': 'Некоторые вещи касаются только вас двоих.',
-      'dl.sub': 'Бесплатно на iPhone и Android. Установите и отправьте ссылку тем, с кем общаетесь чаще всего.',
       'dl.iosNote': 'iPhone: ссылка откроет TestFlight — приложение Apple для бета-версий. Установите его, затем Televo.',
       'dl.androidNote': 'Android: откройте скачанный файл. Если телефон спросит, разрешите установку из браузера.',
       'dl.wlLabel': 'Хотите дождаться App Store? Напишем один раз — в день выхода.', 'dl.placeholder': 'you@example.com', 'dl.cta': 'Напишите мне',
