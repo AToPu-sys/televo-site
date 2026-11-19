@@ -335,8 +335,8 @@
 
   /* one entrance, on load only */
   @media (prefers-reduced-motion: no-preference) {
-    .hero h1, .hero-sub, .hero-actions, .hero-facts, .phone-stage { animation: rise .9s cubic-bezier(.16,1,.3,1) both; }
-    .hero-sub { animation-delay: .08s; } .hero-actions { animation-delay: .16s; } .hero-facts { animation-delay: .24s; } .phone-stage { animation-delay: .12s; }
+    .hero h1, .hero-sub, .hero-actions, .hero-facts, .phone-col { animation: rise .9s cubic-bezier(.16,1,.3,1) both; }
+    .hero-sub { animation-delay: .08s; } .hero-actions { animation-delay: .16s; } .hero-facts { animation-delay: .24s; } .phone-col { animation-delay: .12s; }
     @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
   }
 
@@ -390,6 +390,71 @@
   .t-private .tile-ic, .t-future .tile-ic { background: var(--secret-soft); color: var(--secret); }
   @media (max-width: 900px) { .tiles { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .tiles { grid-template-columns: 1fr; } .tile { padding: 26px 22px; } }
+  /* ---------- live phone ---------- */
+  .phone-col { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  .phone { transition: transform .8s cubic-bezier(.16,1,.3,1), box-shadow .6s; }
+  .phone[data-mode="secret"] { box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, 0 60px 120px -40px rgba(0,0,0,0.75), 0 30px 90px -20px rgba(175,166,255,0.45); }
+  .screen { transition: background .6s; }
+  .phone[data-mode="secret"] .screen { background: #1A1626; }
+  .s-back { color: var(--cloud); transition: color .5s; }
+  .phone[data-mode="secret"] .s-back { color: var(--secret); }
+  .s-sub { color: var(--ok); transition: color .5s; }
+  .s-lock { display: none; }
+  .phone[data-mode="secret"] .s-sub { color: var(--secret); }
+  .phone[data-mode="secret"] .s-lock { display: block; }
+  .s-avatar { transition: background .5s; }
+  .phone[data-mode="cloud"] .s-head .s-avatar { background: linear-gradient(135deg, var(--cloud-2), #C77F63); }
+  .s-banner { max-height: 0; opacity: 0; overflow: hidden; text-align: center; font-size: 11.5px; color: var(--secret-2); background: var(--secret-soft); transition: max-height .5s, opacity .5s, padding .5s; }
+  .phone[data-mode="secret"] .s-banner { max-height: 40px; opacity: 1; padding: 7px 10px; }
+  .lp-body { height: 330px; min-height: 0; overflow: hidden; justify-content: flex-end; }
+  .lp-body > * { flex-shrink: 0; }
+  .lp-body { transition: height .5s; }
+  .phone[data-mode="secret"] .lp-body { height: 299px; }
+  .b-out { transition: background .5s, color .5s; }
+  .phone[data-mode="cloud"] .b-out { background: var(--cloud); }
+  .phone[data-mode="secret"] .b-out { background: var(--secret); }
+  .s-send { transition: background .5s; }
+  .phone[data-mode="cloud"] .s-send { background: var(--cloud); }
+  .pop { animation: pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+  @keyframes pop { from { opacity: 0; transform: translateY(10px) scale(.92); } to { opacity: 1; transform: none; } }
+  .vanish { animation: vanish 1.1s ease forwards; }
+  @keyframes vanish { 0% { opacity: 1; filter: blur(0); } 60% { opacity: .5; filter: blur(3px); transform: scale(.97); } 100% { opacity: 0; filter: blur(8px); transform: scale(.9); max-height: 0; padding: 0; margin: 0; } }
+  .b .timer { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; opacity: .7; margin-top: 3px; }
+  .b-photo { width: 150px; height: 104px; border-radius: 14px; align-self: flex-start; background: linear-gradient(140deg, #F2BBA2 0%, #C77F63 45%, #6F5AA8 100%); position: relative; overflow: hidden; }
+  .b-photo::after { content: ''; position: absolute; left: 18px; right: 18px; bottom: 16px; height: 28px; border-radius: 50% 50% 0 0; background: rgba(26,20,20,0.35); }
+  .b-voice { display: flex; align-items: center; gap: 8px; }
+  .b-voice .play { width: 24px; height: 24px; border-radius: 50%; background: rgba(26,20,20,0.85); display: grid; place-items: center; flex-shrink: 0; }
+  .wave { display: flex; align-items: center; gap: 2px; height: 20px; }
+  .wave i { width: 3px; border-radius: 2px; background: rgba(26,20,20,0.75); animation: wave 1s ease-in-out infinite; }
+  @keyframes wave { 0%, 100% { transform: scaleY(.35); } 50% { transform: scaleY(1); } }
+  .lp-call { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: radial-gradient(120% 80% at 50% 20%, #3A2F4A, #17141E 70%); transform: translateY(100%); transition: transform .6s cubic-bezier(.16,1,.3,1); border-radius: 37px; }
+  .lp-call.on { transform: none; }
+  .lp-call .ring { width: 84px; height: 84px; font-size: 30px; }
+  .lp-call .call-name { font-size: 22px; }
+  .lp-call .call-actions { margin-top: 26px; gap: 48px; }
+  .lp-call .cbtn { width: 54px; height: 54px; }
+  .lp-call.accepted .cbtn-no { opacity: 0; transform: scale(.6); transition: .3s; }
+  .lp-call.accepted .cbtn-yes { transform: scale(1.15); transition: .3s; }
+  .mode-switch { display: inline-flex; padding: 5px; border-radius: 999px; background: var(--bg-2); border: 1px solid var(--line); }
+  .mode-switch button { border: 0; background: transparent; padding: 10px 18px; border-radius: 999px; font-size: 14.5px; font-weight: 600; color: var(--dim); display: inline-flex; align-items: center; gap: 8px; transition: background .3s, color .3s; }
+  .mode-switch button[aria-pressed="true"][data-mode="cloud"] { background: var(--cloud); color: var(--ink); }
+  .mode-switch button[aria-pressed="true"][data-mode="secret"] { background: var(--secret); color: var(--ink); }
+  .mode-hint { font-size: 14px; color: var(--dim); text-align: center; min-height: 22px; transition: opacity .3s; }
+  @media (max-width: 400px) { .mode-switch button { padding: 10px 13px; font-size: 13.5px; } }
+
+  /* ---------- reveal on scroll ---------- */
+  .rv { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+  .rv.in { opacity: 1; transform: none; }
+  .tile.rv:nth-child(2) { transition-delay: .08s; } .tile.rv:nth-child(3) { transition-delay: .16s; }
+  .tile.rv:nth-child(4) { transition-delay: .24s; } .tile.rv:nth-child(5) { transition-delay: .32s; } .tile.rv:nth-child(6) { transition-delay: .4s; }
+  .tile { transition: border-color .3s, transform .3s; }
+  .tile:hover { border-color: var(--line-2); transform: translateY(-3px); }
+  @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } .pop, .vanish, .wave i { animation: none; } }
+  .typing { align-self: flex-start; display: none; gap: 4px; padding: 12px 14px; border-radius: 16px 16px 16px 5px; background: #2A2533; }
+  .typing.on { display: inline-flex; }
+  .typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--dim); animation: blink 1s infinite; }
+  .typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+  @keyframes blink { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MobileApplication","name":"Televo","operatingSystem":"iOS, Android","applicationCategory":"CommunicationApplication","description":"Free private messenger: chats on all your devices, voice and video calls, and end-to-end encrypted Secret Chats.","url":"https://gettelevo.space/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Televo","url":"https://gettelevo.space/","email":"hello@gettelevo.space"}}
@@ -440,52 +505,60 @@
           <span data-i18n="dl.android">Download for Android</span>
         </a>
       </div>
-      <p class="hero-more" data-i18n="hero.more">Free, without ads. <a href="#why">Why Televo</a></p>
+      <p class="hero-more" data-i18n="hero.more">Free. Fast. Simple.</p>
     </div>
 
-    <div class="phone-stage" aria-hidden="true">
-      <div class="phone">
-        <div class="screen">
-          <div class="island"></div>
-          <div class="s-status"><span>9:41</span><span>●●●</span></div>
-          <div class="s-head">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--secret)"><path d="M15 18l-6-6 6-6"/></svg>
-            <div class="s-avatar">M</div>
-            <div>
-              <div class="s-name">Maya</div>
-              <div class="s-sub">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
-                <span data-i18n="phone.status">Secret Chat</span>
+    <div class="phone-col">
+      <div class="phone-stage">
+        <div class="phone" id="live-phone" data-mode="cloud" aria-hidden="true">
+          <div class="screen">
+            <div class="island"></div>
+            <div class="s-status"><span>9:41</span><span>●●●</span></div>
+            <div class="s-head">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="s-back"><path d="M15 18l-6-6 6-6"/></svg>
+              <div class="s-avatar">M</div>
+              <div>
+                <div class="s-name">Maya</div>
+                <div class="s-sub"><svg class="s-lock" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg><span id="lp-status" data-i18n="lp.online">online</span></div>
+              </div>
+            </div>
+            <div class="s-banner" data-i18n="lp.banner">Only you two can see this chat</div>
+            <div class="s-body lp-body" id="lp-body"></div>
+            <div class="s-input">
+              <div class="s-field" data-i18n="phone.input">Message</div>
+              <div class="s-send"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1A1414" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+            </div>
+            <div class="lp-call" id="lp-call">
+              <div class="ring">M</div>
+              <div class="call-name">Maya</div>
+              <div class="call-sub" id="lp-call-sub" data-i18n="lp.calling">Video call…</div>
+              <div class="call-actions">
+                <div class="cbtn cbtn-no"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="#1A1414" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+                <div class="cbtn cbtn-yes"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 5c0-1 1-2 2-2h1a1 1 0 011 .8l1 3a1 1 0 01-.3 1L7 9.3a12 12 0 007 7l1.5-1.7a1 1 0 011-.3l3 1a1 1 0 01.8 1v1c0 1-1 2-2 2C10.5 20.5 3.5 13.5 4 5z" fill="#1A1414"/></svg></div>
               </div>
             </div>
           </div>
-          <div class="s-body">
-            <span class="s-day" data-i18n="phone.day">Today</span>
-            <div class="s-sys" data-i18n="phone.sys">Only you and Maya can read this chat.</div>
-            <div class="b b-in"><span data-i18n="phone.m1">landed. the results came back</span><time>21:04</time></div>
-            <div class="b b-in"><span data-i18n="phone.m2">it’s fine. it’s really fine 🙂</span><time>21:04</time></div>
-            <div class="b b-out"><span data-i18n="phone.m3">oh thank god. calling you in 5</span><time>21:05</time></div>
-          </div>
-          <div class="s-input">
-            <div class="s-field" data-i18n="phone.input">Message</div>
-            <div class="s-send"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1A1414" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
-          </div>
         </div>
       </div>
+      <div class="mode-switch" role="group" aria-label="Chat type">
+        <button type="button" data-mode="cloud" aria-pressed="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 100-9h-1.26A7 7 0 104 16.25"/><path d="M8 19h9.5"/></svg><span data-i18n="lp.cloud">Regular chat</span></button>
+        <button type="button" data-mode="secret" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg><span data-i18n="lp.secret">Secret Chat</span></button>
+      </div>
+      <p class="mode-hint" id="mode-hint" data-i18n="lp.hintCloud">On all your devices, synced instantly.</p>
     </div>
   </div>
 </header>
 
 <section class="sec" id="why">
   <div class="wrap">
-    <h2 class="h2" data-i18n="why.title">Why Televo?</h2>
+    <h2 class="h2 rv" data-i18n="why.title">Why Televo?</h2>
     <div class="tiles">
-      <article class="tile t-private"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div><h3 data-i18n="t.private.h"></h3><p data-i18n="t.private.p"></p></article>
-      <article class="tile t-free"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4l-7.2 7.2a2 2 0 01-2.8 0L3 13V3h10l7.6 7.6a2 2 0 010 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg></div><h3 data-i18n="t.free.h"></h3><p data-i18n="t.free.p"></p></article>
-      <article class="tile t-synced"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0114-5.3M20 12a8 8 0 01-14 5.3M18 3v4h-4M6 21v-4h4"/></svg></div><h3 data-i18n="t.synced.h"></h3><p data-i18n="t.synced.p"></p></article>
-      <article class="tile t-calls"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-1 1-2 2-2h1a1 1 0 011 .8l1 3a1 1 0 01-.3 1L7 9.3a12 12 0 007 7l1.5-1.7a1 1 0 011-.3l3 1a1 1 0 01.8 1v1c0 1-1 2-2 2C10.5 20.5 3.5 13.5 4 5z"/></svg></div><h3 data-i18n="t.calls.h"></h3><p data-i18n="t.calls.p"></p></article>
-      <article class="tile t-vanish"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3 data-i18n="t.vanish.h"></h3><p data-i18n="t.vanish.p"></p></article>
-      <article class="tile t-future"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.4 8.7-8 10.5-4.6-1.8-8-5.5-8-10.5v-6L12 2z"/><path d="M9 12l2 2 4-4"/></svg></div><h3 data-i18n="t.future.h"></h3><p data-i18n="t.future.p"></p></article>
+      <article class="tile rv t-private"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div><h3 data-i18n="t.private.h"></h3><p data-i18n="t.private.p"></p></article>
+      <article class="tile rv t-free"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4l-7.2 7.2a2 2 0 01-2.8 0L3 13V3h10l7.6 7.6a2 2 0 010 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg></div><h3 data-i18n="t.free.h"></h3><p data-i18n="t.free.p"></p></article>
+      <article class="tile rv t-synced"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0114-5.3M20 12a8 8 0 01-14 5.3M18 3v4h-4M6 21v-4h4"/></svg></div><h3 data-i18n="t.synced.h"></h3><p data-i18n="t.synced.p"></p></article>
+      <article class="tile rv t-calls"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-1 1-2 2-2h1a1 1 0 011 .8l1 3a1 1 0 01-.3 1L7 9.3a12 12 0 007 7l1.5-1.7a1 1 0 011-.3l3 1a1 1 0 01.8 1v1c0 1-1 2-2 2C10.5 20.5 3.5 13.5 4 5z"/></svg></div><h3 data-i18n="t.calls.h"></h3><p data-i18n="t.calls.p"></p></article>
+      <article class="tile rv t-vanish"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3 data-i18n="t.vanish.h"></h3><p data-i18n="t.vanish.p"></p></article>
+      <article class="tile rv t-future"><div class="tile-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v6c0 5-3.4 8.7-8 10.5-4.6-1.8-8-5.5-8-10.5v-6L12 2z"/><path d="M9 12l2 2 4-4"/></svg></div><h3 data-i18n="t.future.h"></h3><p data-i18n="t.future.p"></p></article>
     </div>
     <p class="hero-more" style="margin-top:32px" data-i18n="why.more"></p>
   </div>
@@ -493,7 +566,7 @@
 
 <section class="download" id="download">
   <div class="wrap">
-    <h2 class="h2" data-i18n="dl.title">Some things are just between you and them.</h2>
+    <h2 class="h2 rv" data-i18n="dl.title">Some things are just between you and them.</h2>
     <p class="lede" data-i18n="dl.sub">Free on iPhone and Android. Install it, then send the link to the people you talk to most.</p>
     <div class="dl-buttons" data-dl>
       <a class="btn btn-ghost" data-dl-ios href="https://testflight.apple.com/join/yxDepS3N" target="_blank" rel="noopener">
@@ -542,11 +615,24 @@
 <script>
   var I18N = {
     en: {
+      'lp.online': 'online',
+      'lp.banner': 'Only you two can see this chat',
+      'lp.cloud': 'Regular chat',
+      'lp.secret': 'Secret Chat',
+      'lp.hintCloud': 'On all your devices, synced instantly.',
+      'lp.hintSecret': 'Only the two of you can read it. Not even Televo.',
+      'lp.calling': 'Video call…',
+      'lp.connected': 'Connected',
+      'lp.timer': 'disappears',
+      'lp.m1': 'are you home yet?',
+      'lp.m2': 'almost, on my way',
+      'lp.m3': 'love it 😍 send me more',
+      'lp.m4': 'see you at the usual place',
       'nav.why': 'Why Televo',
       'nav.privacy': 'Privacy',
       'hero.title': 'Private messaging for you and your people.',
       'hero.sub': 'Fast, free and without ads. Chat, call and send voice messages on iPhone and Android.',
-      'hero.more': 'Free. No ads. No catch.',
+      'hero.more': 'Free. Fast. Simple.',
       'why.title': 'Why Televo?',
       't.private.h': 'Private',
       't.private.p': 'Secret Chats only the two of you can read. Not even we can open them.',
@@ -564,46 +650,57 @@
       'dl.title': 'Some things are just between you and them.',
       'dl.sub': 'Download Televo and invite the people you talk to most.',
       'dl.note': 'On iPhone, the link opens TestFlight, Apple’s app for beta versions.',
-      'nav.skip': 'Skip to download', 'nav.how': 'Privacy', 'nav.features': 'Features', 'nav.calls': 'Calls', 'nav.faq': 'FAQ', 'nav.cta': 'Download',
-      'dl.ios': 'Download for iPhone', 'dl.android': 'Download for Android',
-      'phone.status': 'Secret Chat', 'phone.day': 'Today', 'phone.sys': 'Only you and Maya can read this chat.',
-      'phone.m1': 'landed. the results came back', 'phone.m2': 'it’s fine. it’s really fine 🙂', 'phone.m3': 'oh thank god. calling you in 5', 'phone.input': 'Message',
-      'how.title': 'Two kinds of chats. You choose.',
-      'how.sub': 'Most of the time you just want to talk. Sometimes you want a conversation nobody else could ever open. Televo has a chat for each.',
-      'how.cloudTag': 'Everyday chats', 'how.cloudH': 'On every device you own.',
-      'how.cloudP': 'Start on your phone, carry on from your tablet, get a new phone and everything is still there.',
-      'how.c1': 'Stored encrypted with AES-256 in the Televo cloud', 'how.c2': 'The key lives in a separate vault, away from your messages', 'how.c3': 'Groups, photos, files and voice messages', 'how.c4': 'Your messages are never used for ads or sold',
-      'how.cloudHint': 'Works like cloud chats in Telegram.',
-      'how.secretTag': 'Secret Chats', 'how.secretH': 'Only the two of you.',
-      'how.secretP': 'Tap the lock and your messages are sealed on your phone before they leave it. Televo can’t open them, and neither can anyone else.',
-      'how.s1': 'The keys exist only on your two phones', 'how.s2': 'Built to stay safe against future quantum computers', 'how.s3': 'Compare a short code to be sure it’s really them', 'how.s4': 'If their key changes, Televo warns you before sending',
-      'how.secretHint': 'The same idea as Signal, inside a messenger your family already knows how to use.',
-      'how.more': '<a href="/support#encryption">How the encryption works</a> and other questions in the FAQ.',
-      'ft.title': 'Everything you’d expect from a messenger.',
-      'ft.1h': 'Messages that disappear on their own.', 'ft.1p': 'Set a timer and the message is deleted from both phones and from our servers when it runs out.',
-      'ft.2h': 'Group chats.', 'ft.2p': 'Family, friends, the building chat. Add a group photo and choose who can manage it.',
-      'ft.3h': 'Voice messages.', 'ft.3p': 'Record and send in a couple of taps, or cancel before it goes.',
-      'ft.4h': 'Sign in with a QR code.', 'ft.4p': 'Scan from your phone to sign in on another device. See every device and sign any of them out.',
-      'ft.5h': 'Your account stays yours.', 'ft.5p': 'Two-step verification, a passcode or Face ID lock, blocking, and deleting your account whenever you want.',
-      'call.sub': 'Televo video call…', 'call.title': 'Calls that ring like a phone call.',
-      'call.p': 'Voice and video calls show up on your lock screen like a normal call, even when Televo is closed. The call is encrypted between the two phones. Leave the app and the video keeps playing in a small window.',
-      'dl.iosNote': 'iPhone: the link opens TestFlight, Apple’s app for beta versions. Install it, then Televo.',
-      'dl.androidNote': 'Android: open the downloaded file. If your phone asks, allow installs from your browser.',
-      'dl.wlLabel': 'Rather wait for the App Store? We’ll email you once, on launch day.', 'dl.placeholder': 'you@example.com', 'dl.cta': 'Email me',
-      'footer.tagline': 'A private messenger for you and your people.', 'footer.product': 'Product', 'footer.code': 'Source code', 'footer.legal': 'Legal', 'footer.terms': 'Terms of Service', 'footer.privacy': 'Privacy Policy', 'footer.contact': 'Contact', 'footer.support': 'Support &amp; FAQ', 'footer.copy': '© 2026 Televo. Built for people, not ad networks.',
+      'nav.skip': 'Skip to download',
+      'nav.faq': 'FAQ',
+      'nav.cta': 'Download',
+      'dl.ios': 'Download for iPhone',
+      'dl.android': 'Download for Android',
+      'phone.status': 'Secret Chat',
+      'phone.day': 'Today',
+      'phone.sys': 'Only you and Maya can read this chat.',
+      'phone.m1': 'landed. the results came back',
+      'phone.m2': 'it’s fine. it’s really fine 🙂',
+      'phone.m3': 'oh thank god. calling you in 5',
+      'phone.input': 'Message',
+      'dl.wlLabel': 'Rather wait for the App Store? We’ll email you once, on launch day.',
+      'dl.placeholder': 'you@example.com',
+      'dl.cta': 'Email me',
+      'footer.tagline': 'A private messenger for you and your people.',
+      'footer.product': 'Product',
+      'footer.code': 'Source code',
+      'footer.legal': 'Legal',
+      'footer.terms': 'Terms of Service',
+      'footer.privacy': 'Privacy Policy',
+      'footer.contact': 'Contact',
+      'footer.support': 'Support &amp; FAQ',
+      'footer.copy': '© 2026 Televo. Built for people, not ad networks.',
       'waitlist.invalidEmail': 'Enter a valid email address, like name@example.com.',
       'waitlist.joined': 'Done. We’ll email you once, when Televo is on the App Store.',
       'waitlist.alreadyJoined': 'This email is already on the list.',
       'waitlist.error': 'Couldn’t save your email. Try again in a minute.',
       'waitlist.networkError': 'No connection. Check your internet and try again.',
       'waitlist.joinedLabel': 'Added'
+
     },
     ru: {
+      'lp.online': 'в сети',
+      'lp.banner': 'Этот чат видите только вы двое',
+      'lp.cloud': 'Обычный чат',
+      'lp.secret': 'Секретный чат',
+      'lp.hintCloud': 'На всех ваших устройствах, сразу.',
+      'lp.hintSecret': 'Прочитаете только вы двое. Даже Televo не сможет.',
+      'lp.calling': 'Видеозвонок…',
+      'lp.connected': 'Соединено',
+      'lp.timer': 'исчезнет',
+      'lp.m1': 'ты уже дома?',
+      'lp.m2': 'почти, уже иду',
+      'lp.m3': 'класс 😍 скинь ещё',
+      'lp.m4': 'встречаемся на нашем месте',
       'nav.why': 'Почему Televo',
       'nav.privacy': 'Конфиденциальность',
       'hero.title': 'Приватный мессенджер для вас и ваших близких.',
       'hero.sub': 'Быстрый, бесплатный и без рекламы. Переписка, звонки и голосовые на iPhone и Android.',
-      'hero.more': 'Бесплатно. Без рекламы. Без подвоха.',
+      'hero.more': 'Бесплатно. Быстро. Просто.',
       'why.title': 'Почему Televo?',
       't.private.h': 'Приватный',
       't.private.p': 'Секретные чаты прочитаете только вы двое. Даже мы не можем их открыть.',
@@ -621,39 +718,37 @@
       'dl.title': 'Некоторые вещи касаются только вас двоих.',
       'dl.sub': 'Скачайте Televo и позовите тех, с кем общаетесь чаще всего.',
       'dl.note': 'На iPhone ссылка откроет TestFlight — приложение Apple для бета-версий.',
-      'nav.skip': 'Перейти к скачиванию', 'nav.how': 'Приватность', 'nav.features': 'Возможности', 'nav.calls': 'Звонки', 'nav.faq': 'Вопросы', 'nav.cta': 'Скачать',
-      'dl.ios': 'Скачать для iPhone', 'dl.android': 'Скачать для Android',
-      'phone.status': 'Секретный чат', 'phone.day': 'Сегодня', 'phone.sys': 'Этот чат можете прочитать только вы и Майя.',
-      'phone.m1': 'приземлилась. результаты пришли', 'phone.m2': 'всё хорошо. правда хорошо 🙂', 'phone.m3': 'фух, слава богу. наберу через 5 минут', 'phone.input': 'Сообщение',
-      'how.title': 'Два вида чатов. Выбираете вы.',
-      'how.sub': 'Чаще всего хочется просто поговорить. А иногда нужен разговор, который больше никто и никогда не откроет. В Televo есть чат для каждого случая.',
-      'how.cloudTag': 'Обычные чаты', 'how.cloudH': 'На всех ваших устройствах.',
-      'how.cloudP': 'Начните на телефоне, продолжите на планшете, смените телефон — и всё на месте.',
-      'how.c1': 'Хранятся в облаке Televo, зашифрованные AES-256', 'how.c2': 'Ключ лежит в отдельном хранилище, отдельно от сообщений', 'how.c3': 'Группы, фото, файлы и голосовые', 'how.c4': 'Ваши сообщения никогда не используются для рекламы и не продаются',
-      'how.cloudHint': 'Устроены как облачные чаты в Telegram.',
-      'how.secretTag': 'Секретные чаты', 'how.secretH': 'Только вы двое.',
-      'how.secretP': 'Нажмите на замок — и сообщения запечатываются на вашем телефоне ещё до отправки. Televo не может их открыть, и никто другой тоже.',
-      'how.s1': 'Ключи есть только на ваших двух телефонах', 'how.s2': 'Защита рассчитана даже на квантовые компьютеры будущего', 'how.s3': 'Сверьте короткий код, чтобы убедиться, что это точно ваш собеседник', 'how.s4': 'Если ключ собеседника сменится, Televo предупредит до отправки',
-      'how.secretHint': 'Та же идея, что в Signal, — внутри мессенджера, которым ваша семья уже умеет пользоваться.',
-      'how.more': '<a href="/support#encryption">Как устроено шифрование</a> и другие ответы — в разделе вопросов.',
-      'ft.title': 'Всё, чего вы ждёте от мессенджера.',
-      'ft.1h': 'Сообщения, которые исчезают сами.', 'ft.1p': 'Поставьте таймер — и по его истечении сообщение удалится с обоих телефонов и с наших серверов.',
-      'ft.2h': 'Групповые чаты.', 'ft.2p': 'Семья, друзья, чат дома. Поставьте фото группы и выберите, кто ей управляет.',
-      'ft.3h': 'Голосовые сообщения.', 'ft.3p': 'Запись и отправка в пару касаний — или отмена, пока не ушло.',
-      'ft.4h': 'Вход по QR-коду.', 'ft.4p': 'Отсканируйте код телефоном, чтобы войти на другом устройстве. Все устройства на виду, из любого можно выйти.',
-      'ft.5h': 'Аккаунт остаётся вашим.', 'ft.5p': 'Двухфакторная проверка, код-пароль или Face ID, блокировка людей и удаление аккаунта в любой момент.',
-      'call.sub': 'Видеозвонок Televo…', 'call.title': 'Звонки, как обычный телефонный вызов.',
-      'call.p': 'Голосовые и видеозвонки появляются на экране блокировки как обычный звонок, даже когда Televo закрыт. Звонок зашифрован между двумя телефонами. Выйдите из приложения — видео продолжится в маленьком окне.',
-      'dl.iosNote': 'iPhone: ссылка откроет TestFlight — приложение Apple для бета-версий. Установите его, затем Televo.',
-      'dl.androidNote': 'Android: откройте скачанный файл. Если телефон спросит, разрешите установку из браузера.',
-      'dl.wlLabel': 'Хотите дождаться App Store? Напишем один раз — в день выхода.', 'dl.placeholder': 'you@example.com', 'dl.cta': 'Напишите мне',
-      'footer.tagline': 'Приватный мессенджер для вас и ваших близких.', 'footer.product': 'Продукт', 'footer.code': 'Исходный код', 'footer.legal': 'Документы', 'footer.terms': 'Условия использования', 'footer.privacy': 'Политика конфиденциальности', 'footer.contact': 'Контакты', 'footer.support': 'Поддержка и вопросы', 'footer.copy': '© 2026 Televo. Сделано для людей, а не для рекламных сетей.',
+      'nav.skip': 'Перейти к скачиванию',
+      'nav.faq': 'Вопросы',
+      'nav.cta': 'Скачать',
+      'dl.ios': 'Скачать для iPhone',
+      'dl.android': 'Скачать для Android',
+      'phone.status': 'Секретный чат',
+      'phone.day': 'Сегодня',
+      'phone.sys': 'Этот чат можете прочитать только вы и Майя.',
+      'phone.m1': 'приземлилась. результаты пришли',
+      'phone.m2': 'всё хорошо. правда хорошо 🙂',
+      'phone.m3': 'фух, слава богу. наберу через 5 минут',
+      'phone.input': 'Сообщение',
+      'dl.wlLabel': 'Хотите дождаться App Store? Напишем один раз — в день выхода.',
+      'dl.placeholder': 'you@example.com',
+      'dl.cta': 'Напишите мне',
+      'footer.tagline': 'Приватный мессенджер для вас и ваших близких.',
+      'footer.product': 'Продукт',
+      'footer.code': 'Исходный код',
+      'footer.legal': 'Документы',
+      'footer.terms': 'Условия использования',
+      'footer.privacy': 'Политика конфиденциальности',
+      'footer.contact': 'Контакты',
+      'footer.support': 'Поддержка и вопросы',
+      'footer.copy': '© 2026 Televo. Сделано для людей, а не для рекламных сетей.',
       'waitlist.invalidEmail': 'Введите адрес почты, например name@example.com.',
       'waitlist.joined': 'Готово. Напишем один раз — когда Televo появится в App Store.',
       'waitlist.alreadyJoined': 'Этот адрес уже в списке.',
       'waitlist.error': 'Не удалось сохранить адрес. Попробуйте через минуту.',
       'waitlist.networkError': 'Нет соединения. Проверьте интернет и попробуйте снова.',
       'waitlist.joinedLabel': 'Добавлено'
+
     }
   };
 
@@ -723,6 +818,75 @@
       p.classList.remove('btn-ghost'); p.classList.add('btn-primary');
       box.insertBefore(p, box.firstChild);
     });
+  })();
+
+
+  // Live phone: a short loop of what using Televo looks like.
+  (function () {
+    var phone = document.getElementById('live-phone'); if (!phone) return;
+    var body = document.getElementById('lp-body'), call = document.getElementById('lp-call'), callSub = document.getElementById('lp-call-sub');
+    var hint = document.getElementById('mode-hint'), status = document.getElementById('lp-status');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function t(k) { var l = window.__televoLang || 'en'; return (I18N[l] && I18N[l][k]) || I18N.en[k] || k; }
+    var mode = 'cloud';
+    function setMode(m) {
+      mode = m; phone.setAttribute('data-mode', m);
+      document.querySelectorAll('.mode-switch button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-mode') === m ? 'true' : 'false'); });
+      hint.setAttribute('data-i18n', m === 'secret' ? 'lp.hintSecret' : 'lp.hintCloud'); hint.innerHTML = t(hint.getAttribute('data-i18n'));
+      status.setAttribute('data-i18n', m === 'secret' ? 'lp.secret' : 'lp.online'); status.innerHTML = t(status.getAttribute('data-i18n'));
+    }
+    document.querySelectorAll('.mode-switch button').forEach(function (b) { b.addEventListener('click', function () { setMode(b.getAttribute('data-mode')); userPicked = true; }); });
+    var userPicked = false;
+
+    function el(cls, html) { var d = document.createElement('div'); d.className = cls; if (html != null) d.innerHTML = html; return d; }
+    function add(node) { node.classList.add('pop'); body.appendChild(node); while (body.children.length > 6) body.removeChild(body.firstChild); return node; }
+    function text(cls, key) { var d = el('b ' + cls); d.textContent = t(key); return add(d); }
+    function typing() { return add(el('typing on', '<i></i><i></i><i></i>')); }
+    function voice() {
+      var bars = ''; for (var i = 0; i < 18; i++) bars += '<i style="height:' + (6 + Math.round(Math.abs(Math.sin(i * 1.7)) * 14)) + 'px;animation-delay:' + (i * 0.06).toFixed(2) + 's"></i>';
+      return add(el('b b-out b-voice', '<span class="play"><svg width="10" height="10" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#F4EFE9"/></svg></span><span class="wave">' + bars + '</span>'));
+    }
+    function timed(key) {
+      var d = el('b b-out'); d.textContent = t(key);
+      var tm = el('timer', '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' + t('lp.timer'));
+      d.appendChild(tm); return add(d);
+    }
+    var steps = [
+      [700, function () { typing(); }],
+      [1100, function () { body.removeChild(body.lastChild); text('b-in', 'lp.m1'); }],
+      [1300, function () { text('b-out', 'lp.m2'); }],
+      [1300, function () { add(el('b-photo')); }],
+      [1200, function () { text('b-in', 'lp.m3'); }],
+      [1400, function () { voice(); }],
+      [1800, function () { if (!userPicked) setMode('secret'); }],
+      [1200, function () { timed('lp.m4'); }],
+      [2600, function () { var last = body.lastChild; last.classList.remove('pop'); last.classList.add('vanish'); setTimeout(function () { if (last.parentNode) last.parentNode.removeChild(last); }, 1100); }],
+      [1500, function () { callSub.innerHTML = t('lp.calling'); call.classList.add('on'); }],
+      [2200, function () { call.classList.add('accepted'); callSub.innerHTML = t('lp.connected'); }],
+      [1600, function () { call.classList.remove('on', 'accepted'); }],
+      [1200, function () { body.innerHTML = ''; if (!userPicked) setMode('cloud'); }]
+    ];
+    if (reduce) {
+      text('b-in', 'lp.m1'); text('b-out', 'lp.m2'); text('b-in', 'lp.m3'); return;
+    }
+    var i = 0, timer = null, visible = true;
+    function next() {
+      if (!visible) { timer = null; return; }
+      var step = steps[i]; i = (i + 1) % steps.length;
+      timer = setTimeout(function () { step[1](); next(); }, step[0]);
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible && !timer) next(); }).observe(phone);
+    }
+    next();
+  })();
+
+  // Sections slide in once as they come into view.
+  (function () {
+    var els = document.querySelectorAll('.rv');
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.15 });
+    els.forEach(function (e) { io.observe(e); });
   })();
 </script>
 </body>
