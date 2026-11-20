@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.televo.app",
+      "sha256_cert_fingerprints": [
+        "99:E4:69:BB:6B:1D:22:CF:12:5E:BF:CB:55:FE:B5:18:9B:8D:AB:12:D2:EA:E3:BE:FC:01:E6:E5:63:BC:34:5E"
+      ]
+    }
+  }
+]
